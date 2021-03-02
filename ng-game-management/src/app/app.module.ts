@@ -8,13 +8,21 @@ import { AppComponent } from './app.component';
 import { VideoGameComponent } from './video-game/video-game.component';
 import { VgShelfComponent } from './vg-shelf/vg-shelf.component';
 import { AddGameComponent } from './add-game/add-game.component';
+import { PlatformComponent } from './platform/platform.component';
+import { PlatformShelfComponent } from './platform-shelf/platform-shelf.component';
+import { ImageComponent } from './image/image.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     VideoGameComponent,
     VgShelfComponent,
-    AddGameComponent
+    AddGameComponent,
+    PlatformComponent,
+    PlatformShelfComponent,
+    ImageComponent,
+
   ],
   imports: [
     BrowserModule,

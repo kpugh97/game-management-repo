@@ -11,6 +11,7 @@ export class VgShelfComponent implements OnInit {
 
   games:Game[];
   constructor(private service: GameManagerService) {
+    //in memory test
     // this.games = [{gameID:1, title:"TEST", category:"RPG", year:2021}];
    }
 

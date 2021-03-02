@@ -5,6 +5,6 @@ export interface Game
     releaseYear: number;
     category: string;
     platforms: number[];
-    // imgSrc:string;
+    imgSrc?:string;
 
 }

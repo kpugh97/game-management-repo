@@ -4,6 +4,7 @@ import {tap, catchError} from 'rxjs/operators';
 import {of} from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Game } from './ts/Game';
+import { Platform } from './ts/Platform';
 
 
 @Injectable({
@@ -28,6 +29,18 @@ export class GameManagerService {
     );
   }
 
+  getAllPlats(): Observable<Platform[]>{
+    return this.http.get<Platform[]>(this.baseURL+ "/platforms")
+    .pipe(
+      tap(x => console.log(x)),
+      catchError(err => {
+        console.log(err);
+        let empty : Platform[] = [];
+        return of(empty);
+      })
+    );
+  }
+
   addGame(toAdd:Game): Observable<Game>
   {
     return this.http.post<Game>(this.baseURL + "/newgame",toAdd,this.httpOptions)
@@ -41,5 +54,5 @@ export class GameManagerService {
   }
 
 
-  
+
 }
