@@ -12,7 +12,9 @@ import requests.CreateGameRequest;
 
 import java.util.List;
 
+@RequestMapping("/api")
 @RestController
+@CrossOrigin("http://localhost:4200")
 public class GameController {
     @Autowired
     GameManagementService service;

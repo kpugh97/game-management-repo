@@ -58,4 +58,9 @@ public class GameInMemDAO implements GameDAO{
         throw new UnsupportedOperationException();
 
     }
+
+    @Override
+    public void updateGamePlatform(Integer gameID, Integer platformToChange, List<Integer> platforms) throws NullIDException, NullPlatformException, InvalidIDException {
+
+    }
 }

@@ -172,11 +172,31 @@ public class GamePostgresDAO implements GameDAO {
         }
     }
 
+    @Override
+    public void updateGamePlatform(Integer gameID, Integer platformToChange, List<Integer>platforms) throws NullIDException, NullPlatformException, InvalidIDException {
+        if (gameID == null) {
+            throw new NullIDException("Cannot update a game with a null ID!");
+        }
+        if (platforms == null) {
+            throw new NullPlatformException("Must add at least one(1) platform!");
+        }
+        for (int i = 0; i < platforms.size(); i++) {
+            try {
+                template.update("UPDATE \"GamePlatforms\" SET \"platformID\" = ?\n" +
+                        "WHERE \"gameID\" = ? \n"+
+                        "AND \'platformID\'= ?", platformToChange, gameID, platforms.get(i));
+            } catch (DataIntegrityViolationException e) {
+                throw new InvalidIDException("Cannot add a game on a platform with ID " + platforms.get(i) + "!");
+            }
+
+        }
+
+    }
         //TO BE MOVED SOMEWHERE ELSE
 //        //insert new platforms
 //            for (int i = 0; i < platforms.size(); i++) {
 //                try {
-//                    template.query("INSERT INTO \"GamePlatforms\" (\"platformID\",\"gameID\") VALUES (?, ?) RETURNING \"platformID\",\"gameID\"", new GamePlatformMapper(),
+//                    template.query("UPDATE INTO \"GamePlatforms\" (\"platformID\",\"gameID\") VALUES (?, ?) RETURNING \"platformID\",\"gameID\"", new GamePlatformMapper(),
 //                            platforms.get(i),
 //                            gameID);
 //                    template.update("UPDATE \"GamePlatforms\" SET \"gameID\" = \'"+gameID+"\' WHERE \"platformID\" = \'" + platforms.get(i)+"\'");
