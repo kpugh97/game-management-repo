@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ImageLoaderService } from '../image-loader.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { from } from 'rxjs';
+import { GameManagerService } from '../game-manager.service'; 
+import { Game } from '../ts/Game';
+import {VideoGameComponent } from '../video-game/video-game.component'
+
 
 @Component({
   selector: 'app-image',
@@ -8,13 +13,19 @@ import { ImageLoaderService } from '../image-loader.service';
 })
 export class ImageComponent implements OnInit {
 
-
+  url:string;
+  @Input()gameTitle:string;
   
-  constructor(private service: ImageLoaderService) { }
+  constructor(private service: GameManagerService, private router: Router) { }
 
 
   ngOnInit(): void {
-    this.service.getImage("SMITE").subscribe();
+    this.service.loadGameImage(this.gameTitle).subscribe( urlResponse=>{
+      this.url = urlResponse.url;
+      console.log("Got data");
+    } );
+    console.log("finished ngOnInit");
+    
   }
 
 

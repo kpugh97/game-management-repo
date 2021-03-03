@@ -5,6 +5,8 @@ import {of} from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Game } from './ts/Game';
 import { Platform } from './ts/Platform';
+import { StringResponse } from './ts/StringResponse'
+
 
 
 @Injectable({
@@ -16,6 +18,9 @@ export class GameManagerService {
   httpOptions = {headers: new HttpHeaders({"Content-Type": "application/json"})}
 
   constructor(private http: HttpClient) { }
+
+
+//GAME RELATED REQUESTS
 
   getAllGames(): Observable<Game[]>{
     return this.http.get<Game[]>(this.baseURL+ "/game")
@@ -29,17 +34,17 @@ export class GameManagerService {
     );
   }
 
-  getAllPlats(): Observable<Platform[]>{
-    return this.http.get<Platform[]>(this.baseURL+ "/platforms")
+  getGameByID(gameID:number): Observable<Game>{
+    return this.http.get<Game>(this.baseURL+ "/game/id")
     .pipe(
       tap(x => console.log(x)),
       catchError(err => {
         console.log(err);
-        let empty : Platform[] = [];
-        return of(empty);
+        return of(null);
       })
     );
   }
+
 
   addGame(toAdd:Game): Observable<Game>
   {
@@ -53,6 +58,55 @@ export class GameManagerService {
     );
   }
 
+  editGame(toEdit:Game): Observable<Game>
+  {
+    return this.http.put<Game>(this.baseURL + "/edit",toEdit,this.httpOptions)
+    .pipe(
+      tap(x => console.log(x)),
+      catchError(err => {
+        console.log(err);
+        return of(null);
+      })
+    );
+  }
+
+  deleteGame(toDelete:number): Observable<Game>
+  {
+    return this.http.delete<Game>(this.baseURL + "/delete/game", this.httpOptions)
+    .pipe(
+      tap(x => console.log(x)),
+      catchError(err => {
+        console.log(err);
+        return of(null);
+      })
+    );
+  }
+
+  loadGameImage(title:string): Observable<StringResponse>{
+    return this.http.get<StringResponse>(this.baseURL+ "/image/"+ title)
+    .pipe(
+      tap(x => console.log(x)),
+      catchError(err => {
+        console.log(err);
+        return of(null);
+      })
+    );
+  }
+
+
+
+//PLATFORM RELATED REQUESTS
+  getAllPlats(): Observable<Platform[]>{
+    return this.http.get<Platform[]>(this.baseURL+ "/platforms")
+    .pipe(
+      tap(x => console.log(x)),
+      catchError(err => {
+        console.log(err);
+        let empty : Platform[] = [];
+        return of(empty);
+      })
+    );
+  }
 
 
 }
