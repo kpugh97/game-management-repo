@@ -1,9 +1,6 @@
 package com.tp.gamemanagementsystem.controllers;
 
-import com.tp.gamemanagementsystem.exceptions.InvalidIDException;
-import com.tp.gamemanagementsystem.exceptions.NullIDException;
-import com.tp.gamemanagementsystem.exceptions.NullReviewException;
-import com.tp.gamemanagementsystem.exceptions.NullTitleException;
+import com.tp.gamemanagementsystem.exceptions.*;
 import com.tp.gamemanagementsystem.models.Review;
 import com.tp.gamemanagementsystem.services.GameManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +21,11 @@ public class ReviewController {
 
     //return all reviews by most recent
     @GetMapping("/reviews")
-    public List<Review> getAllReviews()
+    public ResponseEntity getAllReviews()
     {
 
         List<Review> allReviews = service.getAllReviews();
-        return allReviews;
+        return ResponseEntity.ok(allReviews);
     }
 
     //reviews by game ID
@@ -40,7 +37,7 @@ public class ReviewController {
         {
             newReview = service.makeReview(review.getReviewTitle(), review.getReviewText(),review.getRating(), review.getGameID());
         }
-        catch(NullIDException | InvalidIDException | NullTitleException | NullReviewException e)
+        catch(NullIDException | InvalidIDException | NullTitleException | NullReviewException | InvalidRatingException e)
         {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
@@ -49,7 +46,7 @@ public class ReviewController {
 
     //reviews by game ID
     @GetMapping("/review/game/ID")
-    public List<Review> getReviewsByGameID(@RequestBody Integer gameID)
+    public ResponseEntity getReviewsByGameID(@RequestBody Integer gameID)
     {
         List<Review> allReviews = null;
         try
@@ -58,14 +55,14 @@ public class ReviewController {
         }
         catch(NullIDException | InvalidIDException e)
         {
-            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
-        return allReviews;
+        return ResponseEntity.ok(allReviews);
     }
 
     //reviews by game name
     @GetMapping("/review/game")
-    public List<Review> getReviewsByGame(@RequestBody String title)
+    public ResponseEntity getReviewsByGame(@RequestBody String title)
     {
         List<Review> allReviews = null;
         try
@@ -74,40 +71,40 @@ public class ReviewController {
         }
         catch(NullTitleException e)
         {
-            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
-        return allReviews;
+        return ResponseEntity.ok(allReviews);
     }
 
     //edit a game review by the review ID
     @PutMapping("/edit/review")
-    public String editReview(@RequestBody UpdateReviewRequest request)
+    public ResponseEntity editReview(@RequestBody UpdateReviewRequest request)
     {
         List<Review> allReviews = null;
         try
         {
             service.editReview(request.getReviewID(), request.getReview(), request.getRating());
         }
-        catch(NullIDException | NullReviewException e)
+        catch(NullIDException | NullReviewException | InvalidIDException | InvalidRatingException e)
         {
-            e.getMessage();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
-        return "Review successfully edited!";
+        return ResponseEntity.ok("Review successfully edited!");
     }
 
     //delete a game review by the review ID
     @DeleteMapping("/delete/review")
-    public String deleteReview(@RequestBody Integer reviewID)
+    public ResponseEntity deleteReview(@RequestBody Integer reviewID)
     {
         try
         {
             service.deleteReview(reviewID);
         }
-        catch(NullIDException e)
+        catch(NullIDException | InvalidIDException e)
         {
-            e.getMessage();
+          return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
-        return "Review successfully deleted!";
+        return ResponseEntity.ok("Review successfully deleted!");
     }
 
 }

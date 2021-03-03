@@ -25,6 +25,9 @@ public class GameManagementService {
     @Autowired
     ReviewDAO reviewdao;
 
+
+    //VIDEO GAME DAOS:
+
     public List<Game> getGameCollection() {
         return dao.getGameCollection();
     }
@@ -77,34 +80,6 @@ public class GameManagementService {
         return dao.getGameByCategory(category);
     }
 
-    public Platform getPlatformByID(Integer platID) throws NullIDException, InvalidIDException {
-        if(platID < 0)
-        {
-            throw new InvalidIDException("Cannot search an ID with a negative value");
-
-        }
-        return platdao.getPlatformByID(platID);
-
-    }
-
-    public List<Game> getGamesByPlatformID(Integer platID) throws NullIDException, InvalidIDException {
-        if(platID < 0)
-        {
-            throw new InvalidIDException("Cannot search an ID with a negative value");
-
-        }
-        return platdao.getGamesByPlatformID(platID);
-
-    }
-
-    public List<Game> getGamesByPlatformName(String name) throws NullTitleException {
-        if (name.trim().length() <= 0) {
-            throw new NullTitleException("There must be a name to search!");
-
-        }
-        return platdao.getGamesByPlatformName(name);
-
-    }
 
     public void deleteGame(Integer gameID) throws NullIDException, InvalidIDException {
         if(gameID<0)
@@ -131,8 +106,20 @@ public class GameManagementService {
         dao.editGame(gameID, title, category, year);
     }
 
+    //PLATFORM DAOS
+
     public List<Platform> getAllPlatforms() {
         return platdao.getAllPlatforms();
+    }
+
+    public Platform getPlatformByID(Integer platID) throws NullIDException, InvalidIDException {
+        if(platID < 0)
+        {
+            throw new InvalidIDException("Cannot search an ID with a negative value");
+
+        }
+        return platdao.getPlatformByID(platID);
+
     }
 
     public void deletePlatform(Integer platID) throws NullIDException, InvalidIDException {
@@ -148,31 +135,97 @@ public class GameManagementService {
     }
 
     public void updatePlatform(Integer platID, String name) throws NullTitleException, NullIDException, InvalidIDException{
+        if(platID<0)
+        {
+            throw new InvalidIDException("Invalid ID input!");
+        }
+        if(name.trim().length()<=0)
+        {
+            throw new NullTitleException("Invalid name for platform!");
+        }
         platdao.updatePlatformName(platID, name);
     }
 
+    public List<Game> getGamesByPlatformID(Integer platID) throws NullIDException, InvalidIDException {
+        if(platID < 0)
+        {
+            throw new InvalidIDException("Cannot search an ID with a negative value");
 
-    public List<Review> getReviewsByGameName(String title) throws NullTitleException {
-        return reviewdao.getReviewsByGameName(title);
+        }
+        return platdao.getGamesByPlatformID(platID);
+
     }
 
-    public List<Review> getReviewsByGameID(Integer gameID) throws NullIDException, InvalidIDException {
-        return reviewdao.getReviewsByGameID(gameID);
+    public List<Game> getGamesByPlatformName(String name) throws NullTitleException {
+        if (name.trim().length() <= 0) {
+            throw new NullTitleException("There must be a name to search!");
+
+        }
+        return platdao.getGamesByPlatformName(name);
+
     }
+
+
+    //REVIEW DAOS
 
     public List<Review> getAllReviews() {
         return reviewdao.getAllReviews();
     }
 
-    public void deleteReview(Integer reviewID) throws NullIDException {
+    public List<Review> getReviewsByGameID(Integer gameID) throws NullIDException, InvalidIDException {
+        if(gameID < 0)
+        {
+            throw new InvalidIDException("Invalid ID input!");
+        }
+        return reviewdao.getReviewsByGameID(gameID);
+    }
+
+    public List<Review> getReviewsByGameName(String title) throws NullTitleException {
+        if(title.trim().length() <= 0)
+        {
+            throw new NullTitleException("Invalid title input!");
+        }
+        return reviewdao.getReviewsByGameName(title);
+    }
+
+    public void deleteReview(Integer reviewID) throws NullIDException, InvalidIDException{
+        if(reviewID<0)
+        {
+            throw new InvalidIDException("Invalid ID input!");
+        }
         reviewdao.deleteReview(reviewID);
     }
 
-    public void editReview(Integer reviewID, String review, Integer rating) throws NullIDException, NullReviewException {
+    public void editReview(Integer reviewID, String review, Integer rating) throws NullIDException, NullReviewException, InvalidIDException, InvalidRatingException {
+        if(reviewID < 0)
+        {
+            throw new InvalidIDException("Invalid ID input!");
+        }
+        if(review.trim().length() <= 0)
+        {
+            throw new NullReviewException("Review must have input other than just whitespace!");
+        }
+        if(rating < 0 || rating > 10)
+        {
+            throw new InvalidRatingException("Invalid rating input!");
+        }
         reviewdao.editReview(reviewID, review, rating);
     }
 
-    public Review makeReview(String title, String reviewText, Integer rating, Integer gameID) throws NullIDException, NullTitleException, NullReviewException, InvalidIDException {
+    public Review makeReview(String title, String reviewText, Integer rating, Integer gameID) throws NullIDException, NullTitleException, NullReviewException, InvalidIDException,InvalidRatingException {
+        if(title.trim().length()<=0)
+        {
+            throw new NullTitleException("Invalid title input!");
+        }
+        if(reviewText.trim().length()<=0)
+        {
+            throw new NullReviewException("Cannot make an empty review!");
+        }
+        if(rating<0||rating>10)
+        {
+            throw new InvalidRatingException("Invalid rating input!");
+
+        }
         return reviewdao.makeReview(title, reviewText, rating, gameID);
     }
 }

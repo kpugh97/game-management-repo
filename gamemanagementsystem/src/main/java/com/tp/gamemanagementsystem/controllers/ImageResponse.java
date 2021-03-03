@@ -7,6 +7,7 @@ public class ImageResponse {
     {
 
     }
+
     public ImageResponse(String url) {
         this.url = url;
     }
