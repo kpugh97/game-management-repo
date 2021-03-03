@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tp.gamemanagementsystem.exceptions.*;
 import com.tp.gamemanagementsystem.models.Game;
 import com.tp.gamemanagementsystem.services.GameManagementService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,18 +27,17 @@ public class GameController {
     @Autowired
     GameManagementService service;
 
-    //TODO: make this a response entity
     @PostMapping("/newgame")
-    public Game createGame(@RequestBody CreateGameRequest request)
+    public ResponseEntity createGame(@RequestBody CreateGameRequest request)
     {
         Game toReturn = null;
         try {
             toReturn = service.createGame(request.getGameID(), request.getTitle(), request.getCategory(),request.getReleaseYear(), request.getPlatforms());
         }catch (InvalidIDException | NullTitleException| NullCategoryException| NullYearException| NullPlatformException e)
         {
-            e.getMessage();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
-        return toReturn;
+        return ResponseEntity.ok(toReturn);
     }
 
     @GetMapping("/image")
