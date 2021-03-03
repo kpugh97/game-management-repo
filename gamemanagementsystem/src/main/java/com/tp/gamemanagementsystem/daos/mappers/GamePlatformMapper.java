@@ -11,8 +11,6 @@ public class GamePlatformMapper implements RowMapper<GamePlatform> {
     @Override
     public GamePlatform mapRow(ResultSet resultSet, int i) throws SQLException {
         GamePlatform gp = new GamePlatform();
-//        gp.setGameTitle(resultSet.getString("title"));
-//        gp.setPlatformName(resultSet.getString("name"));
         gp.setPlatformID(resultSet.getInt("platformID"));
         gp.setGameID(resultSet.getInt("gameID"));
         return gp;

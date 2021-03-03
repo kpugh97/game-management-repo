@@ -37,11 +37,6 @@ public class GameInMemDAO implements GameDAO{
     }
 
     @Override
-    public List<GamePlatform> getGameByTitle(String title) throws NullTitleException {
-        return null;
-    }
-
-    @Override
     public List<Game> getGameByYear(Integer year) throws NullYearException {
         throw new UnsupportedOperationException();
 
@@ -59,8 +54,4 @@ public class GameInMemDAO implements GameDAO{
 
     }
 
-    @Override
-    public void updateGamePlatform(Integer gameID, Integer platformToChange, List<Integer> platforms) throws NullIDException, NullPlatformException, InvalidIDException {
-
-    }
 }

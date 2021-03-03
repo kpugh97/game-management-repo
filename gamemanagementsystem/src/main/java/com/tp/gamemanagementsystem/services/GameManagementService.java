@@ -11,6 +11,7 @@ import com.tp.gamemanagementsystem.models.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.Year;
 import java.util.List;
 
 @Component
@@ -29,38 +30,81 @@ public class GameManagementService {
     }
 
     public Game getGameByID(Integer gameID) throws NullIDException, InvalidIDException {
-
-        Game game = dao.getGameByID(gameID);
-        return game;
+        if(gameID<0) {
+            throw new InvalidIDException("Invalid ID input!");
+        }
+        return  dao.getGameByID(gameID);
     }
 
     public Game createGame(Integer gameID, String title, String category, Integer year, List<Integer> platforms) throws InvalidIDException, NullTitleException, NullCategoryException, NullYearException, NullPlatformException {
+        //current year
+        Year y = Year.now();
+        //set that year to an int
+        int currYear = y.getValue();
+        if(gameID<0)
+        {
+            throw new InvalidIDException("Invalid ID input!");
+        }
+        if(title.trim().length() <= 0)
+        {
+            throw new NullTitleException("Invalid title input!");
+
+        }
+        if(category.trim().length() <= 0)
+        {
+            throw new NullCategoryException("Invalid category input!");
+        }
+        if(year < 0 || year > currYear) {
+            throw new NullYearException("Invalid year input!");
+        }
         return dao.createGame(title, category, year, platforms);
     }
 
     public List<Game> getGameByYear(Integer year) throws NullYearException {
+        //current year
+        Year y = Year.now();
+        //set that year to an int
+        int currYear = y.getValue();
+        if(year < 0 || year > currYear) {
+            throw new NullYearException("Invalid year input!");
+        }
         return dao.getGameByYear(year);
-    }
 
-    public List<GamePlatform> getGameByTitle(String title) throws NullTitleException {
-        return dao.getGameByTitle(title);
     }
-
 
     public List<Game> getGameByCategory(String category) throws NullCategoryException {
+        if(category.trim().length() <= 0)
+        {
+            throw new NullCategoryException("Cannot search a null category!");
+        }
         return dao.getGameByCategory(category);
     }
 
     public Platform getPlatformByID(Integer platID) throws NullIDException, InvalidIDException {
+        if(platID < 0)
+        {
+            throw new InvalidIDException("Cannot search an ID with a negative value");
+
+        }
         return platdao.getPlatformByID(platID);
+
     }
 
     public List<Game> getGamesByPlatformID(Integer platID) throws NullIDException, InvalidIDException {
+        if(platID < 0)
+        {
+            throw new InvalidIDException("Cannot search an ID with a negative value");
+
+        }
         return platdao.getGamesByPlatformID(platID);
 
     }
 
     public List<Game> getGamesByPlatformName(String name) throws NullTitleException {
+        if (name.trim().length() <= 0) {
+            throw new NullTitleException("There must be a name to search!");
+
+        }
         return platdao.getGamesByPlatformName(name);
 
     }

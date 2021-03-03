@@ -99,40 +99,6 @@ public class GamePostgresDAO implements GameDAO {
         }
         return toReturn;
     }
-//    @Override
-//    public List<Game> getGameByTitle(String title) throws NullTitleException {
-//        if(title == null)
-//        {
-//            throw new NullTitleException("Cannot retrieve a game with a null category!");
-//        }
-//        List<Game> toReturn = null;
-//        toReturn = template.query("SELECT * FROM \"Games\" WHERE \"title\" = ?", new GameMapper(),title);
-//        if(toReturn.isEmpty())
-//        {
-//            throw new NullTitleException("Cannot retrieve a game with the title "+title+"!");
-//        }
-//        return toReturn;
-//    }
-//
-    @Override
-    public List<GamePlatform> getGameByTitle(String title) throws NullTitleException {
-        if(title == null)
-        {
-            throw new NullTitleException("Cannot retrieve a game with a null category!");
-        }
-        List<GamePlatform> toReturn = null;
-        toReturn = template.query("SELECT \"title\", ps.\"name\" FROM \"Games\" as gs\n"+
-               "INNER JOIN \"GamePlatforms\" as gp\n"+
-                "ON gs.\"gameID\" = gp.\"gameID\""+
-                "INNER JOIN \"Platforms\" as ps"+
-                "ON ps.\"platformID\" = gp.\"platformID\"\n"+
-                "WHERE \"title\" = ?", new GamePlatformMapper(),title);
-        if(toReturn.isEmpty())
-        {
-            throw new NullTitleException("Cannot retrieve a game with the title "+title+"!");
-        }
-        return toReturn;
-    }
 
     @Override
     public List<Game> getGameByYear(Integer year) throws NullYearException {
@@ -165,48 +131,11 @@ public class GamePostgresDAO implements GameDAO {
         }
         //update game with new info
         try {
-//            toEdit = template.queryForObject("SELECT * FROM \"Games\" WHERE \"gameID\" = \'" + gameID + "\'", new GameMapper());
             template.update("UPDATE \"Games\" SET \"title\" = \'" + title + "\' , \"category\" = \'" + category + "\' , \"year\" = \'" + releaseDate + "\' WHERE \"gameID\" = \'" + gameID + "\';");
         } catch (EmptyResultDataAccessException e) {
             throw new InvalidIDException("Cannot make changes to a game with ID " + gameID + "!");
         }
     }
-
-    @Override
-    public void updateGamePlatform(Integer gameID, Integer platformToChange, List<Integer>platforms) throws NullIDException, NullPlatformException, InvalidIDException {
-        if (gameID == null) {
-            throw new NullIDException("Cannot update a game with a null ID!");
-        }
-        if (platforms == null) {
-            throw new NullPlatformException("Must add at least one(1) platform!");
-        }
-        for (int i = 0; i < platforms.size(); i++) {
-            try {
-                template.update("UPDATE \"GamePlatforms\" SET \"platformID\" = ?\n" +
-                        "WHERE \"gameID\" = ? \n"+
-                        "AND \'platformID\'= ?", platformToChange, gameID, platforms.get(i));
-            } catch (DataIntegrityViolationException e) {
-                throw new InvalidIDException("Cannot add a game on a platform with ID " + platforms.get(i) + "!");
-            }
-
-        }
-
-    }
-        //TO BE MOVED SOMEWHERE ELSE
-//        //insert new platforms
-//            for (int i = 0; i < platforms.size(); i++) {
-//                try {
-//                    template.query("UPDATE INTO \"GamePlatforms\" (\"platformID\",\"gameID\") VALUES (?, ?) RETURNING \"platformID\",\"gameID\"", new GamePlatformMapper(),
-//                            platforms.get(i),
-//                            gameID);
-//                    template.update("UPDATE \"GamePlatforms\" SET \"gameID\" = \'"+gameID+"\' WHERE \"platformID\" = \'" + platforms.get(i)+"\'");
-//                } catch (DataIntegrityViolationException e)
-//                {
-//                    throw new InvalidIDException("Cannot add a game on a platform with ID " + platforms.get(i)+"!");
-//                }
-//            }
-
-
 
     //delete a game by the gameID
     @Override

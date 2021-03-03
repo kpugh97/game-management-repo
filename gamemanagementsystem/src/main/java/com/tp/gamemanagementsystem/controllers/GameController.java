@@ -1,8 +1,8 @@
 package com.tp.gamemanagementsystem.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tp.gamemanagementsystem.exceptions.*;
 import com.tp.gamemanagementsystem.models.Game;
-import com.tp.gamemanagementsystem.models.GamePlatform;
 import com.tp.gamemanagementsystem.services.GameManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +10,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import requests.CreateGameRequest;
 
-import java.util.List;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URLEncoder;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 
 @RequestMapping("/api")
 @RestController
@@ -19,6 +26,7 @@ public class GameController {
     @Autowired
     GameManagementService service;
 
+    //TODO: make this a response entity
     @PostMapping("/newgame")
     public Game createGame(@RequestBody CreateGameRequest request)
     {
@@ -30,6 +38,37 @@ public class GameController {
             e.getMessage();
         }
         return toReturn;
+    }
+
+    @GetMapping("/image")
+    public ResponseEntity getImage(@RequestBody String name)
+    {
+        //make get request to this uri with parameters of this string name passed in from the body
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://www.giantbomb.com/api/search/?api_key=d43060a7cedfdd5c627a315fcd1965ae6366d127&format=json&query="
+                        + URLEncoder.encode(name, StandardCharsets.UTF_8) + "&resources=game")).build();
+        try
+        {
+            //right now we a response of all the information we want put into a string
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            System.out.println(response.body());
+            //do something with that response body: preferably take the string and parse it into a way that we get a
+            //data type (like a map) to assign all the value to keys
+            ObjectMapper mapper = new ObjectMapper();
+            LinkedHashMap<String, LinkedHashSet<Integer>> linkedMap = mapper.readValue(response.body(),LinkedHashMap.class);
+            System.out.println(linkedMap);
+            for(Map.Entry entry : linkedMap.entrySet())
+            {
+                System.out.println("Key:"+ entry.getKey()+"Values: "+ entry.getValue());
+            }
+
+        }
+        catch (IOException | InterruptedException e)
+        {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+       throw new UnsupportedOperationException();
     }
 
     @GetMapping("/game")
@@ -52,19 +91,6 @@ public class GameController {
         return ResponseEntity.ok(game);
     }
 
-    @GetMapping("game/title")
-    public ResponseEntity getGameByTitle(@RequestBody String title)
-    {
-        List<GamePlatform> game =null;
-        try {
-            game = service.getGameByTitle(title);
-        }
-        catch (NullTitleException e)
-        {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
-        return ResponseEntity.ok(game);
-    }
 
     @GetMapping("game/category")
     public ResponseEntity getGameByCategory(@RequestBody String category)
