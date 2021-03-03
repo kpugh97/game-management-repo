@@ -97,7 +97,7 @@ public class PlatformPostgresDAO implements PlatformDAO {
     }
 
     @Override
-    public void deletePlatform(Integer platID) throws NullIDException{
+    public void deletePlatform(Integer platID) throws NullIDException, InvalidIDException{
         if(platID==null)
         {
             throw new NullIDException("Cannot delete a platform with a null ID!");

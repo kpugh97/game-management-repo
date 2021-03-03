@@ -53,7 +53,7 @@ public class GameManagementService {
         if(year < 0 || year > currYear) {
             throw new NullYearException("Invalid year input!");
         }
-        
+
         return dao.createGame(title, category, year, platforms);
     }
 
@@ -135,7 +135,11 @@ public class GameManagementService {
         return platdao.getAllPlatforms();
     }
 
-    public void deletePlatform(Integer platID) throws NullIDException {
+    public void deletePlatform(Integer platID) throws NullIDException, InvalidIDException {
+        if(platID < 0)
+        {
+            throw new InvalidIDException("Invalid ID input!");
+        }
         platdao.deletePlatform(platID);
     }
 
@@ -143,7 +147,7 @@ public class GameManagementService {
         return platdao.addPlatform(name);
     }
 
-    public void updatePlatform(Integer platID, String name) throws NullTitleException, NullIDException {
+    public void updatePlatform(Integer platID, String name) throws NullTitleException, NullIDException, InvalidIDException{
         platdao.updatePlatformName(platID, name);
     }
 

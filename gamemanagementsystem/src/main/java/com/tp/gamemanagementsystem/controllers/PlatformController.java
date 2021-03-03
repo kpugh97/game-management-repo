@@ -61,7 +61,7 @@ public class PlatformController {
 
     //get all the games on one platform by the platform's name
     @GetMapping("/platform/games/platname")
-    public ResponseEntity getPlatformGamesByID(@RequestBody String name)
+    public ResponseEntity getGamesByPlatformName(@RequestBody String name)
     {
         List<Game> allGames = null;
         try {
@@ -75,7 +75,7 @@ public class PlatformController {
     }
 
     @PostMapping("/newplatform")
-    public Platform addPlatform(String name)
+    public ResponseEntity addPlatform(String name)
     {
         Platform newPlatform = null;
         try
@@ -84,9 +84,9 @@ public class PlatformController {
         }
         catch (NullTitleException e)
         {
-            e.getMessage();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
-        return newPlatform;
+        return ResponseEntity.ok(newPlatform);
     }
 
     @PutMapping("/edit/platform")
@@ -96,7 +96,7 @@ public class PlatformController {
         {
             service.updatePlatform(platID,name);
         }
-        catch (NullIDException | NullTitleException e)
+        catch (NullIDException | NullTitleException | InvalidIDException e)
         {
             e.getMessage();
         }
@@ -110,7 +110,7 @@ public class PlatformController {
         {
             service.deletePlatform(platID);
         }
-        catch (NullIDException e)
+        catch (NullIDException | InvalidIDException e)
         {
             return e.getMessage();
         }

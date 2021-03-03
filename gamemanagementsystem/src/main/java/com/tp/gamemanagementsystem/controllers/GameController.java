@@ -40,35 +40,36 @@ public class GameController {
         return ResponseEntity.ok(toReturn);
     }
 
-    @GetMapping("/image")
-    public ResponseEntity getImage(@RequestBody String name)
+    @GetMapping("/image/{name}")
+    public ResponseEntity getImage(@PathVariable String name)
     {
         //make get request to this uri with parameters of this string name passed in from the body
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://www.giantbomb.com/api/search/?api_key=d43060a7cedfdd5c627a315fcd1965ae6366d127&format=json&query="
                         + URLEncoder.encode(name, StandardCharsets.UTF_8) + "&resources=game")).build();
+        ImageResponse imageURL = new ImageResponse();
         try
         {
             //right now we a response of all the information we want put into a string
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println(response.body());
-            //do something with that response body: preferably take the string and parse it into a way that we get a
-            //data type (like a map) to assign all the value to keys
-            ObjectMapper mapper = new ObjectMapper();
-            LinkedHashMap<String, LinkedHashSet<Integer>> linkedMap = mapper.readValue(response.body(),LinkedHashMap.class);
-            System.out.println(linkedMap);
-            for(Map.Entry entry : linkedMap.entrySet())
-            {
-                System.out.println("Key:"+ entry.getKey()+"Values: "+ entry.getValue());
-            }
 
+            int urlStart = response.body().indexOf("\"medium_url\":");
+            int urlEnd = response.body().indexOf(",",urlStart);
+
+            //if we want just the url or more than this result add or subtract less of my substring
+            imageURL.setUrl(response.body().substring(urlStart+14,urlEnd-1));
+            //trimming out escapes in the string
+            String trimString = imageURL.getUrl().replaceAll("\\\\","");
+            //set that trimmed string as our new url
+            imageURL.setUrl(trimString);
+            System.out.println(imageURL.getUrl());
         }
         catch (IOException | InterruptedException e)
         {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
-       throw new UnsupportedOperationException();
+        return  ResponseEntity.ok(imageURL);
     }
 
     @GetMapping("/game")
