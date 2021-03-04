@@ -6,9 +6,11 @@ import com.tp.gamemanagementsystem.exceptions.NullPlatformException;
 import com.tp.gamemanagementsystem.exceptions.NullTitleException;
 import com.tp.gamemanagementsystem.models.Game;
 import com.tp.gamemanagementsystem.models.Platform;
+import org.springframework.context.annotation.Profile;
 
 import java.util.List;
 
+@Profile({"mainApp","DAOTesting","serviceTest"})
 public interface PlatformDAO {
     List<Platform> getAllPlatforms();
     Platform getPlatformByID(Integer platID) throws NullIDException, InvalidIDException;

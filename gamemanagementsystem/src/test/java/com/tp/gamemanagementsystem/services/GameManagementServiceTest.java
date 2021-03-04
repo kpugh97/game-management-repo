@@ -2,6 +2,7 @@ package com.tp.gamemanagementsystem.services;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,10 +16,126 @@ public class GameManagementServiceTest {
     @Autowired
     GameManagementService testService;
 
-    @Test
-    public void fakeTest()
+
+
+    @BeforeEach
+    public void setup()
     {
-        assertTrue(false);
+
+    }
+
+    @Test
+    public void getGameByIDTest()
+    {
+
+    }
+
+    @Test
+    public void getGameByIDInvalidID()
+    {
+
+    }
+
+    @Test
+    public void createGameTest()
+    {
+
+    }
+
+    @Test
+    public void createGameTestInvalidID()
+    {
+
+    }
+
+    @Test
+    public void createGameTestInvalidTitle()
+    {
+
+    }
+
+    @Test
+    public void createGameTestInvalidCategory()
+    {
+
+    }
+
+    @Test
+    public void createGameTestInvalidYear()
+    {
+
+    }
+
+    @Test
+    public void createGameTestInvalidPlatform()
+    {
+
+    }
+
+    @Test
+    public void getGameByYearTest()
+    {
+
+    }
+
+    @Test
+    public void getGameByYearInvalidYear()
+    {
+
+    }
+
+    @Test
+    public void getGameByCategoryTest()
+    {
+
+    }
+
+    @Test
+    public void getGameByCategoryInvalidCategory()
+    {
+
+    }
+
+    @Test
+    public void deleteGameTest()
+    {
+
+    }
+
+    @Test
+    public void deleteGameTestInvalidID()
+    {
+
+    }
+
+    @Test
+    public void editGameTest()
+    {
+
+    }
+
+    @Test
+    public void editGameInvalidID()
+    {
+
+    }
+
+    @Test
+    public void editGameInvalidTitle()
+    {
+
+    }
+
+    @Test
+    public void editGameInvalidCategory()
+    {
+
+    }
+
+    @Test
+    public void editGameInvalidYear()
+    {
+
     }
 
 }

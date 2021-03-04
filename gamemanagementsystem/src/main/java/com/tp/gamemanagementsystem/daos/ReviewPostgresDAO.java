@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-@Profile({"mainApp","DAOTesting"})
+@Profile({"mainApp","DAOTesting","serviceTest"})
 public class ReviewPostgresDAO implements ReviewDAO {
 
     @Autowired

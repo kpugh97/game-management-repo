@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Profile;
 
 import java.util.List;
 
+@Profile({"mainApp","DAOTesting","serviceTest"})
 public interface ReviewDAO {
 
     //create a new review to type up

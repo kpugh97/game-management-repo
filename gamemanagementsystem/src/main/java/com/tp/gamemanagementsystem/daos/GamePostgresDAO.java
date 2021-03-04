@@ -16,7 +16,7 @@ import java.util.List;
 
 
 @Component
-@Profile({"mainApp","DAOTesting"})
+@Profile({"mainApp","DAOTesting","serviceTest"})
 public class GamePostgresDAO implements GameDAO {
 
     @Autowired

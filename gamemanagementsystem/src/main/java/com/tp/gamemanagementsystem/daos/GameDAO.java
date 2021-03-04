@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Profile;
 
 import java.util.List;
 
-@Profile({"mainApp","DAOTesting"})
+@Profile({"mainApp","DAOTesting","serviceTest"})
 public interface GameDAO {
     Game createGame(String title, String category, Integer year, List<Integer> platforms) throws InvalidIDException, NullTitleException, NullCategoryException, NullYearException, NullPlatformException;
     Game getGameByID(Integer gameID) throws NullIDException, InvalidIDException;

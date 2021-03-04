@@ -9,12 +9,14 @@ import com.tp.gamemanagementsystem.models.GamePlatform;
 import com.tp.gamemanagementsystem.models.Platform;
 import com.tp.gamemanagementsystem.models.Review;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.time.Year;
 import java.util.List;
 
 @Component
+@Profile({"mainApp","DAOTesting","serviceTest"})
 public class GameManagementService {
     @Autowired
     GameDAO dao;

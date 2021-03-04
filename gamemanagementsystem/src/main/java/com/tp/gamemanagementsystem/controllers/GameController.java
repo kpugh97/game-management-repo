@@ -41,11 +41,10 @@ public class GameController {
     }
 
 
-
     @GetMapping("/game")
-    public List<Game> getGameCollection()
+    public ResponseEntity getGameCollection()
     {
-        return service.getGameCollection();
+        return ResponseEntity.ok(service.getGameCollection());
     }
 
     @GetMapping("/game/id")
@@ -93,29 +92,29 @@ public class GameController {
     }
 
     @PutMapping("/edit/game")
-    public String editGame(@RequestBody Game editGame)
+    public ResponseEntity editGame(@RequestBody Game editGame)
     {
         try {
             service.editGame(editGame.getGameID(),editGame.getTitle(),editGame.getCategory(),editGame.getReleaseYear());
         }
         catch (InvalidIDException | NullIDException | NullYearException | NullTitleException | NullCategoryException e)
         {
-            return e.getMessage();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
-        return "Game successfully edited!";
+        return ResponseEntity.ok("Game successfully edited!");
     }
 
     @DeleteMapping("/delete/game")
-    public String deleteGame(@RequestBody Integer gameID)
+    public ResponseEntity deleteGame(@RequestBody Integer gameID)
     {
         try {
             service.deleteGame(gameID);
         }
         catch (InvalidIDException | NullIDException e)
         {
-            return e.getMessage();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
-        return "Game successfully deleted!";
+        return ResponseEntity.ok("Game successfully deleted!");
     }
 
     @GetMapping("/image/{name}")
