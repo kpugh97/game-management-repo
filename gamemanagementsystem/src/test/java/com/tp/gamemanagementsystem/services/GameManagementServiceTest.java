@@ -2,6 +2,8 @@ package com.tp.gamemanagementsystem.services;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.tp.gamemanagementsystem.models.Game;
+import com.tp.gamemanagementsystem.models.Platform;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

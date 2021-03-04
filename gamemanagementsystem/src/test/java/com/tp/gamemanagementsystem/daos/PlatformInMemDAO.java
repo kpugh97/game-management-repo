@@ -146,7 +146,7 @@ public class PlatformInMemDAO implements PlatformDAO{
         return toReturn;
 
     }
-    
+
     @Override
     public List<Game> getGamesByPlatformName(String name) throws NullTitleException {
         if(name == null)

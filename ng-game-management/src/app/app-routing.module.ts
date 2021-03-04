@@ -4,12 +4,13 @@ import {VideoGameComponent} from './video-game/video-game.component';
 import {VgShelfComponent} from './vg-shelf/vg-shelf.component';
 import { AddGameComponent } from './add-game/add-game.component';
 import { PlatformShelfComponent } from './platform-shelf/platform-shelf.component';
+import { DeleteGameComponent } from './delete-game/delete-game.component';
 
 const routes: Routes = [
   {path: "", component: VgShelfComponent},
   {path: "newgame", component:AddGameComponent},
-  {path: "platforms", component:PlatformShelfComponent}
-
+  {path: "platforms", component:PlatformShelfComponent},
+  {path: "delete", component:DeleteGameComponent}
 ];
 
 @NgModule({

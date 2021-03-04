@@ -41,7 +41,7 @@ public class GameManagementService {
         return  dao.getGameByID(gameID);
     }
 
-    public Game createGame(Integer gameID, String title, String category, Integer year, List<Integer> platforms) throws InvalidIDException, NullTitleException, NullCategoryException, NullYearException, NullPlatformException {
+    public Game createGame(String title, String category, Integer year, List<Integer> platforms) throws InvalidIDException, NullTitleException, NullCategoryException, NullYearException, NullPlatformException {
         //current year
         Year y = Year.now();
         //set that year to an int

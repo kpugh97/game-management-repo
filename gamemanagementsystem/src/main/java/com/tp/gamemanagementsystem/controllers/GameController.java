@@ -32,7 +32,7 @@ public class GameController {
     {
         Game toReturn = null;
         try {
-            toReturn = service.createGame(request.getGameID(), request.getTitle(), request.getCategory(),request.getReleaseYear(), request.getPlatforms());
+            toReturn = service.createGame(request.getTitle(), request.getCategory(),request.getReleaseYear(), request.getPlatforms());
         }catch (InvalidIDException | NullTitleException| NullCategoryException| NullYearException| NullPlatformException e)
         {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -104,8 +104,8 @@ public class GameController {
         return ResponseEntity.ok("Game successfully edited!");
     }
 
-    @DeleteMapping("/delete/game")
-    public ResponseEntity deleteGame(@RequestBody Integer gameID)
+    @DeleteMapping("/delete/game/{gameID}")
+    public ResponseEntity deleteGame(@PathVariable Integer gameID)
     {
         try {
             service.deleteGame(gameID);

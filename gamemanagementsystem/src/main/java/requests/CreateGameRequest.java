@@ -5,19 +5,10 @@ import java.util.List;
 
 public class CreateGameRequest {
 
-     Integer gameID;
      String title;
      Integer releaseYear;
      String category;
      List<Integer> platforms = new ArrayList<>();
-
-    public Integer getGameID() {
-        return gameID;
-    }
-
-    public void setGameID(Integer gameID) {
-        this.gameID = gameID;
-    }
 
     public String getTitle() {
         return title;

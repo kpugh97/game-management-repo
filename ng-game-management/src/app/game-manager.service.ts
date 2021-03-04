@@ -70,9 +70,9 @@ export class GameManagerService {
     );
   }
 
-  deleteGame(toDelete:number): Observable<Game>
+  deleteGame(toDelete:number): Observable<{}>
   {
-    return this.http.delete<Game>(this.baseURL + "/delete/game", this.httpOptions)
+    return this.http.delete<Game>(this.baseURL + "/delete/"+toDelete, this.httpOptions)
     .pipe(
       tap(x => console.log(x)),
       catchError(err => {
