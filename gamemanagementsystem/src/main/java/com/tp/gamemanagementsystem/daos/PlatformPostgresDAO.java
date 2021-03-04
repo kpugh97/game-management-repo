@@ -44,6 +44,7 @@ public class PlatformPostgresDAO implements PlatformDAO {
         return allPlats;
     }
 
+    @Override
     public Platform getPlatformByID(Integer platformID) throws NullIDException, InvalidIDException
     {
         if(platformID == null)
@@ -61,7 +62,7 @@ public class PlatformPostgresDAO implements PlatformDAO {
         return toReturn;
     }
 
-
+    @Override
     public List<Game> getGamesByPlatformID(Integer platID) throws NullIDException, InvalidIDException
     {
         if(platID == null)

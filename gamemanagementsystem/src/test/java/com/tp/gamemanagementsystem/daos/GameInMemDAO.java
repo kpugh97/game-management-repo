@@ -56,7 +56,7 @@ public class GameInMemDAO implements GameDAO{
         {
             throw new NullIDException("Cannot retrieve a game with a null ID");
         }
-        Game toReturn = new Game();
+        Game toReturn = null;
         for(int i =0; i<allGames.size();i++) {
             {
                 if (allGames.get(i).getGameID().equals(gameID))
@@ -64,6 +64,10 @@ public class GameInMemDAO implements GameDAO{
                     toReturn = new Game(allGames.get(i));
                 }
             }
+        }
+        if(toReturn == null)
+        {
+            throw new InvalidIDException("Cannot find a game with ID "+gameID+"!");
         }
         return toReturn;
 

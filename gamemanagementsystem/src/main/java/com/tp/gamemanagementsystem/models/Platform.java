@@ -6,7 +6,16 @@ public class Platform {
     private Integer platformID;
     private String name;
 
-//    List<Game> allGames;
+    public Platform()
+    {
+
+    }
+
+    public Platform(Platform that)
+    {
+        this.platformID = that.platformID;
+        this.name = that.name;
+    }
 
     public Integer getPlatformID() {
         return platformID;
@@ -24,12 +33,5 @@ public class Platform {
         this.name = name;
     }
 
-//
-//    public List<Game> getAllGames() {
-//        return allGames;
-//    }
-//
-//    public void setAllGames(List<Game> allGames) {
-//        this.allGames = allGames;
-//    }
+
 }
