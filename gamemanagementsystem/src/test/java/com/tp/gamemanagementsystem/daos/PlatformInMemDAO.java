@@ -124,24 +124,47 @@ public class PlatformInMemDAO implements PlatformDAO{
 
     }
 
-    //not testable in mem
+
     @Override
     public List<Game> getGamesByPlatformID(Integer platID) throws NullIDException, InvalidIDException {
         if(platID == null)
         {
             throw new NullIDException("Cannot retrieve a platform with a null ID!");
         }
-        return null;
+        List<Game> toReturn = new ArrayList<>();
+        for (int i = 0; i < allPlatforms.size(); i++) {
+            if(allPlatforms.get(i).getPlatformID().equals(platID) && gpList.get(i).getPlatform().getPlatformID().equals(platID))
+            {
+                toReturn.add(gpList.get(i).getGame());
+            }
+
+        }
+        if(toReturn.isEmpty())
+        {
+            throw new InvalidIDException("Cannot find any games on a platform with ID "+platID+"!");
+        }
+        return toReturn;
 
     }
-
-    //not testable in mem
+    
     @Override
     public List<Game> getGamesByPlatformName(String name) throws NullTitleException {
         if(name == null)
         {
             throw new NullTitleException("Cannot retrieve a platform with a null name!");
         }
-        return null;
+        List<Game> toReturn = new ArrayList<>();
+        for (int i = 0; i < allPlatforms.size(); i++) {
+            if(allPlatforms.get(i).getName().equals(name) && gpList.get(i).getPlatform().getName().equals(name))
+            {
+                toReturn.add(gpList.get(i).getGame());
+            }
+
+        }
+        if(toReturn.isEmpty())
+        {
+            throw new NullTitleException("Cannot find any games on a platform with name "+name+"!");
+        }
+        return toReturn;
     }
 }

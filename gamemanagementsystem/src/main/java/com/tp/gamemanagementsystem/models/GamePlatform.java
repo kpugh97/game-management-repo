@@ -1,6 +1,30 @@
 package com.tp.gamemanagementsystem.models;
 
+import java.util.List;
+
 public class GamePlatform {
+    private Platform platform;
+    private Game game;
+
+    public Platform getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(Platform platform) {
+        this.platform = platform;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    private String platformName;
+    private Integer platformID;
+    private Integer gameID;
     private String gameTitle;
 
     public String getGameTitle() {
@@ -19,9 +43,6 @@ public class GamePlatform {
         this.platformName = platformName;
     }
 
-    private String platformName;
-    private Integer platformID;
-    private Integer gameID;
 
     public Integer getPlatformID() {
         return platformID;
