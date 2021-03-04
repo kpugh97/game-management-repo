@@ -148,4 +148,43 @@ public class GamePostgresDAO implements GameDAO {
         template.update("DELETE FROM \"Reviews\" WHERE \"gameID\"="+gameID);
         template.update("DELETE FROM \"Games\" WHERE \"gameID\"="+gameID);
     }
+
+
+    //ADD IMAGE SEARCHED TO DATABASE TO PULL FROM
+    @Override
+    public void saveImageToDB(String gameName, String url) throws NullTitleException {
+        if(gameName==null)
+        {
+            throw new NullTitleException("Cannot find a game with a null title");
+        }
+        if(url==null)
+        {
+            System.out.println("No URL to update.");
+            return;
+        }
+        //check if there is a url in this column already
+        String someURL = null;
+        try {
+            someURL = template.queryForObject("SELECT \"imageSrc\" FROM \"Games\" WHERE \"title\" = ?", new StringMapper("imageSrc"), gameName);
+        }
+        catch (EmptyResultDataAccessException e) {
+            throw new NullTitleException("Cannot find a game with title " + gameName + "!");
+        }
+        if(someURL!=null)
+        {
+            //if there is an image already leave this method
+            System.out.println("Source already supplied");
+            return;
+        }
+        //if there is no image update this column
+        else {
+            //if there is a title and url add that url to the game with matching name
+            try {
+                template.update("UPDATE \"Games\" SET \"imageSrc\" = ? WHERE \"title\" = ?", url, gameName);
+            } catch (EmptyResultDataAccessException e) {
+                throw new NullTitleException("Cannot find a game with title " + gameName + "!");
+            }
+        }
+
+    }
 }

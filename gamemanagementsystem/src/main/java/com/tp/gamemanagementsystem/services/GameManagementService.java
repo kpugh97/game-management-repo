@@ -230,6 +230,10 @@ public class GameManagementService {
         }
         return reviewdao.makeReview(title, reviewText, rating, gameID);
     }
+
+    public void saveImageToDB(String gameName, String url) throws NullURLException, NullTitleException {
+        dao.saveImageToDB(gameName,url);
+    }
 }
 
 

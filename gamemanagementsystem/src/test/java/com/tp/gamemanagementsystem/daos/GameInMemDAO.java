@@ -191,4 +191,9 @@ public class GameInMemDAO implements GameDAO{
 
     }
 
+    @Override
+    public void saveImageToDB(String gameName, String url) throws NullTitleException, NullURLException {
+
+    }
+
 }

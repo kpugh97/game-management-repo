@@ -47,7 +47,7 @@ public class GameController {
         return ResponseEntity.ok(service.getGameCollection());
     }
 
-    @GetMapping("/game/id")
+    @GetMapping("/game/id/{gameID}")
     public ResponseEntity getGameByID(@PathVariable Integer gameID)
     {
         Game game =null;
@@ -62,7 +62,7 @@ public class GameController {
     }
 
 
-    @GetMapping("game/{category}")
+    @GetMapping("game/genre/{category}")
     public ResponseEntity getGameByCategory(@PathVariable String category)
     {
         List<Game> game =null;
@@ -77,7 +77,7 @@ public class GameController {
     }
 
 
-    @GetMapping("/game/{year}")
+    @GetMapping("/game/year/{year}")
     public ResponseEntity getGameByYear(@PathVariable Integer year)
     {
         List<Game> game =null;
@@ -141,8 +141,9 @@ public class GameController {
             //set that trimmed string as our new url
             imageURL.setUrl(trimString);
             System.out.println(imageURL.getUrl());
+            service.saveImageToDB(name,imageURL.getUrl());
         }
-        catch (IOException | InterruptedException e)
+        catch (IOException | InterruptedException | NullTitleException | NullURLException e)
         {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
