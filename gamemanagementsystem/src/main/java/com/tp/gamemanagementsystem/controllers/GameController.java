@@ -48,7 +48,7 @@ public class GameController {
     }
 
     @GetMapping("/game/id")
-    public ResponseEntity getGameByID(@RequestBody Integer gameID)
+    public ResponseEntity getGameByID(@PathVariable Integer gameID)
     {
         Game game =null;
         try {
@@ -62,8 +62,8 @@ public class GameController {
     }
 
 
-    @GetMapping("game/category")
-    public ResponseEntity getGameByCategory(@RequestBody String category)
+    @GetMapping("game/{category}")
+    public ResponseEntity getGameByCategory(@PathVariable String category)
     {
         List<Game> game =null;
         try {
@@ -77,8 +77,8 @@ public class GameController {
     }
 
 
-    @GetMapping("/game/year")
-    public ResponseEntity getGameByYear(@RequestBody Integer year)
+    @GetMapping("/game/{year}")
+    public ResponseEntity getGameByYear(@PathVariable Integer year)
     {
         List<Game> game =null;
         try {
