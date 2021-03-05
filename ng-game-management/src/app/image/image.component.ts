@@ -19,9 +19,9 @@ export class ImageComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.service.loadGameImage(this.gameTitle).subscribe( urlResponse=>{
-      this.url = urlResponse.url;
-    } ); 
+    // this.service.loadGameImage(this.gameTitle).subscribe( urlResponse=>{
+    //   this.url = urlResponse.url;
+    // } ); 
   }
 
 
