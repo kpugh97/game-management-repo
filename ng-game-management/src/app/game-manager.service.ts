@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { empty, Observable } from 'rxjs';
-import {tap, catchError} from 'rxjs/operators';
+import {tap, catchError, map} from 'rxjs/operators';
 import {of} from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Game } from './ts/Game';
@@ -35,6 +35,9 @@ export class GameManagerService {
     );
   }
 
+
+
+
   getGameByID(gameID:number): Observable<Game>{
     return this.http.get<Game>(this.baseURL+ "/game/id/"+gameID)
     .pipe(
@@ -43,6 +46,13 @@ export class GameManagerService {
         console.log(err);
         return of(null);
       })
+    );
+  }
+  
+
+  getGame(gameID: number | string) {
+    return this.getAllGames().pipe(
+      map((games: Game[])=> games.find(game=> game.gameID === +gameID))
     );
   }
 

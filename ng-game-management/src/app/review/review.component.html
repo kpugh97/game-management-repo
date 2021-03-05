@@ -1,0 +1,21 @@
+<div id="reviewDiv">
+    <div id="reviewContent">
+        <h3>{{review.reviewTitle}} - {{review.gameTitle}} </h3> 
+         <p>{{review.reviewText}} <br><br>
+
+            <ng-container
+            *ngIf="review.rating!=null; then showRating; else noRating">
+        </ng-container> 
+
+            <ng-template #showRating>
+           Game Rating: {{review.rating}}/10
+            </ng-template>
+
+            <ng-template #noRating>
+                Game Rating: -
+            </ng-template>
+        </p>  
+
+    </div>
+    
+</div>

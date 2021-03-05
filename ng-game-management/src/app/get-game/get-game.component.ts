@@ -1,7 +1,9 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output} from '@angular/core';
 import { GameManagerService } from '../game-manager.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Game } from '../ts/Game';
+import { switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-get-game',
@@ -10,24 +12,26 @@ import { Game } from '../ts/Game';
 })
 export class GetGameComponent implements OnInit {
 
-  @Input()id:number;
-  toReturn: Game;
+  // @Input()id:number;
+  toReturn: Observable<Game>;
 
 
-  constructor(private service: GameManagerService, private router: Router) { }
+  constructor(private service: GameManagerService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.toReturn= this.route.paramMap.pipe(
+      switchMap((params: ParamMap)=>
+    this.service.getGame(params.get("gameID")))
+    );
   }
 
-  getGame()
-  {
-    this.service.getGameByID(this.id).subscribe(returnedGame =>{
-      this.toReturn = returnedGame;
-      console.log(returnedGame);
-      console.log(this.toReturn);
-      
-      
-    });
-  }
+  // getGame()
+  // {
+  //   this.service.getGameByID(this.id).subscribe(returnedGame =>{
+  //     this.toReturn = returnedGame;
+  //     console.log(returnedGame);
+  //     console.log(this.toReturn);
+  //   });
+  // }
 
 }

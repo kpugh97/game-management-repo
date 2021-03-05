@@ -14,6 +14,9 @@ import { ImageComponent } from './image/image.component';
 import { DeleteGameComponent } from './delete-game/delete-game.component';
 import { GetGameComponent } from './get-game/get-game.component';
 import { EditGameComponent } from './edit-game/edit-game.component';
+import { AllReviewsComponent } from './all-reviews/all-reviews.component';
+import { ReviewComponent } from './review/review.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 @NgModule({
@@ -28,6 +31,9 @@ import { EditGameComponent } from './edit-game/edit-game.component';
     DeleteGameComponent,
     GetGameComponent,
     EditGameComponent,
+    AllReviewsComponent,
+    ReviewComponent,
+    PageNotFoundComponent,
 
   ],
   imports: [

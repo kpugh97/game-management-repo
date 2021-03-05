@@ -1,0 +1,9 @@
+#reviewDiv{
+    border: black solid 4px;
+    margin-bottom: 30px;
+}
+
+#reviewContent
+{
+   margin-left: 10px; 
+}

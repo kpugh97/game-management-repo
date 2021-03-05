@@ -1,7 +1,7 @@
 <div>
     <ng-container
         *ngIf="game.imgSrc!=null; then showImage; else loadImage">
-    </ng-container>
+    </ng-container> 
 
     <ng-template #showImage>
         <img 
@@ -13,7 +13,7 @@
     </ng-template>
 
     <p id="gameInfo">
-        Title: {{game.title}}<br>
+        Title: <a [routerLink]="['/get', game.gameID]"> {{game.title}}</a> <br>
         Genre: {{game.category}} <br>
         Release Year: {{game.releaseYear}}
     </p>

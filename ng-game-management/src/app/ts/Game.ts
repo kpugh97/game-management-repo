@@ -6,5 +6,6 @@ export interface Game
     category: string;
     platforms: number[];
     imgSrc?:string;
+    desc?: string;
 
 }
