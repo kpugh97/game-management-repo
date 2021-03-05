@@ -7,6 +7,7 @@ public class Game {
     private Integer releaseYear;
     private String category;
     private String imgSrc;
+    private String desc;
 
 
 
@@ -32,6 +33,7 @@ public class Game {
         this.title = that.title;
         this.releaseYear = that.releaseYear;
         this.category = that.category;
+
     }
 
 
@@ -74,4 +76,13 @@ public class Game {
     public void setImgSrc(String imgSrc) {
         this.imgSrc = imgSrc;
     }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
 }
