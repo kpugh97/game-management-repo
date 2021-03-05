@@ -1,13 +1,13 @@
 package com.tp.gamemanagementsystem.models;
 
-import java.util.List;
-
 public class Game {
 
     private Integer gameID;
     private String title;
     private Integer releaseYear;
     private String category;
+    private String imgSrc;
+
 
 
     //empty default constructor for testing
@@ -23,8 +23,6 @@ public class Game {
         this.title = title;
         this.releaseYear = releaseYear;
         this.category = category;
-
-
     }
 
     //updating a new game
@@ -69,5 +67,11 @@ public class Game {
         this.category = category;
     }
 
+    public String getImgSrc() {
+        return imgSrc;
+    }
 
+    public void setImgSrc(String imgSrc) {
+        this.imgSrc = imgSrc;
+    }
 }

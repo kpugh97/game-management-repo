@@ -1,0 +1,14 @@
+img
+{
+      height: 100%;
+      width: 20%;
+      min-width: 20%;
+      min-height: 50%;
+}
+
+#gameInfo
+{
+      padding-left: 10px;
+      display: inline-block;
+      align-items: center;
+}

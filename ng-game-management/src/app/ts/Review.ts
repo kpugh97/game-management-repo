@@ -4,4 +4,5 @@ export interface Review{
     reviewText: string;
     rating?:number;
     gameTitle:string;
+    gameID: number;
 }

@@ -1,6 +1,20 @@
 <div>
+    <ng-container
+        *ngIf="game.imgSrc!=null; then showImage; else loadImage">
+    </ng-container>
+
+    <ng-template #showImage>
+        <img 
+        src="{{game.imgSrc}}">
+    </ng-template>
+
+    <ng-template #loadImage>
     <app-image [gameTitle]="game.title"></app-image>
-    <p>{{game.title}} <br>
-   Genre: {{game.category}} <br>
-   Release Year: {{game.releaseYear}}</p>
+    </ng-template>
+
+    <p id="gameInfo">
+        Title: {{game.title}}<br>
+        Genre: {{game.category}} <br>
+        Release Year: {{game.releaseYear}}
+    </p>
 </div> 

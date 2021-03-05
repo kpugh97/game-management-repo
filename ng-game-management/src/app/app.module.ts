@@ -12,6 +12,8 @@ import { PlatformComponent } from './platform/platform.component';
 import { PlatformShelfComponent } from './platform-shelf/platform-shelf.component';
 import { ImageComponent } from './image/image.component';
 import { DeleteGameComponent } from './delete-game/delete-game.component';
+import { GetGameComponent } from './get-game/get-game.component';
+import { EditGameComponent } from './edit-game/edit-game.component';
 
 
 @NgModule({
@@ -24,6 +26,8 @@ import { DeleteGameComponent } from './delete-game/delete-game.component';
     PlatformShelfComponent,
     ImageComponent,
     DeleteGameComponent,
+    GetGameComponent,
+    EditGameComponent,
 
   ],
   imports: [

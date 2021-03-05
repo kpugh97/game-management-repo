@@ -30,8 +30,8 @@ public class PlatformController {
 
 
     //get the platform by its ID
-    @GetMapping("/platform/id")
-    public ResponseEntity getPlatformByID(@RequestBody Integer platID)
+    @GetMapping("/platform/id/{platID}")
+    public ResponseEntity getPlatformByID(@PathVariable Integer platID)
     {
         Platform plat = null;
         try {
@@ -45,8 +45,8 @@ public class PlatformController {
     }
 
     //get all the games on one platform by the platform's ID
-    @GetMapping("/platform/games/id")
-    public ResponseEntity getPlatformGamesByID(@RequestBody Integer platID)
+    @GetMapping("/platform/games/{platID}")
+    public ResponseEntity getPlatformGamesByID(@PathVariable Integer platID)
     {
         List<Game> allGames = null;
         try {
@@ -60,8 +60,8 @@ public class PlatformController {
     }
 
     //get all the games on one platform by the platform's name
-    @GetMapping("/platform/games/platname")
-    public ResponseEntity getGamesByPlatformName(@RequestBody String name)
+    @GetMapping("/platform/platname/{name}")
+    public ResponseEntity getGamesByPlatformName(@PathVariable String name)
     {
         List<Game> allGames = null;
         try {
@@ -75,7 +75,7 @@ public class PlatformController {
     }
 
     @PostMapping("/newplatform")
-    public ResponseEntity addPlatform(String name)
+    public ResponseEntity addPlatform(@RequestBody String name)
     {
         Platform newPlatform = null;
         try
@@ -90,21 +90,22 @@ public class PlatformController {
     }
 
     @PutMapping("/edit/platform")
-    public String updatePlatform(Integer platID, String name )
+    public ResponseEntity updatePlatform(@RequestBody Platform plat)
     {
         try
         {
-            service.updatePlatform(platID,name);
+            service.updatePlatform(plat.getPlatformID(),plat.getName());
         }
         catch (NullIDException | NullTitleException | InvalidIDException e)
         {
-            e.getMessage();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body( e.getMessage());
+
         }
-        return "Platform successfully updated!";
+        return ResponseEntity.ok("Platform successfully updated!");
     }
 
-    @DeleteMapping("/delete/platform")
-    public String deletePlatform(Integer platID)
+    @DeleteMapping("/delete/platform/{platID}")
+    public ResponseEntity deletePlatform(@PathVariable Integer platID)
     {
         try
         {
@@ -112,9 +113,9 @@ public class PlatformController {
         }
         catch (NullIDException | InvalidIDException e)
         {
-            return e.getMessage();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body( e.getMessage());
         }
-        return "Platform successfully deleted!";
+        return ResponseEntity.ok("Platform successfully deleted!");
     }
 
 }

@@ -1,5 +1,8 @@
-<h1>Welcome!</h1>
+<h1>Game List</h1>
 <div>
+    <input id="searchBar" type="text" placeholder="Search"> 
+</div>
+<div id="gameSquare">
     <app-video-game *ngFor="let game of games" [game]="game">
 
     </app-video-game>    

@@ -1,0 +1,20 @@
+<h1>Enter the ID of the Game to Edit</h1>
+<div>
+   ID: <input type="number"[(ngModel)]="toEdit.gameID" > <br>
+   Title: <input type="text" [(ngModel)]="toEdit.title"> <br>
+   Release Year: <select name="" id="yearSelect" [(ngModel)] = "toEdit.releaseYear">
+      <option value="" disabled selected>Select Year</option>
+   </select>
+   Genre: <input type="text" [(ngModel)]="toEdit.category">
+   <button (click)="editGame()">Edit Game</button>
+
+   <p>{{toEdit.title}} - {{toEdit.releaseYear}}</p>
+
+</div>
+
+
+
+
+
+
+ 

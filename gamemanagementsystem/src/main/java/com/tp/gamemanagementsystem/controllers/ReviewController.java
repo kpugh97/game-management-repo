@@ -45,8 +45,8 @@ public class ReviewController {
     }
 
     //reviews by game ID
-    @GetMapping("/review/game/ID")
-    public ResponseEntity getReviewsByGameID(@RequestBody Integer gameID)
+    @GetMapping("/review/gamereview/{gameID}")
+    public ResponseEntity getReviewsByGameID(@PathVariable Integer gameID)
     {
         List<Review> allReviews = null;
         try
@@ -61,8 +61,8 @@ public class ReviewController {
     }
 
     //reviews by game name
-    @GetMapping("/review/game")
-    public ResponseEntity getReviewsByGame(@RequestBody String title)
+    @GetMapping("/review/gamename/{title}")
+    public ResponseEntity getReviewsByGame(@PathVariable String title)
     {
         List<Review> allReviews = null;
         try
@@ -93,8 +93,8 @@ public class ReviewController {
     }
 
     //delete a game review by the review ID
-    @DeleteMapping("/delete/review")
-    public ResponseEntity deleteReview(@RequestBody Integer reviewID)
+    @DeleteMapping("/delete/review/{reviewID}")
+    public ResponseEntity deleteReview(@PathVariable Integer reviewID)
     {
         try
         {

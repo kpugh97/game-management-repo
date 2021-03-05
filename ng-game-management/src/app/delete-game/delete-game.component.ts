@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GameManagerService } from '../game-manager.service';
 import { Game } from '../ts/Game';
@@ -10,7 +10,7 @@ import { Game } from '../ts/Game';
 })
 export class DeleteGameComponent implements OnInit {
 
-  id:number;
+  @Input()id:number;
 
   constructor(private service: GameManagerService, private router: Router) { }
 
