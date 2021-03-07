@@ -19,12 +19,18 @@ export class GetGameComponent implements OnInit {
   constructor(private service: GameManagerService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    console.log(history.state)
     this.toReturn= this.route.paramMap.pipe(
       switchMap((params: ParamMap)=>
     this.service.getGame(params.get("gameID")))
     );
+  
   }
 
+  toEditWithData()
+  {
+    this.router.navigateByUrl("/edit",{state: {gameID: this.toReturn }});
+  }
   // getGame()
   // {
   //   this.service.getGameByID(this.id).subscribe(returnedGame =>{

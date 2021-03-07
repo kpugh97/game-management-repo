@@ -17,6 +17,8 @@ import { EditGameComponent } from './edit-game/edit-game.component';
 import { AllReviewsComponent } from './all-reviews/all-reviews.component';
 import { ReviewComponent } from './review/review.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ReviewByNameComponent } from './review-by-name/review-by-name.component';
+import { AddReviewComponent } from './add-review/add-review.component';
 
 
 @NgModule({
@@ -34,6 +36,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     AllReviewsComponent,
     ReviewComponent,
     PageNotFoundComponent,
+    ReviewByNameComponent,
+    AddReviewComponent,
 
   ],
   imports: [

@@ -1,0 +1,14 @@
+template
+{
+    width: 544px;
+    height: 234px;
+}
+
+#scoreSpan{
+    margin-left: 20px;
+}
+
+#toSubmit
+{
+    margin-left: 10px;
+}

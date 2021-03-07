@@ -1,7 +1,11 @@
-<span>Title</span>
+<span>Title:</span>
 <input type="text" [(ngModel)]="title"> <br>
-<span>Category</span>
-<input type="text" [(ngModel)]="category"> <br>
-<span>Year</span> 
-<input type="number" [(ngModel)]="releaseYear"> <br>
+<span>Category:</span>
+<!-- <input type="text" [(ngModel)]="category"> <br> -->
+<select id="categorySelect" [(ngModel)]="category">
+    <option value="" disabled selected>Choose Genre Category</option>
+</select> <br>
+<span>Release Year:</span>  <select name="" id="yearSelect" [(ngModel)] = "releaseYear">
+    <option value="" disabled selected>Select Year</option>
+ </select>
 <button (click)= "addGame()">Add Game</button>

@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap  } from '@angular/router';
+import { Observable } from 'rxjs';
 import { GameManagerService } from '../game-manager.service';
 import { Game } from '../ts/Game';
+import { switchMap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-edit-game',
@@ -12,10 +15,15 @@ export class EditGameComponent implements OnInit {
 
   @Input()toEdit:Game = {} as Game;
 
-  constructor(private service: GameManagerService, private router: Router) { }
+  constructor(private service: GameManagerService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    console.log(this.route.snapshot.params)
+    this.toEdit.gameID = this.route.snapshot.params.gameID;
+    this.toEdit.title = this.route.snapshot.params.title;
     this.populate();
+    this.loadCategories();
+
   }
 
   editGame()
@@ -38,5 +46,20 @@ export class EditGameComponent implements OnInit {
     }
 
   }
+
+   //preset categories for each game
+   loadCategories()
+   {
+     let select = document.getElementById("categorySelect");
+     let categories: string[] = ["Adventure","Puzzle","Action","Action-advenure","RPG","FPS","MOBA","MMORPG","Simulation","Strategy","Sports", "Mobile"];
+     for(let i =0;i<categories.length;i++)
+     {
+       let option : any = document.createElement("option");
+       option.text = categories[i];
+       option.value = categories[i];
+       select.appendChild(option);
+     }
+ 
+   }
 
 }

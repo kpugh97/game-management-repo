@@ -49,12 +49,12 @@ export class GameManagerService {
     );
   }
   
-
   getGame(gameID: number | string) {
     return this.getAllGames().pipe(
       map((games: Game[])=> games.find(game=> game.gameID === +gameID))
     );
   }
+
 
   addGame(toAdd:Game): Observable<Game>
   {

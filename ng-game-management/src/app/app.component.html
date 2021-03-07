@@ -1,1 +1,39 @@
-<router-outlet></router-outlet>
+<h1>Video Game List Tracker</h1>
+<div id="searchDiv">
+    <input id="searchBar" type="text" placeholder="Search"> 
+</div>
+<nav id="navBar">
+    <ul>
+        <li> 
+             <a routerLink="" routerLinkActive>Home</a>
+        </li>
+        <li>
+        <a routerLink="/recentrev" routerLinkActive>Reviews</a>
+        </li>
+        <li>
+            <a routerLink="/newgame" routerLinkActive>Add Game</a>
+        </li>
+        <li>
+            <a routerLink="/delete" routerLinkActive>Remove Game</a>
+        </li>
+        <!-- <li>
+        Games by Platform
+            <ul id="platformList">
+                <li>
+                    <a routerLink="/platform/" routerLinkActive></a>
+                </li>
+                <li>
+                    <a routerLink="/platform/" routerLinkActive></a>
+                </li>
+                <li>
+                    <a routerLink="/platform/" routerLinkActive></a>
+                </li>
+            </ul>
+        </li> -->
+    </ul>
+    
+    
+</nav>
+<div>
+    <router-outlet></router-outlet>
+</div>

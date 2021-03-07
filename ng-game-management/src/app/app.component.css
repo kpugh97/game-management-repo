@@ -1,0 +1,17 @@
+h1{
+    display: inline;
+}
+
+
+a{
+    margin: 5px;
+}
+
+#searchDiv{
+    display: inline;
+    margin-left: 30px ;
+}
+
+#navBar{
+    margin-bottom: 20px;
+}

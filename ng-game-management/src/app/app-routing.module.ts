@@ -9,15 +9,18 @@ import {GetGameComponent} from './get-game/get-game.component';
 import { EditGameComponent } from './edit-game/edit-game.component';
 import { AllReviewsComponent } from './all-reviews/all-reviews.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AddReviewComponent } from './add-review/add-review.component';
 
 const routes: Routes = [
-  {path: "", component: VgShelfComponent},
+  {path: "home", component: VgShelfComponent},
+  {path: "", redirectTo: "/home",pathMatch: "full"},
   {path: "newgame", component:AddGameComponent},
   {path: "get/:gameID", component:GetGameComponent},
   {path: "delete", component:DeleteGameComponent},
-  {path: "edit", component:EditGameComponent},
+  {path: "edit/:gameID/:title", component:EditGameComponent},
   {path: "platforms", component:PlatformShelfComponent},
   {path: "recentrev", component: AllReviewsComponent},
+  {path: "addreview/:gameID/:title", component: AddReviewComponent},
   {path: "**", component: PageNotFoundComponent}
 ];
 

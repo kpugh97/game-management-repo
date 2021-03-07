@@ -1,0 +1,10 @@
+<div id="reviewDiv">
+    <span>Game ID: {{addThis.gameID}}</span>
+    <span>Title: </span><input type="text" [(ngModel)]="addThis.reviewTitle">
+     <span id="scoreSpan">Score: </span><select id="gameScore">
+         <option value="" disabled selected>Rating</option>
+     </select> <br> <br>
+     <span id="reviewArea">Your Review Goes Here:</span><br>
+    <textarea cols="60" rows="20" [(ngModel)]="addThis.reviewText"></textarea>
+    <button id="toSubmit" (click)="addReview()">Submit</button>
+</div>

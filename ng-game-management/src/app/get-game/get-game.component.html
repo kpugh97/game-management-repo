@@ -1,4 +1,4 @@
-<h2>Game Info</h2>
+<h2>Game Info:</h2> 
 <div *ngIf="toReturn | async as gameReturned">
     <img src="{{gameReturned.imgSrc}}">
     <p>{{gameReturned.title}} <br>
@@ -18,3 +18,16 @@
 </p>
 </div>
 
+<div id= gameReviews *ngIf="toReturn | async as gameReturned">
+    <app-review-by-name [gameTitle]="gameReturned.title">
+        
+    </app-review-by-name>
+</div>
+
+<div id="goToEdit" *ngIf="toReturn | async as gameReturned">
+    <button [routerLink]="['/edit', gameReturned.gameID, gameReturned.title]" >Edit This Game</button><br>
+</div>
+
+<div id="goMakeReview" *ngIf="toReturn | async as gameReturned">
+    <button [routerLink]="['/addreview', gameReturned.gameID, gameReturned.title]">Review This Game</button><br>
+</div>
