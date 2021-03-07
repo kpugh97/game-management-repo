@@ -25,7 +25,7 @@ public class GamePostgresDAO implements GameDAO {
 
     @Override
     public List<Game> getGameCollection() {
-        List<Game> allGames = template.query("SELECT \"Games\".\"gameID\", \"title\", \"category\", \"year\", \"imageSrc\" FROM \"Games\" ORDER BY \"gameID\"", new GameMapper());
+        List<Game> allGames = template.query("SELECT \"Games\".\"gameID\", \"title\", \"category\", \"year\", \"imageSrc\", \"desc\" FROM \"Games\" ORDER BY \"gameID\"", new GameMapper());
         return allGames;
     }
 
@@ -131,7 +131,7 @@ public class GamePostgresDAO implements GameDAO {
         }
         //update game with new info
         try {
-            template.update("UPDATE \"Games\" SET \"title\" = ? , \"category\" = ?, \"year\" = ?, \"imageSrc\" = NULL WHERE \"gameID\" = ? ;",title,category,releaseDate,gameID);
+            template.update("UPDATE \"Games\" SET \"title\" = ? , \"category\" = ?, \"year\" = ? WHERE \"gameID\" = ? ;",title,category,releaseDate,gameID);
         } catch (EmptyResultDataAccessException e) {
             throw new InvalidIDException("Cannot make changes to a game with ID " + gameID + "!");
         }

@@ -17,6 +17,7 @@ public class GameMapper implements RowMapper<Game> {
         gameMap.setCategory(resultSet.getString("category"));
         gameMap.setReleaseYear(resultSet.getInt("year"));
         gameMap.setImgSrc(resultSet.getString("imageSrc"));
+        gameMap.setDesc(resultSet.getString("desc"));
 
         return gameMap;
     }
