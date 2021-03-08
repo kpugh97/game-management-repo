@@ -28,6 +28,20 @@ public class ReviewController {
         return ResponseEntity.ok(allReviews);
     }
 
+
+    @GetMapping("/review/id/{reviewID}")
+    public ResponseEntity getReviewByID(@PathVariable Integer reviewID)
+    {
+        Review toReturn = null;
+        try {
+            toReturn = service.getReviewByID(reviewID);
+        }catch(NullIDException| InvalidIDException e)
+        {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+        return ResponseEntity.ok(toReturn);
+    }
+
     //reviews by game ID
     @PostMapping("/add/review")
     public ResponseEntity makeReview(@RequestBody Review review)

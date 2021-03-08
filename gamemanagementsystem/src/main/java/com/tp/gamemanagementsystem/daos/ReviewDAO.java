@@ -20,5 +20,5 @@ public interface ReviewDAO {
     void editReview(Integer reviewID, String review, Integer rating) throws NullIDException,NullReviewException, InvalidIDException;
     List<Review> getReviewsByGameName(String title) throws NullTitleException;
     List<Review> getReviewsByGameID(Integer gameID) throws NullIDException, InvalidIDException;
-
+    Review getReviewByID(Integer reviewID) throws NullIDException, InvalidIDException;
 }

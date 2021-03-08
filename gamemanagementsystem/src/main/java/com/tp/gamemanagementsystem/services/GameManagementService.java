@@ -174,6 +174,10 @@ public class GameManagementService {
         return reviewdao.getAllReviews();
     }
 
+    public Review getReviewByID(Integer reviewID) throws NullIDException, InvalidIDException{
+        return reviewdao.getReviewByID(reviewID);
+    }
+
     public List<Review> getReviewsByGameID(Integer gameID) throws NullIDException, InvalidIDException {
         if(gameID < 0)
         {

@@ -68,6 +68,9 @@ public class ReviewPostgresDAO implements ReviewDAO {
             newReview.setReviewText(review);
             newReview.setGameID(gameID);
             newReview.setRating(rating);
+            template.update("UPDATE \"Reviews\" as r SET \"gameTitle\"=gs.\"title\" \n"+
+                    "FROM \"Games\" as gs \n"+
+                    "WHERE r.\"gameID\" = gs.\"gameID\"");
         }
         catch (DataIntegrityViolationException e)
         {
@@ -79,7 +82,7 @@ public class ReviewPostgresDAO implements ReviewDAO {
     @Override
     public List<Review> getAllReviews(){
 
-        List<Review> allReviews = template.query("SELECT gs.\"gameID\",\"title\",\"reviewID\",\"title\",\"category\",\"reviewTitle\",\"reviewText\",\"rating\" FROM \"Games\" as gs\n"+
+        List<Review> allReviews = template.query("SELECT gs.\"gameID\",\"title\",\"reviewID\",\"title\",\"category\",\"reviewTitle\",\"reviewText\",\"rating\", \"gameTitle\" FROM \"Games\" as gs\n"+
                 "INNER JOIN \"Reviews\" as rs ON rs.\"gameID\"=gs.\"gameID\"\n"+
                 "ORDER BY rs.\"reviewID\" DESC",new ReviewMapper());
         return allReviews;
@@ -112,7 +115,7 @@ public class ReviewPostgresDAO implements ReviewDAO {
         }
         List<Review> allReviews = null;
         try {
-            allReviews = template.query("SELECT gs.\"gameID\", \"reviewID\",\"title\",\"category\",\"reviewTitle\",\"reviewText\",\"rating\" FROM \"Games\" as gs\n"+
+            allReviews = template.query("SELECT gs.\"gameID\", \"reviewID\",\"title\",\"category\",\"reviewTitle\",\"reviewText\",\"rating\", \"gameTitle\" FROM \"Games\" as gs\n"+
                     "INNER JOIN \"Reviews\" as rs ON rs.\"gameID\"=gs.\"gameID\"\n"+
                     "WHERE gs.\"title\" = ?",new ReviewMapper(),title);
         }

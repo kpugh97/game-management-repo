@@ -31,6 +31,16 @@ public class ReviewInMemDAO implements ReviewDAO {
     }
 
     @Override
+    public Review getReviewByID(Integer reviewID) throws NullIDException, InvalidIDException {
+        if(reviewID == null)
+        {
+            throw new NullIDException("Cannot retrieve a review with null ID!");
+        }
+        Review toReturn = null;
+        return toReturn;
+    }
+
+    @Override
     public Review makeReview(String reviewTitle, String review, Integer rating, Integer gameID) throws NullTitleException, NullReviewException, NullIDException, InvalidIDException {
         if(reviewTitle == null)
         {
@@ -157,4 +167,6 @@ public class ReviewInMemDAO implements ReviewDAO {
         }
         return toReturn;
     }
+
+
 }
