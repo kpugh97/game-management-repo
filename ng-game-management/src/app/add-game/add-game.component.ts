@@ -21,6 +21,7 @@ export class AddGameComponent implements OnInit {
   ngOnInit(): void {
     this.populate();
     this.loadCategories();
+    this.loadPlatforms();
   }
 
   addGame()
@@ -43,6 +44,24 @@ export class AddGameComponent implements OnInit {
       option.value = categories[i];
       select.appendChild(option);
     }
+  }
+
+
+  //preset platforms 
+    loadPlatforms()
+    {
+      let select = document.getElementById("platSelect");
+      let plats: string[] = ["Playstation","Playstation 1","Playstation 2","Playstation 3","Playstation 4",
+      "Playsation 5","Xbox","Xbox 360","Xbox One","NES", "Super NES","Nintendo 64", "Nintendo DS","Nintendo DSi",
+      "Nintendo 3DS","Gameboy", "Gameboy Advance","Nintendo Gamecube", "Nintendo Wii","Nintendo Wii U","Nintendo Switch","PC","Dreamcast","Atari 7800"];
+      for(let i =0;i<plats.length;i++)
+      {
+        let platoption : any = document.createElement("option");
+        platoption.text = plats[i];
+        platoption.value = plats[i];
+        select.appendChild(platoption);
+      }
+  
 
   }
 

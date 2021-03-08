@@ -21,6 +21,7 @@ import { ReviewByNameComponent } from './review-by-name/review-by-name.component
 import { AddReviewComponent } from './add-review/add-review.component';
 import { EditReviewComponent } from './edit-review/edit-review.component';
 import { DeleteReviewComponent } from './delete-review/delete-review.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { DeleteReviewComponent } from './delete-review/delete-review.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
