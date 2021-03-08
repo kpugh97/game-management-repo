@@ -19,6 +19,9 @@ export class DeleteGameComponent implements OnInit {
 
   deleteGame()
   {
+    if(confirm("Do you want to delete this game?"))
+    {
     this.service.deleteGame(this.id).subscribe((_)=>{this.router.navigate([""])});
+    }
   }
 }

@@ -20,7 +20,6 @@ export class EditGameComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.route.snapshot.params)
     this.toEdit.gameID = this.route.snapshot.params.gameID;
-    this.toEdit.title = this.route.snapshot.params.title;
     this.populate();
     this.loadCategories();
 

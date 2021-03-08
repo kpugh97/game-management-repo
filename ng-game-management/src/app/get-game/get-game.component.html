@@ -31,3 +31,7 @@
 <div id="goMakeReview" *ngIf="toReturn | async as gameReturned">
     <button [routerLink]="['/addreview', gameReturned.gameID, gameReturned.title]">Review This Game</button><br>
 </div>
+
+<div id="goMakeReview" *ngIf="toReturn | async as gameReturned">
+    <app-delete-game [id]="gameReturned.gameID"></app-delete-game>
+</div>

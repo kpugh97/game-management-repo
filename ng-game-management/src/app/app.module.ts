@@ -19,6 +19,8 @@ import { ReviewComponent } from './review/review.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ReviewByNameComponent } from './review-by-name/review-by-name.component';
 import { AddReviewComponent } from './add-review/add-review.component';
+import { EditReviewComponent } from './edit-review/edit-review.component';
+import { DeleteReviewComponent } from './delete-review/delete-review.component';
 
 
 @NgModule({
@@ -38,6 +40,8 @@ import { AddReviewComponent } from './add-review/add-review.component';
     PageNotFoundComponent,
     ReviewByNameComponent,
     AddReviewComponent,
+    EditReviewComponent,
+    DeleteReviewComponent,
 
   ],
   imports: [

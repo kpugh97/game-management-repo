@@ -27,10 +27,6 @@ export class GetGameComponent implements OnInit {
   
   }
 
-  toEditWithData()
-  {
-    this.router.navigateByUrl("/edit",{state: {gameID: this.toReturn }});
-  }
   // getGame()
   // {
   //   this.service.getGameByID(this.id).subscribe(returnedGame =>{

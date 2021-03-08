@@ -10,6 +10,8 @@ import { EditGameComponent } from './edit-game/edit-game.component';
 import { AllReviewsComponent } from './all-reviews/all-reviews.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AddReviewComponent } from './add-review/add-review.component';
+import { EditReviewComponent } from './edit-review/edit-review.component';
+import { DeleteReviewComponent } from './delete-review/delete-review.component';
 
 const routes: Routes = [
   {path: "home", component: VgShelfComponent},
@@ -21,6 +23,8 @@ const routes: Routes = [
   {path: "platforms", component:PlatformShelfComponent},
   {path: "recentrev", component: AllReviewsComponent},
   {path: "addreview/:gameID/:title", component: AddReviewComponent},
+  {path: "editreview/:reviewID", component: EditReviewComponent},
+  {path: "deletereview/:reviewID", component: DeleteReviewComponent},
   {path: "**", component: PageNotFoundComponent}
 ];
 

@@ -7,6 +7,7 @@ import { Game } from './ts/Game';
 import { Platform } from './ts/Platform';
 import { StringResponse } from './ts/StringResponse'
 import { Review } from './ts/Review';
+import { EditReview } from './ts/EditReview';
 
 
 
@@ -233,7 +234,7 @@ getAllReviews() : Observable<Review[]>
 
   addReview(toAdd:Review) : Observable<Review>
   {
-    return this.http.post<Review>(this.baseURL+"add/review",toAdd,this.httpOptions)
+    return this.http.post<Review>(this.baseURL+"/add/review",toAdd,this.httpOptions)
     .pipe(
       tap(x => console.log(x)),
       catchError(err => {
@@ -268,7 +269,7 @@ getReviewsByGameTitle(title:string) : Observable<Review[]>
     );
   }
 
-  editReview(toEdit:Review) : Observable<Review>
+  editReview(toEdit:EditReview) : Observable<Review>
   {
     return this.http.put<Review>(this.baseURL+"/edit/review",toEdit,this.httpOptions)
     .pipe(

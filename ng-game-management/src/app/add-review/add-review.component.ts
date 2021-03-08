@@ -10,8 +10,7 @@ import { Review } from '../ts/Review';
 })
 export class AddReviewComponent implements OnInit {
 
-  @Input()id:number;
-  addThis:Review;
+  addThis:Review = {} as Review;
 
   constructor(private service: GameManagerService, private router: Router, private route: ActivatedRoute) { }
 
@@ -19,12 +18,13 @@ export class AddReviewComponent implements OnInit {
   console.log(this.route.snapshot.params);
   this.populate();
   this.addThis.gameID = this.route.snapshot.params.gameID;
+  this.addThis.gameTitle = this.route.snapshot.params.title;
   }
 
   addReview()
   {
     let toAdd: Review = {reviewTitle: this.addThis.reviewTitle, reviewText: this.addThis.reviewText, rating: this.addThis.rating, gameTitle:this.addThis.gameTitle, gameID: this.addThis.gameID};
-    this.service.addReview(toAdd).subscribe((_) => {this.router.navigate([".."])});
+    this.service.addReview(toAdd).subscribe((_) => {this.router.navigate(["/recentrev"])});
   }
 
   populate()
