@@ -1,0 +1,5 @@
+<div *ngIf="toReturn | async as reviewReturned">
+    <app-edit-review [reviewText]=reviewReturned.reviewText [rating]= reviewReturned.rating>
+
+    </app-edit-review>
+</div>

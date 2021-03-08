@@ -231,6 +231,19 @@ getAllReviews() : Observable<Review[]>
   );
 }
 
+getReviewByID(reviewID:number) : Observable<Review>
+  {
+    return this.http.get<Review>(this.baseURL+"/review/id/"+reviewID,this.httpOptions)
+    .pipe(
+      tap(x => console.log(x)),
+      catchError(err => {
+        console.log(err);
+        return of(null);
+      })
+    )
+  }
+
+
 
   addReview(toAdd:Review) : Observable<Review>
   {
@@ -242,6 +255,12 @@ getAllReviews() : Observable<Review[]>
         return of(null);
       })
     )
+  }
+
+  getReview(reviewID: number | string) {
+    return this.getAllReviews().pipe(
+      map((reviews: Review[])=> reviews.find(review=> review.reviewID === +reviewID))
+    );
   }
 
 

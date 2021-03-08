@@ -1,5 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import * as EventEmitter from 'events';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { GameManagerService } from '../game-manager.service';
 import { EditReview } from '../ts/EditReview';
 import { Review } from '../ts/Review'
@@ -11,20 +14,24 @@ import { Review } from '../ts/Review'
 })
 export class EditReviewComponent implements OnInit {
 
-  @Input()toEdit:EditReview={} as EditReview;
+  @Input() reviewID: number;
+  @Input()reviewText:string;
+  @Input()rating:number;
 
   constructor(private service: GameManagerService, private router: Router, private route: ActivatedRoute) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     console.log(this.route.snapshot.params);
-    this.toEdit.reviewID = this.route.snapshot.params.reviewID;
+    this.reviewID = this.route.snapshot.params.reviewID;
     this.populate();
+
   }
+
 
 
   editReview()
   {
-    let editThis: EditReview = {reviewID: this.toEdit.reviewID, review: this.toEdit.review, rating:this.toEdit.rating};
+    let editThis: EditReview = {reviewID: this.reviewID, review: this.reviewText, rating:this.rating};
     this.service.editReview(editThis).subscribe((_)=>{this.router.navigate(["/recentrev"])});
   }
 

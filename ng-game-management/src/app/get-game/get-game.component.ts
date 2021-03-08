@@ -23,8 +23,7 @@ export class GetGameComponent implements OnInit {
     this.toReturn= this.route.paramMap.pipe(
       switchMap((params: ParamMap)=>
     this.service.getGame(params.get("gameID")))
-    );
-  
+    );  
   }
 
   // getGame()

@@ -8,3 +8,27 @@ img
      height: 100%;
       width: 40%;
 }
+
+#goToEditGame{
+    display: inline-block;
+    margin: 10px;
+
+}
+
+#goMakeReview
+{
+    display: inline-block;
+    margin: 10px;
+
+
+
+}
+
+#goDeleteGame
+{
+    display: inline-block;
+    margin: 10px;
+    float: right;
+    
+
+}

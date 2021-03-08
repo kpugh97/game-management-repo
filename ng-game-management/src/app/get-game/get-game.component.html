@@ -24,14 +24,14 @@
     </app-review-by-name>
 </div>
 
-<div id="goToEdit" *ngIf="toReturn | async as gameReturned">
-    <button [routerLink]="['/edit', gameReturned.gameID, gameReturned.title]" >Edit This Game</button><br>
+<div id="goToEditGame" *ngIf="toReturn | async as gameReturned">
+    <button  type="button" class="btn btn-outline-primary" [routerLink]="['/edit', gameReturned.gameID, gameReturned.title]" >Edit This Game</button><br>
 </div>
 
 <div id="goMakeReview" *ngIf="toReturn | async as gameReturned">
-    <button [routerLink]="['/addreview', gameReturned.gameID, gameReturned.title]">Review This Game</button><br>
+    <button type="button" class="btn btn-outline-info" [routerLink]="['/addreview', gameReturned.gameID, gameReturned.title]">Review This Game</button><br>
 </div>
 
-<div id="goMakeReview" *ngIf="toReturn | async as gameReturned">
+<div id="goDeleteGame" *ngIf="toReturn | async as gameReturned">
     <app-delete-game [id]="gameReturned.gameID"></app-delete-game>
 </div>

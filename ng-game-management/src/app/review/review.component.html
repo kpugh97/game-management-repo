@@ -15,7 +15,7 @@
                 Game Rating: -/10
             </ng-template>
         </p>  
-        <button [routerLink]="['/editreview', review.reviewID]">Edit this Review</button>
+        <button id="reviewBtn" type="button" class="btn btn-outline-primary btn-sm" [routerLink]="['/editreview', review.reviewID]">Edit this Review</button>
         <app-delete-review [id]="review.reviewID"></app-delete-review>
     </div>
     

@@ -1,11 +1,8 @@
 <div>
-   <span>
-    Review ID: {{toEdit.reviewID}}
-   </span> <br> <br> 
    <span>Edit Review Here: </span> <br> 
-   <select id="ratingEdit" [(ngModel)]="toEdit.rating">
+   <select id="ratingEdit" [(ngModel)]="rating">
        <option value="" disabled selected>Rating</option>
    </select> <br>
-<textarea id="reviewEditText" cols="60" rows="20" [(ngModel)]="toEdit.review"></textarea> 
+<textarea id="reviewEditText" cols="60" rows="20" [(ngModel)]="reviewText"></textarea> 
 <button (click)="editReview()">Edit Review</button> 
 </div> 
