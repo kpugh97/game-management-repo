@@ -29,7 +29,7 @@ public class ReviewController {
     }
 
     //reviews by game ID
-    @PostMapping("add/review")
+    @PostMapping("/add/review")
     public ResponseEntity makeReview(@RequestBody Review review)
     {
         Review newReview = null;
