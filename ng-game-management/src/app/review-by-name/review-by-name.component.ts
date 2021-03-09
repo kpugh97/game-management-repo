@@ -1,4 +1,8 @@
+import { Location } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { GameManagerService } from '../game-manager.service';
 import { Review } from '../ts/Review';
 
@@ -9,14 +13,27 @@ import { Review } from '../ts/Review';
 })
 export class ReviewByNameComponent implements OnInit {
 
-  @Input()gameTitle:string;
+  gameID:number;
+  gameTitle:string;
   reviews: Review[];
 
-  constructor(private service: GameManagerService) { }
+  constructor(private service: GameManagerService, private router: Router, private route: ActivatedRoute, private location: Location) { }
 
   ngOnInit(): void {
+
+    console.log(this.route.snapshot.params.gameID);
+    console.log(this.route.snapshot.params.title);
+
+    this.gameID = this.route.snapshot.params.gameID;
+    this.gameTitle = this.route.snapshot.params.title;
     this.service.getReviewsByGameTitle(this.gameTitle).subscribe(list =>
       this.reviews = list)
   }
+
+  // back()
+  // {
+  //   
+  // }
+
 
 }

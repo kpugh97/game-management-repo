@@ -1,0 +1,5 @@
+<div *ngIf="toReturn | async as gameToEdit">
+    <app-edit-game [gameID]="gameToEdit.gameID" [gameTitle]="gameToEdit.title" [category]="gameToEdit.category" [year]="gameToEdit.releaseYear">
+
+    </app-edit-game>
+</div>

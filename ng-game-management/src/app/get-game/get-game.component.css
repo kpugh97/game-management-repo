@@ -19,9 +19,6 @@ img
 {
     display: inline-block;
     margin: 10px;
-
-
-
 }
 
 #goDeleteGame
@@ -30,5 +27,10 @@ img
     margin: 10px;
     float: right;
     
+}
 
+#gameDetailNav ul li{
+    margin: 5px;
+    display: inline-block;
+    list-style: none;
 }

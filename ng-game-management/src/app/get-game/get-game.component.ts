@@ -12,14 +12,14 @@ import { Observable } from 'rxjs';
 })
 export class GetGameComponent implements OnInit {
 
-  // @Input()id:number;
+  @Input()id:number;
   toReturn: Observable<Game>;
 
 
   constructor(private service: GameManagerService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    console.log(history.state)
+    this.id = this.route.snapshot.params.gameID;
     this.toReturn= this.route.paramMap.pipe(
       switchMap((params: ParamMap)=>
     this.service.getGame(params.get("gameID")))

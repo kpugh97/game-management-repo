@@ -23,6 +23,7 @@ import { EditReviewComponent } from './edit-review/edit-review.component';
 import { DeleteReviewComponent } from './delete-review/delete-review.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GetReviewComponent } from './get-review/get-review.component';
+import { GetGameEditComponent } from './get-game-edit/get-game-edit.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { GetReviewComponent } from './get-review/get-review.component';
     EditReviewComponent,
     DeleteReviewComponent,
     GetReviewComponent,
+    GetGameEditComponent,
 
   ],
   imports: [

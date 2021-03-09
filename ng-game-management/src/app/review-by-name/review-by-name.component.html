@@ -1,3 +1,17 @@
+<h2>Game Info:</h2> 
+<div id="navBar">
+    <nav id="gameDetailNav">
+        <ul>
+            <li>
+                <a [routerLink]="['../']">Details</a>
+            </li>
+            <li>
+                <a [routerLink]="['./']">Reviews</a>
+            </li>
+        </ul>
+    </nav> 
+</div>
+
 <div>
     <app-review *ngFor="let review of reviews" [review]="review">
 

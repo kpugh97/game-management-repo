@@ -24,7 +24,7 @@ export class AddReviewComponent implements OnInit {
   addReview()
   {
     let toAdd: Review = {reviewTitle: this.addThis.reviewTitle, reviewText: this.addThis.reviewText, rating: this.addThis.rating, gameTitle:this.addThis.gameTitle, gameID: this.addThis.gameID};
-    this.service.addReview(toAdd).subscribe((_) => {this.router.navigate(["/recentrev"])});
+    this.service.addReview(toAdd).subscribe((_) => {this.router.navigate(["../"])});
   }
 
   populate()

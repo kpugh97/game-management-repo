@@ -1,0 +1,10 @@
+h2
+{
+    margin-bottom: 5px;
+}
+
+#gameDetailNav ul li{
+    display: inline-block;
+    list-style: none;
+    margin: 5px;
+}

@@ -1,7 +1,21 @@
 <h2>Game Info:</h2> 
 <div *ngIf="toReturn | async as gameReturned">
+    <nav id="gameDetailNav">
+        <ul>
+            <li>
+                <a [routerLink]="['/get', gameReturned.gameID]">Details</a>
+            </li>
+            <li>
+                <a [routerLink]="['/get/',gameReturned.gameID, gameReturned.title]">Reviews</a>
+            </li>
+        </ul>
+    </nav> 
+</div>
+
+
+<div *ngIf="toReturn | async as gameReturned">
     <img src="{{gameReturned.imgSrc}}">
-    <p>{{gameReturned.title}} <br>
+    <p>Title: {{gameReturned.title}} <br>
         Genre: {{gameReturned.category}} <br>
         Release Year: {{gameReturned.releaseYear}} <br> 
         
@@ -14,18 +28,26 @@
         </ng-template>
         <ng-template #noDesc>
             Description:  N/a
-         </ng-template>
+         </ng-template> <br>
+         Status: <select id="statusSelect">
+             <option value="" disabled selected>Select</option>
+             <option value="Playing" >Playing</option>
+             <option value="Completed">Completed</option>
+             <option value="Plan to Play">Plan to Play</option>
+             <option value="Dropped">Dropped</option>
+         </select>
 </p>
 </div>
 
+<!-- 
 <div id= gameReviews *ngIf="toReturn | async as gameReturned">
     <app-review-by-name [gameTitle]="gameReturned.title">
         
     </app-review-by-name>
-</div>
+</div> -->
 
 <div id="goToEditGame" *ngIf="toReturn | async as gameReturned">
-    <button  type="button" class="btn btn-outline-primary" [routerLink]="['/edit', gameReturned.gameID, gameReturned.title]" >Edit This Game</button><br>
+    <button  type="button" class="btn btn-outline-primary" [routerLink]="['/edit', gameReturned.gameID]" >Edit This Game</button><br>
 </div>
 
 <div id="goMakeReview" *ngIf="toReturn | async as gameReturned">

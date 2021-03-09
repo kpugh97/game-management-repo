@@ -13,13 +13,20 @@ import { switchMap } from 'rxjs/operators';
 })
 export class EditGameComponent implements OnInit {
 
+  @Input() gameID:number;
+  @Input() gameTitle:string;
+  @Input() category:string;
+  @Input() year:number;
   @Input()toEdit:Game = {} as Game;
 
   constructor(private service: GameManagerService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    console.log(this.route.snapshot.params)
-    this.toEdit.gameID = this.route.snapshot.params.gameID;
+    // console.log(this.gameID);
+    this.toEdit.gameID = this.gameID;
+    this.toEdit.title = this.gameTitle;
+    this.toEdit.category = this.category;
+    this.toEdit.releaseYear = this.year;
     this.populate();
     this.loadCategories();
 
@@ -27,7 +34,7 @@ export class EditGameComponent implements OnInit {
 
   editGame()
   {
-    this.service.editGame(this.toEdit).subscribe(editedGame =>{
+    this.service.editGame(this.toEdit).subscribe((_)=>{this.router.navigate(["./"])},editedGame =>{
       this.toEdit = editedGame; 
     })
   }

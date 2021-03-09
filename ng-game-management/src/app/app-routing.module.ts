@@ -13,14 +13,17 @@ import { AddReviewComponent } from './add-review/add-review.component';
 import { EditReviewComponent } from './edit-review/edit-review.component';
 import { DeleteReviewComponent } from './delete-review/delete-review.component';
 import { GetReviewComponent } from './get-review/get-review.component';
+import { ReviewByNameComponent } from './review-by-name/review-by-name.component';
+import { GetGameEditComponent } from './get-game-edit/get-game-edit.component';
 
 const routes: Routes = [
   {path: "home", component: VgShelfComponent},
   {path: "", redirectTo: "/home",pathMatch: "full"},
   {path: "newgame", component:AddGameComponent},
   {path: "get/:gameID", component:GetGameComponent},
+  {path: "get/:gameID:/:title", component:ReviewByNameComponent},
   {path: "delete", component:DeleteGameComponent},
-  {path: "edit/:gameID/:title", component:EditGameComponent},
+  {path: "edit/:gameID", component:GetGameEditComponent},
   {path: "platforms", component:PlatformShelfComponent},
   {path: "recentrev", component: AllReviewsComponent},
   {path: "addreview/:gameID/:title", component: AddReviewComponent},

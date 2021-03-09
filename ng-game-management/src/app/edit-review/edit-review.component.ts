@@ -15,8 +15,8 @@ import { Review } from '../ts/Review'
 export class EditReviewComponent implements OnInit {
 
   @Input() reviewID: number;
-  @Input()reviewText:string;
-  @Input()rating:number;
+  @Input() reviewText:string;
+  @Input() rating:number;
 
   constructor(private service: GameManagerService, private router: Router, private route: ActivatedRoute) { }
 
