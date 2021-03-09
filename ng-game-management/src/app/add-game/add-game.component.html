@@ -1,17 +1,25 @@
-<span>Title:</span>
-<input type="text" [(ngModel)]="title"> <br>
-<span>Category:</span>
-<!-- <input type="text" [(ngModel)]="category"> <br> -->
-<select id="categorySelect" [(ngModel)]="category">
-    <option value="" disabled selected>Choose Genre Category</option>
-</select> <br>
-<span>Platform(s):</span>
-<select id="platSelect" [(ngModel)]="platforms" (ngModelChange)="selectChangeHandler($event)">
-    <!-- <option value="" disabled selected>Choose Platform</option> -->
-    <option value="" disabled selected>Choose Platform</option>
-    <option *ngFor="let platforms of plats; let i = index" [value]=i+1>{{platforms}}</option>
-</select> <br>
-<span>Release Year:</span>  <select name="" id="yearSelect" [(ngModel)] = "releaseYear">
-    <option value="" disabled selected>Select Year</option>
- </select>
-<button (click)= "addGame()">Add Game</button>
+<h2>Adding a New Game...</h2>
+<div class="container">
+    <div class="child">
+        <span>Title:</span>
+        <input type="text" [(ngModel)]="title"> <br>
+        <span>Category:</span>
+        <select id="categorySelect" [(ngModel)]="category">
+            <option value="" disabled selected>Choose Genre Category</option>
+        </select> <br>
+        <span>Platform(s):</span>
+        <select id="platSelect" [(ngModel)]="platforms" (ngModelChange)="selectChangeHandler($event)">
+            <!-- <option value="" disabled selected>Choose Platform</option> -->
+            <option value="" disabled selected>Choose Platform</option>
+            <option *ngFor="let platforms of plats; let i = index" [value]=i+1>{{platforms}}</option>
+        </select> <br>
+        <span>Release Year:</span>  <select name="" id="yearSelect" [(ngModel)] = "releaseYear">
+            <option value="" disabled selected>Select Year</option>
+         </select> <br> <br>
+        <button type="button" class="btn btn-primary btn-sm" id="addBtn" (click)= "addGame()">Add Game</button>
+        <button type="button" class="btn btn-danger btn-sm" id="cancelBtn" (click)="back()">Cancel</button> 
+
+    </div>
+
+</div>
+

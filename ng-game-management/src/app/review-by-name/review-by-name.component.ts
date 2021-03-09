@@ -17,12 +17,9 @@ export class ReviewByNameComponent implements OnInit {
   gameTitle:string;
   reviews: Review[];
 
-  constructor(private service: GameManagerService, private router: Router, private route: ActivatedRoute, private location: Location) { }
+  constructor(private service: GameManagerService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-
-    console.log(this.route.snapshot.params.gameID);
-    console.log(this.route.snapshot.params.title);
 
     this.gameID = this.route.snapshot.params.gameID;
     this.gameTitle = this.route.snapshot.params.title;

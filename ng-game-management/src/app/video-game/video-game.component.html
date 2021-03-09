@@ -1,20 +1,26 @@
-<div class="">
-    <ng-container
-        *ngIf="game.imgSrc!=null; then showImage; else loadImage">
-    </ng-container> 
+<div class="container">
+    <div class="child">
+        <ng-container
+            *ngIf="game.imgSrc!=null; then showImage; else loadImage">
+        </ng-container> 
 
-    <ng-template #showImage>
-        <img 
-        src="{{game.imgSrc}}">
-    </ng-template>
+        <ng-template #showImage>
+            <a [routerLink]="['/get', game.gameID]"> 
+                <img 
+                src="{{game.imgSrc}}">
+                <!-- {{game.title}} -->
+            </a>
 
-    <ng-template #loadImage>
-        <img src="../assets/boxart/noimage.png">
-    </ng-template>
+        </ng-template>
 
-    <p id="gameInfo">
+        <ng-template #loadImage>
+            <img src="../assets/boxart/noimage.png">
+        </ng-template>
+    </div>
+
+    <!-- <p id="gameInfo">
         Title: <a [routerLink]="['/get', game.gameID]"> {{game.title}}</a> <br>
         Genre: {{game.category}} <br>
         Release Year: {{game.releaseYear}}
-    </p>
+    </p> -->
 </div> 

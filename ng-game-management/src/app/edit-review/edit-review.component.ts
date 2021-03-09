@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import * as EventEmitter from 'events';
@@ -18,7 +19,7 @@ export class EditReviewComponent implements OnInit {
   @Input() reviewText:string;
   @Input() rating:number;
 
-  constructor(private service: GameManagerService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private service: GameManagerService, private router: Router, private route: ActivatedRoute, private location: Location) { }
 
   ngOnInit(): void {    
     console.log(this.route.snapshot.params);
@@ -46,6 +47,11 @@ export class EditReviewComponent implements OnInit {
       select.appendChild(option);
 
     }
+  }
+
+  back()
+  {
+    this.location.back();
   }
 
 }

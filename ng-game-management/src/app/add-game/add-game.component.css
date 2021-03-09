@@ -1,0 +1,41 @@
+.containter{
+    margin: 20px;
+    position: relative;
+}
+
+.child
+{
+    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+h2{
+    margin: 10px;
+}
+
+input
+{
+    height: 22px;
+}
+
+span
+{
+    margin-right: 10px;
+    font-size: large;
+}
+
+#cancelBtn
+{
+    float: left;
+    margin: 5px;
+}
+
+#addBtn
+{
+    float: right;
+    margin: 5px;
+}
+

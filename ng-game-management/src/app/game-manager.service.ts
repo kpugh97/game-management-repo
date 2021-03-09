@@ -158,25 +158,26 @@ export class GameManagerService {
     )
   }
 
-  getGamesByPlatID(platID:number): Observable<Platform[]>{
-    return this.http.get<Platform[]>(this.baseURL+ "/platforms/games/"+platID)
+  getGamesByPlatID(platID:number): Observable<Game[]>{
+    return this.http.get<Game[]>(this.baseURL+ "/platforms/games/"+platID)
     .pipe(
       tap(x => console.log(x)),
       catchError(err => {
         console.log(err);
-        let empty : Platform[] = [];
+        let empty : Game[] = [];
         return of(empty);
       })
     );
   }
 
-  getGamesByPlatName(platform:string): Observable<Platform>{
-    return this.http.get<Platform>(this.baseURL+"/platform/platname/"+platform)
+  getGamesByPlatName(platform:string): Observable<Game[]>{
+    return this.http.get<Game[]>(this.baseURL+"/platform/platname/"+platform)
     .pipe(
       tap(x => console.log(x)),
       catchError(err => {
         console.log(err);
-        return of (null);
+        let empty : Game[] = [];
+        return of (empty);
       })
     )
   }

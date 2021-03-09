@@ -59,7 +59,7 @@ export class EditGameComponent implements OnInit {
    loadCategories()
    {
      let select = document.getElementById("categorySelect");
-     let categories: string[] = ["Adventure","Puzzle","Action","Action-advenure","RPG","FPS","MOBA","MMORPG","Simulation","Strategy","Sports", "Mobile"];
+     let categories: string[] = ["Adventure","Puzzle","Action","Action-adventure","RPG","FPS","MOBA","MMORPG","Simulation","Strategy","Sports", "Mobile"];
      for(let i =0;i<categories.length;i++)
      {
        let option : any = document.createElement("option");
@@ -67,7 +67,11 @@ export class EditGameComponent implements OnInit {
        option.value = categories[i];
        select.appendChild(option);
      }
- 
+   }
+
+   back()
+   {
+     this.location.back();
    }
 
 }

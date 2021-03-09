@@ -1,17 +1,16 @@
-<h2>Game Info:</h2> 
-<div id="navBar">
-    <nav id="gameDetailNav">
-        <ul>
-            <li>
-                <a [routerLink]="['../']">Details</a>
-            </li>
-            <li>
-                <a [routerLink]="['./']">Reviews</a>
-            </li>
-        </ul>
-    </nav> 
-</div>
-
+    <div id="navBar">
+        <h4>Game Info:</h4> 
+        <nav id="gameDetailNav">
+            <ul ngbNav #nav="ngbNav" class="nav-tabs">
+                <li ngbNavItem>
+                    <a  ngbNavLink [routerLink]="['../']">Details</a>
+                </li>
+                <li ngbNavItem>
+                    <a routerLinkActive="active" ngbNavLink [routerLink]="['./']">Reviews</a>
+                </li>
+            </ul>
+        </nav>      
+    </div>
 <div>
     <app-review *ngFor="let review of reviews" [review]="review">
 

@@ -41,4 +41,9 @@ export class AddReviewComponent implements OnInit {
     }
   }
 
+  back()
+  {
+    this.location.back();
+  }
+
 }

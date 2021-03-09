@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GameManagerService } from '../game-manager.service';
@@ -19,7 +20,7 @@ export class AddGameComponent implements OnInit {
   "Playsation 5","Xbox","Xbox 360","Xbox One","NES", "Super NES","Nintendo 64", "Nintendo DS","Nintendo DSi",
   "Nintendo 3DS","Gameboy", "Gameboy Advance","Nintendo Gamecube", "Nintendo Wii","Nintendo Wii U","Nintendo Switch","PC","Dreamcast","Atari 7800"];
 
-  constructor(private service: GameManagerService, private router: Router) { }
+  constructor(private service: GameManagerService, private router: Router, private location: Location) { }
 
   ngOnInit(): void {
     this.populate();
@@ -32,7 +33,7 @@ export class AddGameComponent implements OnInit {
     // let platforms = [9];
     let toAdd: Game = {title: this.title, releaseYear: this.releaseYear, category: this.category, platforms: this.platforms}
     //return to main page after adding game
-    this.service.addGame(toAdd).subscribe((_)=> {this.router.navigate([""])});
+    this.service.addGame(toAdd).subscribe((_)=> {this.router.navigate(["/home"])});
   }
 
   //preset categories for each game
@@ -82,6 +83,11 @@ export class AddGameComponent implements OnInit {
       yearSelect.appendChild(option);
     }
 
+  }
+
+  back()
+  {
+    this.location.back();
   }
 
 }

@@ -24,6 +24,7 @@ import { DeleteReviewComponent } from './delete-review/delete-review.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GetReviewComponent } from './get-review/get-review.component';
 import { GetGameEditComponent } from './get-game-edit/get-game-edit.component';
+import { GamesByPlatnameComponent } from './games-by-platname/games-by-platname.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { GetGameEditComponent } from './get-game-edit/get-game-edit.component';
     DeleteReviewComponent,
     GetReviewComponent,
     GetGameEditComponent,
+    GamesByPlatnameComponent,
 
   ],
   imports: [

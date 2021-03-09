@@ -1,17 +1,16 @@
-<h2>Game Info:</h2> 
 <div *ngIf="toReturn | async as gameReturned">
+    <h4>Game Info:</h4> 
     <nav id="gameDetailNav">
-        <ul>
-            <li>
-                <a [routerLink]="['/get', gameReturned.gameID]">Details</a>
+        <ul ngbNav #nav="ngbNav" class="nav-tabs">
+            <li ngbNavItem>
+                <a ngbNavLink [routerLink]="['/get', gameReturned.gameID]">Details</a>
             </li>
-            <li>
-                <a [routerLink]="['/get/',gameReturned.gameID, gameReturned.title]">Reviews</a>
+            <li ngbNavItem>
+                <a ngbNavLink routerLinkActive="active" [routerLink]="['/get/',gameReturned.gameID, gameReturned.title]">Reviews</a>
             </li>
         </ul>
     </nav> 
 </div>
-
 
 <div *ngIf="toReturn | async as gameReturned">
     <img src="{{gameReturned.imgSrc}}">

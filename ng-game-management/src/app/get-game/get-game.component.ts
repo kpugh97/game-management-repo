@@ -15,7 +15,6 @@ export class GetGameComponent implements OnInit {
   @Input()id:number;
   toReturn: Observable<Game>;
 
-
   constructor(private service: GameManagerService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
