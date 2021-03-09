@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameManagerService } from '../game-manager.service';
@@ -12,7 +13,7 @@ export class AddReviewComponent implements OnInit {
 
   addThis:Review = {} as Review;
 
-  constructor(private service: GameManagerService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private service: GameManagerService, private router: Router, private route: ActivatedRoute, private location: Location) { }
 
   ngOnInit(): void {
   console.log(this.route.snapshot.params);
@@ -24,7 +25,7 @@ export class AddReviewComponent implements OnInit {
   addReview()
   {
     let toAdd: Review = {reviewTitle: this.addThis.reviewTitle, reviewText: this.addThis.reviewText, rating: this.addThis.rating, gameTitle:this.addThis.gameTitle, gameID: this.addThis.gameID};
-    this.service.addReview(toAdd).subscribe((_) => {this.router.navigate(["../"])});
+    this.service.addReview(toAdd).subscribe((_) => {this.location.back()});
   }
 
   populate()

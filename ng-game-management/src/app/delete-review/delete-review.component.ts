@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameManagerService } from '../game-manager.service';
@@ -12,7 +13,7 @@ export class DeleteReviewComponent implements OnInit {
 
   @Input()id:number;
 
-  constructor(private service: GameManagerService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private service: GameManagerService, private router: Router, private route: ActivatedRoute, private location: Location) { }
 
   ngOnInit(): void {
     console.log(this.route.snapshot.params);
@@ -23,7 +24,7 @@ export class DeleteReviewComponent implements OnInit {
   {
     if(confirm("Do you want to delete this review?"))
     {
-      this.service.deleteReview(this.id).subscribe((_)=>{this.router.navigate(["/recentrev"])});
+      this.service.deleteReview(this.id).subscribe((_)=>{this.location.back()});
     }
   }
   

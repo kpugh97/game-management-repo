@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { GameManagerService } from '../game-manager.service';
 import { Game } from '../ts/Game';
 import { switchMap } from 'rxjs/operators';
+import { relative } from '@angular/compiler-cli/src/ngtsc/file_system';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -19,7 +21,7 @@ export class EditGameComponent implements OnInit {
   @Input() year:number;
   @Input()toEdit:Game = {} as Game;
 
-  constructor(private service: GameManagerService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private service: GameManagerService, private router: Router, private route: ActivatedRoute, private location: Location) { }
 
   ngOnInit(): void {
     // console.log(this.gameID);
@@ -34,7 +36,7 @@ export class EditGameComponent implements OnInit {
 
   editGame()
   {
-    this.service.editGame(this.toEdit).subscribe((_)=>{this.router.navigate(["./"])},editedGame =>{
+    this.service.editGame(this.toEdit).subscribe((_)=>{this.location.back()},editedGame =>{
       this.toEdit = editedGame; 
     })
   }

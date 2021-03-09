@@ -39,13 +39,6 @@
 </p>
 </div>
 
-<!-- 
-<div id= gameReviews *ngIf="toReturn | async as gameReturned">
-    <app-review-by-name [gameTitle]="gameReturned.title">
-        
-    </app-review-by-name>
-</div> -->
-
 <div id="goToEditGame" *ngIf="toReturn | async as gameReturned">
     <button  type="button" class="btn btn-outline-primary" [routerLink]="['/edit', gameReturned.gameID]" >Edit This Game</button><br>
 </div>

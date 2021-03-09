@@ -6,8 +6,10 @@
     <option value="" disabled selected>Choose Genre Category</option>
 </select> <br>
 <span>Platform(s):</span>
-<select id="platSelect" [(ngModel)]="platforms">
+<select id="platSelect" [(ngModel)]="platforms" (ngModelChange)="selectChangeHandler($event)">
+    <!-- <option value="" disabled selected>Choose Platform</option> -->
     <option value="" disabled selected>Choose Platform</option>
+    <option *ngFor="let platforms of plats; let i = index" [value]=i+1>{{platforms}}</option>
 </select> <br>
 <span>Release Year:</span>  <select name="" id="yearSelect" [(ngModel)] = "releaseYear">
     <option value="" disabled selected>Select Year</option>

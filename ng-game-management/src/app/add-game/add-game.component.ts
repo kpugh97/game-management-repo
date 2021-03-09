@@ -15,19 +15,22 @@ export class AddGameComponent implements OnInit {
   category: string;
   releaseYear:number;
   platforms:number[];
+  plats: string[] = ["Playstation","Playstation 1","Playstation 2","Playstation 3","Playstation 4",
+  "Playsation 5","Xbox","Xbox 360","Xbox One","NES", "Super NES","Nintendo 64", "Nintendo DS","Nintendo DSi",
+  "Nintendo 3DS","Gameboy", "Gameboy Advance","Nintendo Gamecube", "Nintendo Wii","Nintendo Wii U","Nintendo Switch","PC","Dreamcast","Atari 7800"];
 
   constructor(private service: GameManagerService, private router: Router) { }
 
   ngOnInit(): void {
     this.populate();
     this.loadCategories();
-    this.loadPlatforms();
+    // this.loadPlatforms();
   }
 
   addGame()
   {
-    let platforms = [8];
-    let toAdd: Game = {title: this.title, releaseYear: this.releaseYear, category: this.category, platforms: platforms}
+    // let platforms = [9];
+    let toAdd: Game = {title: this.title, releaseYear: this.releaseYear, category: this.category, platforms: this.platforms}
     //return to main page after adding game
     this.service.addGame(toAdd).subscribe((_)=> {this.router.navigate([""])});
   }
@@ -36,7 +39,7 @@ export class AddGameComponent implements OnInit {
   loadCategories()
   {
     let select = document.getElementById("categorySelect");
-    let categories: string[] = ["Adventure","Puzzle","Action","Action-advenure","RPG","FPS","MOBA","MMORPG","Simulation","Strategy","Sports", "Mobile"];
+    let categories: string[] = ["Adventure","Puzzle","Action","Action-adventure","RPG","FPS","MOBA","MMORPG","Simulation","Strategy","Sports", "Mobile"];
     for(let i =0;i<categories.length;i++)
     {
       let option : any = document.createElement("option");
@@ -47,22 +50,25 @@ export class AddGameComponent implements OnInit {
   }
 
 
-  //preset platforms 
-    loadPlatforms()
-    {
-      let select = document.getElementById("platSelect");
-      let plats: string[] = ["Playstation","Playstation 1","Playstation 2","Playstation 3","Playstation 4",
-      "Playsation 5","Xbox","Xbox 360","Xbox One","NES", "Super NES","Nintendo 64", "Nintendo DS","Nintendo DSi",
-      "Nintendo 3DS","Gameboy", "Gameboy Advance","Nintendo Gamecube", "Nintendo Wii","Nintendo Wii U","Nintendo Switch","PC","Dreamcast","Atari 7800"];
-      for(let i =0;i<plats.length;i++)
-      {
-        let platoption : any = document.createElement("option");
-        platoption.text = plats[i];
-        platoption.value = plats[i];
-        select.appendChild(platoption);
-      }
-  
+  // //preset platforms 
+  //   loadPlatforms()
+  //   {
+  //     let select = document.getElementById("platSelect");
 
+  //     for(let i =0;i<this.plats.length;i++)
+  //     {
+  //       let platoption : any = document.createElement("option");
+  //       platoption.text = this.plats[i];
+  //       platoption.value = i;
+  //       select.appendChild(platoption);
+  //     }
+
+  // }
+
+  selectChangeHandler(event)
+  {
+    this.platforms = [parseInt(event)];
+    // console.log(parseInt(event));
   }
 
   populate()
