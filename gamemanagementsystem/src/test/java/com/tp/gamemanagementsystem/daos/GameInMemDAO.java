@@ -106,7 +106,12 @@ public class GameInMemDAO implements GameDAO{
     }
 
     @Override
-    public List<Game> getGameByYear(Integer year) throws NullYearException {
+    public List<Game> getGamesByTitle(String title) throws NullTitleException {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public List<Game> getGamesByYear(Integer year) throws NullYearException {
         if(year == null)
         {
             throw new NullYearException("Cannot retrieve a game with a null year!");

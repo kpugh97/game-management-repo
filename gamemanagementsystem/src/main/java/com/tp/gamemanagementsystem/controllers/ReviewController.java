@@ -42,7 +42,7 @@ public class ReviewController {
         return ResponseEntity.ok(toReturn);
     }
 
-    //reviews by game ID
+    //reviews by game IDe
     @PostMapping("/add/review")
     public ResponseEntity makeReview(@RequestBody Review review)
     {

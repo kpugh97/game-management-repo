@@ -25,7 +25,7 @@ public class GamePostgresDAO implements GameDAO {
 
     @Override
     public List<Game> getGameCollection() {
-        List<Game> allGames = template.query("SELECT \"Games\".\"gameID\", \"title\", \"category\", \"year\", \"imageSrc\", \"desc\" FROM \"Games\" ORDER BY \"gameID\"", new GameMapper());
+        List<Game> allGames = template.query("SELECT \"Games\".\"gameID\", \"title\", \"category\", \"year\", \"imageSrc\", \"desc\" FROM \"Games\" ORDER BY \"gameID\" DESC", new GameMapper());
         return allGames;
     }
 
@@ -101,7 +101,18 @@ public class GamePostgresDAO implements GameDAO {
     }
 
     @Override
-    public List<Game> getGameByYear(Integer year) throws NullYearException {
+    public List<Game> getGamesByTitle(String title) throws NullTitleException {
+        if(title == null)
+        {
+            throw new NullTitleException("Cannot retrieve a game with a null title!");
+        }
+        List<Game> toReturn = null;
+        toReturn = template.query("SELECT * FROM \"Games\" WHERE \"title\" LIKE '%"+title+"%'", new GameMapper());
+        return toReturn;
+    }
+
+    @Override
+    public List<Game> getGamesByYear(Integer year) throws NullYearException {
         if(year == null)
         {
             throw new NullYearException("Cannot retrieve a game with a null year!");

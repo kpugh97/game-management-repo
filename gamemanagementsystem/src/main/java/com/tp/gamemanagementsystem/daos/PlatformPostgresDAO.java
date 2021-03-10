@@ -86,7 +86,7 @@ public class PlatformPostgresDAO implements PlatformDAO {
         {
             throw new NullTitleException("Cannot retrieve a game with a null platform!");
         }
-        List<Game> allGames = template.query("SELECT \"Games\".\"gameID\", \"title\", \"category\", \"year\", \"imageSrc\", \"Platforms\".\"platformID\",\"name\" FROM \"Games\"\n"+
+        List<Game> allGames = template.query("SELECT \"Games\".\"gameID\", \"title\", \"category\", \"year\", \"imageSrc\", \"Games\".\"desc\", \"Platforms\".\"platformID\",\"name\" FROM \"Games\"\n"+
                 "INNER JOIN \"GamePlatforms\" ON \"Games\".\"gameID\" = \"GamePlatforms\".\"gameID\"\n"+
                 "INNER JOIN \"Platforms\" ON \"Platforms\".\"platformID\" = \"GamePlatforms\".\"platformID\"" +
                 "WHERE \"Platforms\".\"name\" = ?", new GameMapper(), name);

@@ -264,20 +264,20 @@ public class GamePostgresDAOTests {
         platforms2.add(2);
         testDAO.createGame(game2.getTitle(),game2.getCategory(),game2.getReleaseYear(),platforms2);
 
-        assertEquals("Sonic Adventure", testDAO.getGameByYear(1998).get(0).getTitle());
-        assertEquals("Sonic Adventure 2",testDAO.getGameByYear(2000).get(0).getTitle());
+        assertEquals("Sonic Adventure", testDAO.getGamesByYear(1998).get(0).getTitle());
+        assertEquals("Sonic Adventure 2",testDAO.getGamesByYear(2000).get(0).getTitle());
     }
 
     @Test
     public void getGameByYearInvalidYear()
     {
-        assertThrows(NullYearException.class,()-> testDAO.getGameByYear(1995));
+        assertThrows(NullYearException.class,()-> testDAO.getGamesByYear(1995));
     }
 
     @Test
     public void getGameByYearNull()
     {
-        assertThrows(NullYearException.class,()-> testDAO.getGameByYear(null));
+        assertThrows(NullYearException.class,()-> testDAO.getGamesByYear(null));
     }
 
     @Test

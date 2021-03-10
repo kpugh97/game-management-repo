@@ -1,10 +1,8 @@
 package com.tp.gamemanagementsystem.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tp.gamemanagementsystem.exceptions.*;
 import com.tp.gamemanagementsystem.models.Game;
 import com.tp.gamemanagementsystem.services.GameManagementService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -77,13 +75,28 @@ public class GameController {
         return ResponseEntity.ok(game);
     }
 
+    @GetMapping("game/title/{title}")
+    public ResponseEntity getGameByTitle(@PathVariable String title)
+    {
+        List<Game> game =null;
+        try {
+            game = service.getGamesByTitle(title);
+        }
+        catch (NullTitleException e)
+        {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+        return ResponseEntity.ok(game);
+    }
+
+
 
     @GetMapping("/game/year/{year}")
     public ResponseEntity getGameByYear(@PathVariable Integer year)
     {
         List<Game> game =null;
         try {
-            game = service.getGameByYear(year);
+            game = service.getGamesByYear(year);
         }
         catch (NullYearException e)
         {

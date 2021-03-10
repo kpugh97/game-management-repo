@@ -62,7 +62,7 @@ public class GameManagementService {
         return dao.createGame(title, category, year, platforms);
     }
 
-    public List<Game> getGameByYear(Integer year) throws NullYearException {
+    public List<Game> getGamesByYear(Integer year) throws NullYearException {
         //current year
         Year y = Year.now();
         //set that year to an int
@@ -70,7 +70,7 @@ public class GameManagementService {
         if(year < 0 || year > currYear) {
             throw new NullYearException("Invalid year input!");
         }
-        return dao.getGameByYear(year);
+        return dao.getGamesByYear(year);
 
     }
 
@@ -80,6 +80,14 @@ public class GameManagementService {
             throw new NullCategoryException("Cannot search a null category!");
         }
         return dao.getGameByCategory(category);
+    }
+
+    public List<Game> getGamesByTitle(String title) throws NullTitleException{
+        if(title.trim().length() <= 0)
+        {
+            throw new NullTitleException("Cannot search a null category!");
+        }
+        return dao.getGamesByTitle(title);
     }
 
 
