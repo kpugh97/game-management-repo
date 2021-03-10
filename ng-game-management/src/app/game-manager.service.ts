@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { empty, Observable } from 'rxjs';
 import {tap, catchError, map} from 'rxjs/operators';
 import {of} from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Game } from './ts/Game';
 import { Platform } from './ts/Platform';
 import { StringResponse } from './ts/StringResponse'
@@ -36,8 +36,6 @@ export class GameManagerService {
       })
     );
   }
-
-
 
 
   getGameByID(gameID:number): Observable<Game>{
@@ -107,7 +105,19 @@ export class GameManagerService {
     );
   }
 
-  getGameByYear(filter:number): Observable<Game[]>
+  getGamesByTitle(filter:string): Observable<Game[]>
+  {
+    return this.http.get<Game[]>(this.baseURL+ "/game/title/"+filter)
+    .pipe(
+      catchError(err => {
+        console.log(err);
+        let empty: Game[] = [];
+        return of(empty);
+      })
+    );
+  }
+
+  getGamesByYear(filter:number): Observable<Game[]>
   {
     return this.http.get<Game[]>(this.baseURL+ "/game/year/"+filter)
     .pipe(

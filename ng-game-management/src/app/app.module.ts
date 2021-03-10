@@ -26,7 +26,7 @@ import { GetReviewComponent } from './get-review/get-review.component';
 import { GetGameEditComponent } from './get-game-edit/get-game-edit.component';
 import { GamesByPlatnameComponent } from './games-by-platname/games-by-platname.component';
 import {NgxPaginationModule} from 'ngx-pagination';
-
+import { GameSearchComponent } from './game-search/game-search.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +50,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     GetReviewComponent,
     GetGameEditComponent,
     GamesByPlatnameComponent,
+    GameSearchComponent,
+
 
   ],
   imports: [

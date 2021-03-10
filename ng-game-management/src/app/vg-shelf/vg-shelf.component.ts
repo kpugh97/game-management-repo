@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Game } from '../ts/Game';
 import { GameManagerService } from '../game-manager.service'
 import { Observable } from 'rxjs';
-import { FormControl } from '@angular/forms';
-import { combineLatest, startWith } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 
 @Component({
@@ -15,20 +15,26 @@ import { combineLatest, startWith } from 'rxjs/operators';
 export class VgShelfComponent implements OnInit {
 
   games:Game[];
-  p: number = 1
+  p: number = 1;
 
 
 
-  constructor(private service: GameManagerService) {
+  constructor(private service: GameManagerService, private router: Router, private route: ActivatedRoute) {
 
    }
 
   ngOnInit(): void {
+    
     this.service.getAllGames().subscribe(list => {
       this.games = list
     });
-    
   }
 
+  onGameSearched(game:Game[]) : void
+  {
+    
+    this.games = game;
+     
+  }
 
 }

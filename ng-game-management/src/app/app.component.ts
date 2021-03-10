@@ -12,24 +12,6 @@ import { Game } from './ts/Game';
 })
 export class AppComponent {
   title = 'ng-game-management';
-
-  listGames: Observable<Game[]>;
-
-
-  constructor(private service: GameManagerService)
-  {
-    this.listGames = this.service.getAllGames();
-
-  }
-
-  // filterGameList()
-  // {
-  //   this.searchResults = this.searchQuery$.combinedLatest(this.listGames)
-  //  .map(([query, searchList]) => {
-  //    return searchList.filter(game => game.title
-  //    .toLowerCase().indexOf(query.toLowerCase()) !== -1)
-  //  });
-  // }
 }
 
 

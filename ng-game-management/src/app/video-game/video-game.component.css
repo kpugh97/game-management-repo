@@ -2,7 +2,6 @@ div
 {
       margin: 10px;
       display: inline;
-
 }
 
 img
@@ -18,4 +17,9 @@ img
       padding-left: 10px;
       display: inline-block;
       align-items: center;
+}
+
+.myPagination {
+      float: right;
+
 }

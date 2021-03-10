@@ -1,8 +1,9 @@
 <div id="searchDiv">
-    <input id="searchBar" type="search" placeholder="Search"> 
+    <app-game-search 
+    (gameSearchEvent)="onGameSearched($event)" ></app-game-search>
 </div>
 <div id="gameSquare">
-    <app-video-game *ngFor="let game of games | paginate: {id: 'vg', itemsPerPage: 8, currentPage: p }" [game]="game" >
+    <app-video-game *ngFor="let game of games | paginate: {id: 'vg', itemsPerPage: 8, currentPage: p}" [game]="game">
     </app-video-game>    
-    <pagination-controls id="vg"(pageChange)="p = $event"></pagination-controls>
+    <pagination-controls class="myPagination" id="vg"(pageChange)="p = $event"></pagination-controls>
 </div>

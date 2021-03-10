@@ -4,8 +4,9 @@ export interface Game
     title: string;
     releaseYear: number;
     category: string;
-    platforms: number[];
+    platforms?: number[];
     imgSrc?:string;
     desc?: string;
+    status?:number;
 
 }
