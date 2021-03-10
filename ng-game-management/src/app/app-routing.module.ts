@@ -17,6 +17,7 @@ import { ReviewByNameComponent } from './review-by-name/review-by-name.component
 import { GetGameEditComponent } from './get-game-edit/get-game-edit.component';
 import { GamesByPlatnameComponent } from './games-by-platname/games-by-platname.component';
 
+
 const routes: Routes = [
   {path: "home", component: VgShelfComponent},
   {path: "", redirectTo: "/home",pathMatch: "full"},

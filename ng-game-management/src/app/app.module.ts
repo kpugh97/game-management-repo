@@ -25,6 +25,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GetReviewComponent } from './get-review/get-review.component';
 import { GetGameEditComponent } from './get-game-edit/get-game-edit.component';
 import { GamesByPlatnameComponent } from './games-by-platname/games-by-platname.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { GamesByPlatnameComponent } from './games-by-platname/games-by-platname.
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
