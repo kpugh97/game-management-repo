@@ -8,6 +8,7 @@ public class CreateGameRequest {
      String title;
      Integer releaseYear;
      String category;
+     String desc;
      List<Integer> platforms = new ArrayList<>();
 
     public String getTitle() {
@@ -41,4 +42,13 @@ public class CreateGameRequest {
     public void setPlatforms(List<Integer> platforms) {
         this.platforms = platforms;
     }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
 }

@@ -19,6 +19,7 @@ export class AddGameComponent implements OnInit {
   plats: string[] = ["Playstation","Playstation 1","Playstation 2","Playstation 3","Playstation 4",
   "Playsation 5","Xbox","Xbox 360","Xbox One","NES", "Super NES","Nintendo 64", "Nintendo DS","Nintendo DSi",
   "Nintendo 3DS","Gameboy", "Gameboy Advance","Nintendo Gamecube", "Nintendo Wii","Nintendo Wii U","Nintendo Switch","PC","Dreamcast","Atari 7800","N/a"];
+  desc:string;
 
   constructor(private service: GameManagerService, private router: Router, private location: Location) { }
 
@@ -31,7 +32,7 @@ export class AddGameComponent implements OnInit {
   addGame()
   {
     // let platforms = [9];
-    let toAdd: Game = {title: this.title, releaseYear: this.releaseYear, category: this.category, platforms: this.platforms}
+    let toAdd: Game = {title: this.title, releaseYear: this.releaseYear, category: this.category, platforms: this.platforms, desc: this.desc}
     //return to main page after adding game
     this.service.addGame(toAdd).subscribe((_)=> {this.router.navigate(["/home"])});
   }

@@ -25,6 +25,7 @@ img
 {
     display: inline-block;
     margin: 10px;
+    margin-right: 15px;
     float: right;
     
 }
@@ -34,4 +35,9 @@ img
     margin-bottom: 0px;
     display: inline-block;
     list-style: none;
+}
+
+.hasReturned
+{
+    margin-left: 15px;
 }

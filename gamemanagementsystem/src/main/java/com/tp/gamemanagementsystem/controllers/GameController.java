@@ -31,9 +31,9 @@ public class GameController {
     {
         Game toReturn = null;
         try {
-            toReturn = service.createGame(request.getTitle(), request.getCategory(),request.getReleaseYear(), request.getPlatforms());
+            toReturn = service.createGame(request.getTitle(), request.getCategory(),request.getReleaseYear(), request.getPlatforms(), request.getDesc());
             getImage(request.getTitle());
-        }catch (InvalidIDException | NullTitleException| NullCategoryException| NullYearException| NullPlatformException e)
+        }catch (InvalidIDException | NullTitleException| NullCategoryException| NullYearException| NullPlatformException | NullDescriptionException e)
         {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }

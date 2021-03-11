@@ -8,7 +8,7 @@ import java.util.List;
 
 @Profile({"mainApp","DAOTesting","serviceTest"})
 public interface GameDAO {
-    Game createGame(String title, String category, Integer year, List<Integer> platforms) throws InvalidIDException, NullTitleException, NullCategoryException, NullYearException, NullPlatformException;
+    Game createGame(String title, String category, Integer year, List<Integer> platforms, String desc) throws InvalidIDException, NullTitleException, NullCategoryException, NullYearException, NullPlatformException, NullDescriptionException;
     Game getGameByID(Integer gameID) throws NullIDException, InvalidIDException;
     List<Game> getGameCollection();
     List<Game> getGameByCategory(String category) throws NullCategoryException;

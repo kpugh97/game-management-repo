@@ -5,7 +5,6 @@ import com.tp.gamemanagementsystem.daos.PlatformDAO;
 import com.tp.gamemanagementsystem.daos.ReviewDAO;
 import com.tp.gamemanagementsystem.exceptions.*;
 import com.tp.gamemanagementsystem.models.Game;
-import com.tp.gamemanagementsystem.models.GamePlatform;
 import com.tp.gamemanagementsystem.models.Platform;
 import com.tp.gamemanagementsystem.models.Review;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +40,7 @@ public class GameManagementService {
         return  dao.getGameByID(gameID);
     }
 
-    public Game createGame(String title, String category, Integer year, List<Integer> platforms) throws InvalidIDException, NullTitleException, NullCategoryException, NullYearException, NullPlatformException {
+    public Game createGame(String title, String category, Integer year, List<Integer> platforms, String desc) throws InvalidIDException, NullTitleException, NullCategoryException, NullYearException, NullPlatformException, NullDescriptionException {
         //current year
         Year y = Year.now();
         //set that year to an int
@@ -55,11 +54,15 @@ public class GameManagementService {
         {
             throw new NullCategoryException("Invalid category input!");
         }
+        if(desc.trim().length() <= 0)
+        {
+            throw new NullDescriptionException("Invalid description!");
+        }
         if(year < 0 || year > currYear) {
             throw new NullYearException("Invalid year input!");
         }
 
-        return dao.createGame(title, category, year, platforms);
+        return dao.createGame(title, category, year, platforms, desc);
     }
 
     public List<Game> getGamesByYear(Integer year) throws NullYearException {

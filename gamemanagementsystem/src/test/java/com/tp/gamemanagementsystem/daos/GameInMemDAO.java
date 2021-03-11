@@ -2,11 +2,9 @@ package com.tp.gamemanagementsystem.daos;
 
 import com.tp.gamemanagementsystem.exceptions.*;
 import com.tp.gamemanagementsystem.models.Game;
-import com.tp.gamemanagementsystem.models.GamePlatform;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +16,7 @@ public class GameInMemDAO implements GameDAO{
 
 
     @Override
-    public Game createGame(String title, String category, Integer year, List<Integer> platforms) throws NullTitleException, NullCategoryException, NullYearException, NullPlatformException {
+    public Game createGame(String title, String category, Integer year, List<Integer> platforms, String desc) throws NullTitleException, NullCategoryException, NullYearException, NullPlatformException {
         if(title == null)
         {
          throw new NullTitleException("Cannot create a game with a null title!");

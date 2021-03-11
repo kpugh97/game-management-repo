@@ -3,8 +3,6 @@ package com.tp.gamemanagementsystem.daos;
 import com.tp.gamemanagementsystem.daos.mappers.*;
 import com.tp.gamemanagementsystem.exceptions.*;
 import com.tp.gamemanagementsystem.models.Game;
-import com.tp.gamemanagementsystem.models.GamePlatform;
-import com.tp.gamemanagementsystem.models.Platform;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -31,7 +29,7 @@ public class GamePostgresDAO implements GameDAO {
     }
 
     @Override
-    public Game createGame(String title, String category, Integer year, List<Integer> platforms) throws InvalidIDException, NullTitleException, NullCategoryException, NullYearException, NullPlatformException {
+    public Game createGame(String title, String category, Integer year, List<Integer> platforms, String desc) throws InvalidIDException, NullTitleException, NullCategoryException, NullYearException, NullPlatformException, NullDescriptionException {
         if(title == null)
         {
             throw new NullTitleException("Cannot create a game with a null title!");
@@ -48,15 +46,21 @@ public class GamePostgresDAO implements GameDAO {
         {
             throw new NullPlatformException("Cannot create a game with a null platform!");
         }
+        if(desc == null)
+        {
+            throw new NullDescriptionException("Cannot create a game with a null description!");
+        }
         Game newGame = new Game();
-        Integer gameID = template.queryForObject( "INSERT INTO \"Games\" (\"title\", \"category\", \"year\") VALUES (?, ?, ?) RETURNING \"gameID\"", new IntegerMapper("gameID"),
+        Integer gameID = template.queryForObject( "INSERT INTO \"Games\" (\"title\", \"category\", \"year\", \"desc\") VALUES (?, ?, ?, ?) RETURNING \"gameID\"", new IntegerMapper("gameID"),
                 title,
                 category,
-                year);
+                year,
+                desc);
         newGame.setGameID(gameID);
         newGame.setReleaseYear(year);
         newGame.setTitle(title);
         newGame.setCategory(category);
+        newGame.setDesc(desc);
             for (int i = 0; i < platforms.size(); i++) {
                 try {
                     template.query("INSERT INTO \"GamePlatforms\" (\"platformID\",\"gameID\") VALUES (?, ?) RETURNING \"platformID\",\"gameID\"", new GamePlatformMapper(),

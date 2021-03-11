@@ -12,7 +12,7 @@
     </nav> 
 </div>
 
-<div *ngIf="toReturn | async as gameReturned">
+<div class="hasReturned" *ngIf="toReturn | async as gameReturned">
     <img src="{{gameReturned.imgSrc}}">
     <p>Title: {{gameReturned.title}} <br>
         Genre: {{gameReturned.category}} <br>

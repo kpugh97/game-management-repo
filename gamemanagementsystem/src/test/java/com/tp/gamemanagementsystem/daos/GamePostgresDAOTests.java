@@ -35,7 +35,7 @@ public class GamePostgresDAOTests {
 
 
     @Test
-    public void addGameTest() throws InvalidIDException, NullTitleException, NullCategoryException, NullYearException, NullPlatformException
+    public void addGameTest() throws InvalidIDException, NullTitleException, NullCategoryException, NullYearException, NullPlatformException, NullDescriptionException
     {
         Platform dreamCast = new Platform();
         dreamCast.setPlatformID(1);
@@ -50,7 +50,7 @@ public class GamePostgresDAOTests {
         newGame.setCategory("RPG");
         newGame.setReleaseYear(1998);
 
-        Game toReturn = testDAO.createGame(newGame.getTitle(),newGame.getCategory(),newGame.getReleaseYear(),platforms);
+        Game toReturn = testDAO.createGame(newGame.getTitle(),newGame.getCategory(),newGame.getReleaseYear(),platforms, newGame.getDesc() );
 
         assertEquals(1,toReturn.getGameID());
         assertEquals("Sonic Adventure",toReturn.getTitle());
@@ -73,7 +73,7 @@ public class GamePostgresDAOTests {
         newGame.setTitle(null);
         newGame.setCategory("RPG");
         newGame.setReleaseYear(1998);
-        assertThrows(NullTitleException.class,()-> testDAO.createGame(newGame.getTitle(),newGame.getCategory(),newGame.getReleaseYear(),platforms));
+        assertThrows(NullTitleException.class,()-> testDAO.createGame(newGame.getTitle(),newGame.getCategory(),newGame.getReleaseYear(),platforms, newGame.getDesc() ));
     }
 
     @Test
@@ -89,7 +89,7 @@ public class GamePostgresDAOTests {
         newGame.setTitle("Sonic Adventure");
         newGame.setCategory(null);
         newGame.setReleaseYear(1998);
-        assertThrows(NullCategoryException.class,()-> testDAO.createGame(newGame.getTitle(),newGame.getCategory(),newGame.getReleaseYear(),platforms));
+        assertThrows(NullCategoryException.class,()-> testDAO.createGame(newGame.getTitle(),newGame.getCategory(),newGame.getReleaseYear(),platforms, newGame.getDesc()));
 
     }
 
@@ -106,7 +106,7 @@ public class GamePostgresDAOTests {
         newGame.setTitle("Sonic Adventure");
         newGame.setCategory("RPG");
         newGame.setReleaseYear(null);
-        assertThrows(NullYearException.class,()-> testDAO.createGame(newGame.getTitle(),newGame.getCategory(),newGame.getReleaseYear(),platforms));
+        assertThrows(NullYearException.class,()-> testDAO.createGame(newGame.getTitle(),newGame.getCategory(),newGame.getReleaseYear(),platforms,newGame.getDesc()));
     }
 
     @Test
@@ -120,7 +120,7 @@ public class GamePostgresDAOTests {
         newGame.setTitle("Sonic Adventure");
         newGame.setCategory("RPG");
         newGame.setReleaseYear(1998);
-        assertThrows(InvalidIDException.class,()-> testDAO.createGame(newGame.getTitle(),newGame.getCategory(),newGame.getReleaseYear(),platforms));
+        assertThrows(InvalidIDException.class,()-> testDAO.createGame(newGame.getTitle(),newGame.getCategory(),newGame.getReleaseYear(),platforms, newGame.getDesc() ));
     }
 
     @Test
@@ -131,12 +131,11 @@ public class GamePostgresDAOTests {
         newGame.setTitle("Sonic Adventure");
         newGame.setCategory("RPG");
         newGame.setReleaseYear(1998);
-        assertThrows(NullPlatformException.class,()-> testDAO.createGame(newGame.getTitle(),newGame.getCategory(),newGame.getReleaseYear(),platforms));
+        assertThrows(NullPlatformException.class,()-> testDAO.createGame(newGame.getTitle(),newGame.getCategory(),newGame.getReleaseYear(),platforms, newGame.getDesc()));
     }
 
     @Test
-    public void getGameByIDTest() throws InvalidIDException, NullIDException, NullTitleException, NullCategoryException, NullYearException, NullPlatformException
-    {
+    public void getGameByIDTest() throws InvalidIDException, NullIDException, NullTitleException, NullCategoryException, NullYearException, NullPlatformException, NullDescriptionException {
         List<Integer> platforms = new ArrayList<>();
         List<Integer> platforms2 = new ArrayList<>();
         Game newGame = new Game();
@@ -150,14 +149,14 @@ public class GamePostgresDAOTests {
         PS4.setPlatformID(2);
         platforms.add(1);
         platforms.add(2);
-        testDAO.createGame(newGame.getTitle(),newGame.getCategory(),newGame.getReleaseYear(),platforms);
+        testDAO.createGame(newGame.getTitle(),newGame.getCategory(),newGame.getReleaseYear(),platforms, newGame.getDesc() );
 
         Game game2 = new Game();
         game2.setTitle("Sonic Adventure 2");
         game2.setCategory("RPG");
         game2.setReleaseYear(2000);
         platforms2.add(2);
-        testDAO.createGame(game2.getTitle(),game2.getCategory(),game2.getReleaseYear(),platforms2);
+        testDAO.createGame(game2.getTitle(),game2.getCategory(),game2.getReleaseYear(),platforms2, game2.getDesc());
 
         assertEquals("Sonic Adventure", testDAO.getGameByID(1).getTitle());
         assertEquals("Sonic Adventure 2",testDAO.getGameByID(2).getTitle());
@@ -170,8 +169,7 @@ public class GamePostgresDAOTests {
     }
 
     @Test
-    public void getGameByIDInvalid() throws InvalidIDException, NullIDException, NullTitleException, NullCategoryException, NullYearException, NullPlatformException
-    {
+    public void getGameByIDInvalid() throws InvalidIDException, NullIDException, NullTitleException, NullCategoryException, NullYearException, NullPlatformException, NullDescriptionException {
         List<Integer> platforms = new ArrayList<>();
         List<Integer> platforms2 = new ArrayList<>();
         Game newGame = new Game();
@@ -186,14 +184,13 @@ public class GamePostgresDAOTests {
         PS4.setPlatformID(2);
         platforms.add(1);
         platforms.add(2);
-        testDAO.createGame(newGame.getTitle(),newGame.getCategory(),newGame.getReleaseYear(),platforms);
+        testDAO.createGame(newGame.getTitle(),newGame.getCategory(),newGame.getReleaseYear(),platforms, newGame.getDesc());
         assertEquals("Sonic Adventure", testDAO.getGameByID(1).getTitle());
         assertThrows(InvalidIDException.class,()->testDAO.getGameByID(2).getTitle());
     }
 
     @Test
-    public void getGameByCategoryTest() throws InvalidIDException, NullTitleException, NullCategoryException, NullYearException, NullPlatformException
-    {
+    public void getGameByCategoryTest() throws InvalidIDException, NullTitleException, NullCategoryException, NullYearException, NullPlatformException, NullDescriptionException {
         List<Integer> platforms = new ArrayList<>();
         List<Integer> platforms2 = new ArrayList<>();
         Game newGame = new Game();
@@ -207,20 +204,20 @@ public class GamePostgresDAOTests {
         PS4.setPlatformID(2);
         platforms.add(1);
         platforms.add(2);
-        testDAO.createGame(newGame.getTitle(),newGame.getCategory(),newGame.getReleaseYear(),platforms);
+        testDAO.createGame(newGame.getTitle(),newGame.getCategory(),newGame.getReleaseYear(),platforms, newGame.getDesc());
 
         Game game2 = new Game();
         game2.setTitle("Sonic Adventure 2");
         game2.setCategory("RPG");
         game2.setReleaseYear(2000);
         platforms2.add(2);
-        testDAO.createGame(game2.getTitle(),game2.getCategory(),game2.getReleaseYear(),platforms2);
+        testDAO.createGame(game2.getTitle(),game2.getCategory(),game2.getReleaseYear(),platforms2, game2.getDesc() );
 
         Game game3 = new Game();
         game3.setTitle("SMITE");
         game3.setCategory("MOBA");
         game3.setReleaseYear(2012);
-        testDAO.createGame(game3.getTitle(),game3.getCategory(),game3.getReleaseYear(),platforms2);
+        testDAO.createGame(game3.getTitle(),game3.getCategory(),game3.getReleaseYear(),platforms2, game3.getDesc());
 
         assertEquals("Sonic Adventure", testDAO.getGameByCategory("RPG").get(0).getTitle());
         assertEquals("Sonic Adventure 2",testDAO.getGameByCategory("RPG").get(1).getTitle());
@@ -240,8 +237,7 @@ public class GamePostgresDAOTests {
     }
 
     @Test
-    public void getGameByYearTest() throws InvalidIDException, NullTitleException, NullCategoryException, NullYearException, NullPlatformException
-    {
+    public void getGameByYearTest() throws InvalidIDException, NullTitleException, NullCategoryException, NullYearException, NullPlatformException, NullDescriptionException {
         List<Integer> platforms = new ArrayList<>();
         List<Integer> platforms2 = new ArrayList<>();
         Game newGame = new Game();
@@ -255,14 +251,14 @@ public class GamePostgresDAOTests {
         PS4.setPlatformID(2);
         platforms.add(1);
         platforms.add(2);
-        testDAO.createGame(newGame.getTitle(),newGame.getCategory(),newGame.getReleaseYear(),platforms);
+        testDAO.createGame(newGame.getTitle(),newGame.getCategory(),newGame.getReleaseYear(),platforms, newGame.getDesc());
 
         Game game2 = new Game();
         game2.setTitle("Sonic Adventure 2");
         game2.setCategory("RPG");
         game2.setReleaseYear(2000);
         platforms2.add(2);
-        testDAO.createGame(game2.getTitle(),game2.getCategory(),game2.getReleaseYear(),platforms2);
+        testDAO.createGame(game2.getTitle(),game2.getCategory(),game2.getReleaseYear(),platforms2, game2.getDesc());
 
         assertEquals("Sonic Adventure", testDAO.getGamesByYear(1998).get(0).getTitle());
         assertEquals("Sonic Adventure 2",testDAO.getGamesByYear(2000).get(0).getTitle());
@@ -281,8 +277,7 @@ public class GamePostgresDAOTests {
     }
 
     @Test
-    public void editGameTest() throws InvalidIDException,NullIDException, NullTitleException, NullCategoryException, NullYearException, NullPlatformException
-    {
+    public void editGameTest() throws InvalidIDException, NullIDException, NullTitleException, NullCategoryException, NullYearException, NullPlatformException, NullDescriptionException {
         List<Integer> platforms = new ArrayList<>();
         List<Integer> platforms2 = new ArrayList<>();
         platforms.add(1);
@@ -293,7 +288,7 @@ public class GamePostgresDAOTests {
         Platform mobile = new Platform();
         mobile.setPlatformID(3);
         platforms2.add(3);
-        testDAO.createGame("Sonic Adventure", "RPG",1998, platforms);
+        testDAO.createGame("Sonic Adventure", "RPG",1998, platforms, "Cool new game!");
         testDAO.editGame(1,"Pokemon Go", "Simulation",2016);
 
     }
@@ -337,12 +332,11 @@ public class GamePostgresDAOTests {
     }
 
     @Test
-    public void deleteGameTest() throws InvalidIDException, NullIDException, NullTitleException, NullCategoryException, NullYearException, NullPlatformException
-    {
+    public void deleteGameTest() throws InvalidIDException, NullIDException, NullTitleException, NullCategoryException, NullYearException, NullPlatformException, NullDescriptionException {
         List<Integer> platforms = new ArrayList<>();
         platforms.add(1);
         platforms.add(2);
-        testDAO.createGame("Sonic Adventure", "RPG",1998, platforms);
+        testDAO.createGame("Sonic Adventure", "RPG",1998, platforms, "Cool Sonic Game");
         assertEquals(1,testDAO.getGameByID(1).getGameID());
         assertEquals("Sonic Adventure",testDAO.getGameByID(1).getTitle());
         testDAO.deleteGame(1);
