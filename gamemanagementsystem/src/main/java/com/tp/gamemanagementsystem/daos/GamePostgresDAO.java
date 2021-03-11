@@ -25,7 +25,8 @@ public class GamePostgresDAO implements GameDAO {
 
     @Override
     public List<Game> getGameCollection() {
-        List<Game> allGames = template.query("SELECT \"Games\".\"gameID\", \"title\", \"category\", \"year\", \"imageSrc\", \"desc\" FROM \"Games\" ORDER BY \"gameID\" DESC", new GameMapper());
+        List<Game> allGames = template.query("SELECT \"Games\".\"gameID\", \"title\", \"category\", \"year\", \"imageSrc\", \"desc\",\"statusID\" FROM \"Games\" \n"+
+                "ORDER BY \"gameID\" DESC", new GameMapper());
         return allGames;
     }
 
@@ -126,6 +127,8 @@ public class GamePostgresDAO implements GameDAO {
         return toReturn;
     }
 
+
+
     @Override
     public void editGame(Integer gameID, String title, String category, Integer releaseDate) throws NullIDException, InvalidIDException, NullTitleException, NullYearException, NullCategoryException {
         if (gameID == null) {
@@ -196,6 +199,43 @@ public class GamePostgresDAO implements GameDAO {
                 throw new NullTitleException("Cannot find a game with title " + gameName + "!");
             }
         }
+
+    }
+
+    @Override
+    public void updateGameStatus(Integer gameID, Integer statusID) throws NullIDException, InvalidIDException {
+        if(statusID == null)
+        {
+            throw new NullIDException("Cannot update a status with a null ID");
+        }
+        try {
+            template.update("UPDATE \"Games\" SET \"statusID\" = ? WHERE \"gameID\" = ?",statusID,gameID);
+        } catch (EmptyResultDataAccessException e) {
+            throw new InvalidIDException("Cannot change a status with ID " + statusID + "!");
+        }
+
+    }
+
+    @Override
+    public List<Game> getGamesByStatus(Integer statusID) throws NullIDException, InvalidIDException {
+        if(statusID==null)
+        {
+            throw new NullIDException("Cannot get a game with a null status ID!");
+        }
+        List<Game> toReturn  = null;
+        try
+        {
+            toReturn = template.query("SELECT * FROM \"Games\" WHERE \"statusID\" = ?", new GameMapper(),statusID);
+        }
+        catch (DataIntegrityViolationException | EmptyResultDataAccessException e)
+        {
+            throw new InvalidIDException("Cannot find any games with status ID "+statusID+"!");
+        }
+        if(toReturn.isEmpty())
+        {
+           throw new InvalidIDException("Cannot find any games with status ID "+statusID+"!");
+        }
+        return toReturn;
 
     }
 }

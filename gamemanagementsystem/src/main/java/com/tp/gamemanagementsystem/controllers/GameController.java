@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import requests.CreateGameRequest;
+import requests.StatusUpdateRequest;
 
 import java.io.IOException;
 import java.net.URI;
@@ -129,6 +130,34 @@ public class GameController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
         return ResponseEntity.ok("Game successfully deleted!");
+    }
+
+    @PutMapping("/game/status/update")
+    public ResponseEntity updateGameStatus(@RequestBody StatusUpdateRequest request)
+    {
+        try{
+            service.updateGameStatus(request.getGameID(),request.getStatusID());
+        }
+        catch (NullIDException | InvalidIDException e)
+        {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+        return ResponseEntity.ok("Status updated successfully!");
+    }
+
+
+    @GetMapping("/game/status/{statusID}")
+    public ResponseEntity getGamesByStatus(@PathVariable Integer statusID)
+    {
+        List<Game> toReturn = null;
+        try{
+            toReturn = service.getGamesByStatus(statusID);
+
+        }catch (InvalidIDException | NullIDException e)
+        {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+        return ResponseEntity.ok(toReturn);
     }
 
     @GetMapping("/image/{name}")

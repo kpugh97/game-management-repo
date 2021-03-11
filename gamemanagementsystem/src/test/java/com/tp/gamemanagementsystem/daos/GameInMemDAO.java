@@ -201,4 +201,14 @@ public class GameInMemDAO implements GameDAO{
 
     }
 
+    @Override
+    public void updateGameStatus(Integer gameID, Integer statusID) throws NullIDException, InvalidIDException {
+
+    }
+
+    @Override
+    public List<Game> getGamesByStatus(Integer statusID) throws NullIDException, InvalidIDException {
+        return null;
+    }
+
 }

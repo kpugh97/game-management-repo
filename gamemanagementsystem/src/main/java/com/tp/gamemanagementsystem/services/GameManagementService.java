@@ -116,6 +116,24 @@ public class GameManagementService {
         dao.editGame(gameID, title, category, year);
     }
 
+    public void updateGameStatus(Integer gameID, Integer statusID) throws NullIDException, InvalidIDException
+    {
+        if(gameID < 0 || (statusID < 0 || statusID > 4))
+        {
+            throw new InvalidIDException("Invalid status ID!");
+        }
+        dao.updateGameStatus(gameID,statusID);
+    }
+
+    public List<Game> getGamesByStatus(Integer statusID) throws NullIDException, InvalidIDException
+    {
+        if(statusID < 0 || statusID > 4)
+        {
+            throw new InvalidIDException("Invalid status ID!");
+        }
+        return dao.getGamesByStatus(statusID);
+    }
+
     //PLATFORM DAOS
 
     public List<Platform> getAllPlatforms() {

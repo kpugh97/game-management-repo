@@ -17,5 +17,6 @@ public interface GameDAO {
     void editGame(Integer gameID, String title, String category,  Integer releaseDate) throws NullIDException, InvalidIDException, NullTitleException, NullYearException, NullCategoryException;
     void deleteGame(Integer gameID) throws NullIDException, InvalidIDException;
     void saveImageToDB(String gameName, String url) throws NullTitleException, NullURLException;
-
+    void updateGameStatus(Integer gameID, Integer statusID) throws NullIDException, InvalidIDException;
+    List<Game> getGamesByStatus(Integer statusID) throws  NullIDException, InvalidIDException;
 }
