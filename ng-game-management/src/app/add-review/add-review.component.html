@@ -7,6 +7,6 @@
      </select> <br> <br>
      <span id="reviewArea">Your Review Goes Here:</span><br>
     <textarea cols="60" rows="20" [(ngModel)]="addThis.reviewText"></textarea>
-    <button type="button" class="btn btn-primary btn-sm" id="toSubmit" (click)="addReview()">Submit</button>
+    <button [disabled]="!addThis.gameTitle || !addThis.rating || !addThis.reviewText" type="button" class="btn btn-primary btn-sm" id="toSubmit" (click)="addReview()">Submit</button>
     <button type="button" class="btn btn-danger btn-sm" id="cancelBtn" (click)="back()">Cancel</button>
 </div>
