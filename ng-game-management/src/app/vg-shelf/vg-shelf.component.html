@@ -1,7 +1,11 @@
 <div id="searchDiv">
-    <app-game-search 
-    (gameSearchEvent)="onGameSearched($event)" ></app-game-search>
-</div>
+    <div class= "input-group-append">
+        <app-game-search 
+        (gameSearchEvent)="onGameSearched($event)" ></app-game-search> 
+        <button class="btn btn-outline-primary" (click)="resetFilter()">Reset Filter</button>
+    </div>
+</div> <br>
+
 <div id="gameSquare">
     <app-video-game *ngFor="let game of games | paginate: {id: 'vg', itemsPerPage: 8, currentPage: p}" [game]="game">
     </app-video-game>    
