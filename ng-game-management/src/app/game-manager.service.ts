@@ -9,6 +9,7 @@ import { StringResponse } from './ts/StringResponse'
 import { Review } from './ts/Review';
 import { EditReview } from './ts/EditReview';
 import { EditGame } from './ts/EditGame';
+import { EditStatus } from './ts/EditStatus';
 
 
 
@@ -140,6 +141,19 @@ export class GameManagerService {
       })
     );
   }
+
+  updateGameStatus(update:EditStatus): Observable<Game>
+  {
+    return this.http.put<Game>(this.baseURL + "/game/status/update",update,this.httpOptions)
+    .pipe(
+      tap(x => console.log(x)),
+      catchError(err => {
+        console.log(err);
+        return of(null);
+      })
+    );
+  }
+
 
 
 

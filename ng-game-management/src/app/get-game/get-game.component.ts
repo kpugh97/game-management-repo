@@ -4,6 +4,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Game } from '../ts/Game';
 import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { EditStatus } from '../ts/EditStatus';
 
 @Component({
   selector: 'app-get-game',
@@ -13,7 +14,9 @@ import { Observable } from 'rxjs';
 export class GetGameComponent implements OnInit {
 
   @Input()id:number;
+  @Input()statusID:number;
   toReturn: Observable<Game>;
+  toUpdate:EditStatus = {} as EditStatus;
 
   constructor(private service: GameManagerService, private router: Router, private route: ActivatedRoute) { }
 
@@ -25,13 +28,13 @@ export class GetGameComponent implements OnInit {
     );  
   }
 
-  // getGame()
-  // {
-  //   this.service.getGameByID(this.id).subscribe(returnedGame =>{
-  //     this.toReturn = returnedGame;
-  //     console.log(returnedGame);
-  //     console.log(this.toReturn);
-  //   });
-  // }
+  selectChangeHandler(event)
+  {
+    this.toUpdate.gameID = this.id;
+    this.toUpdate.statusID = this.statusID;
+    this.statusID = parseInt(event);
+    this.service.updateGameStatus(this.toUpdate).subscribe((_)=> window.location.reload());
+    console.log(parseInt(event));
+  }
 
 }

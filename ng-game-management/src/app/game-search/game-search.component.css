@@ -1,10 +1,13 @@
 .form-control
 {
+    margin-top: 10px;
+    margin-left: 10px;
     display: inline;
-    width: 400px;
+    width: 300px;
 }
 
 .btn
 {
+    margin-top: 10px;
     display: inline-block;
 }

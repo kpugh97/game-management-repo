@@ -18,7 +18,7 @@ export class AddGameComponent implements OnInit {
   platforms:number[];
   plats: string[] = ["Playstation","Playstation 1","Playstation 2","Playstation 3","Playstation 4",
   "Playsation 5","Xbox","Xbox 360","Xbox One","NES", "Super NES","Nintendo 64", "Nintendo DS","Nintendo DSi",
-  "Nintendo 3DS","Gameboy", "Gameboy Advance","Nintendo Gamecube", "Nintendo Wii","Nintendo Wii U","Nintendo Switch","PC","Dreamcast","Atari 7800"];
+  "Nintendo 3DS","Gameboy", "Gameboy Advance","Nintendo Gamecube", "Nintendo Wii","Nintendo Wii U","Nintendo Switch","PC","Dreamcast","Atari 7800","N/a"];
 
   constructor(private service: GameManagerService, private router: Router, private location: Location) { }
 
@@ -49,22 +49,6 @@ export class AddGameComponent implements OnInit {
       select.appendChild(option);
     }
   }
-
-
-  // //preset platforms 
-  //   loadPlatforms()
-  //   {
-  //     let select = document.getElementById("platSelect");
-
-  //     for(let i =0;i<this.plats.length;i++)
-  //     {
-  //       let platoption : any = document.createElement("option");
-  //       platoption.text = this.plats[i];
-  //       platoption.value = i;
-  //       select.appendChild(platoption);
-  //     }
-
-  // }
 
   selectChangeHandler(event)
   {
