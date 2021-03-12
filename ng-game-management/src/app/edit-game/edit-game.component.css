@@ -15,5 +15,24 @@ input
 
 button
 {
-    margin-left: 20px;
+    margin-top: 10px;
+    
+}
+
+.child
+{
+    width: 650px;
+}
+
+#cancelBtn
+{
+    float: left;
+
+}
+
+#editBtn
+{
+    margin-right: 133px;
+    float: right;
+
 }

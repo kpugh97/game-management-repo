@@ -8,7 +8,6 @@ import { Platform } from './ts/Platform';
 import { StringResponse } from './ts/StringResponse'
 import { Review } from './ts/Review';
 import { EditReview } from './ts/EditReview';
-import { EditGame } from './ts/EditGame';
 import { EditStatus } from './ts/EditStatus';
 
 
