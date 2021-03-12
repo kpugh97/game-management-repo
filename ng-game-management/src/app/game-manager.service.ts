@@ -154,7 +154,17 @@ export class GameManagerService {
     );
   }
 
-
+getAllGenres(): Observable<string[]>
+{
+  return this.http.get<string[]>(this.baseURL+"/genres")
+  .pipe(
+    tap(x => console.log(x)),
+    catchError(err => {console.log(err);
+    let empty : string[] = [];
+    return of(empty);
+  })
+  );
+}
 
 
 //PLATFORM RELATED REQUESTS

@@ -130,7 +130,7 @@ public class GameInMemDAO implements GameDAO{
     }
 
     @Override
-    public void editGame(Integer gameID, String title,  String category, Integer releaseDate) throws NullIDException, InvalidIDException, NullCategoryException, NullYearException, NullTitleException{
+    public void editGame(Integer gameID, String title,  String category, Integer releaseDate, String desc) throws NullIDException, InvalidIDException, NullCategoryException, NullYearException, NullTitleException, NullDescriptionException{
         if(gameID == null)
         {
             throw new NullIDException("Cannot retrieve a game with a null ID");
@@ -206,6 +206,16 @@ public class GameInMemDAO implements GameDAO{
 
     @Override
     public List<Game> getGamesByStatus(Integer statusID) throws NullIDException, InvalidIDException {
+        return null;
+    }
+
+    @Override
+    public List<Game> getGamesByGenre(String catName) throws NullCategoryException {
+        return null;
+    }
+
+    @Override
+    public List<String> getAllGenres() {
         return null;
     }
 

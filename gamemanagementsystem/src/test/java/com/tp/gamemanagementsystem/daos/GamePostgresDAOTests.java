@@ -289,7 +289,7 @@ public class GamePostgresDAOTests {
         mobile.setPlatformID(3);
         platforms2.add(3);
         testDAO.createGame("Sonic Adventure", "RPG",1998, platforms, "Cool new game!");
-        testDAO.editGame(1,"Pokemon Go", "Simulation",2016);
+        testDAO.editGame(1,"Pokemon Go", "Simulation",2016, "New desc!");
 
     }
 
@@ -299,7 +299,7 @@ public class GamePostgresDAOTests {
         List<Integer> platforms = new ArrayList<>();
         platforms.add(1);
         platforms.add(2);
-        assertThrows(NullTitleException.class, ()->testDAO.editGame(1,null,"RPG",2000));
+        assertThrows(NullTitleException.class, ()->testDAO.editGame(1,null,"RPG",2000, "New desc!"));
     }
 
     @Test
@@ -308,7 +308,7 @@ public class GamePostgresDAOTests {
         List<Integer> platforms = new ArrayList<>();
         platforms.add(1);
         platforms.add(2);
-        assertThrows(NullCategoryException.class, ()->testDAO.editGame(1,"Cool Game",null ,2020));
+        assertThrows(NullCategoryException.class, ()->testDAO.editGame(1,"Cool Game",null ,2020, "New desc!"));
 
     }
 
@@ -318,7 +318,7 @@ public class GamePostgresDAOTests {
         List<Integer> platforms = new ArrayList<>();
         platforms.add(1);
         platforms.add(2);
-        assertThrows(NullYearException.class, ()->testDAO.editGame(1,"Cool Game","RPG",null));
+        assertThrows(NullYearException.class, ()->testDAO.editGame(1,"Cool Game","RPG",null, "New desc!"));
 
     }
 
@@ -328,7 +328,7 @@ public class GamePostgresDAOTests {
         List<Integer> platforms = new ArrayList<>();
         platforms.add(1);
         platforms.add(2);
-        assertThrows(NullIDException.class, ()->testDAO.editGame(null,"Cool Game","RPG",2020));
+        assertThrows(NullIDException.class, ()->testDAO.editGame(null,"Cool Game","RPG",2020, "New desc!"));
     }
 
     @Test

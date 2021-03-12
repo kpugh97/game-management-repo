@@ -37,7 +37,6 @@ export class GameSearchComponent implements OnInit {
     //breaks down into separate games
     this.service.getGamesByTitle(this.searchTerm).subscribe(list=>{this.gamesList=list,this.gameSearched()});
   
- 
 
     console.log(this.searchTerm);
   }
@@ -45,6 +44,7 @@ export class GameSearchComponent implements OnInit {
   gameSearched() : void{
     this.gameSearchEvent.emit(   
         this.gamesList
+    
     )
   }
 

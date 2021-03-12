@@ -19,9 +19,6 @@ public class GameMapper implements RowMapper<Game> {
         gameMap.setImgSrc(resultSet.getString("imageSrc"));
         gameMap.setDesc(resultSet.getString("desc"));
         gameMap.setStatusID(resultSet.getInt("statusID"));
-//        gameMap.setStatusName(resultSet.getString("statusName"));
-
-
         return gameMap;
     }
 

@@ -1,14 +1,19 @@
-<h1>Editing {{toEdit.title}}...</h1>
+<h1>Editing {{gameTitle}}...</h1>
 <div>
    <span>Title:</span>  <input type="text" [(ngModel)]="toEdit.title"> <br>
+
    <span>Genre:</span> <select id="categorySelect" [(ngModel)]="toEdit.category">
       <option value="" disabled selected>Choose Genre Category</option>
+      <option *ngFor="let category of categories">{{category}}</option>
   </select> <br>
+
    <span>Release Year:</span>  <select name="" id="yearSelect" [(ngModel)] = "toEdit.releaseYear">
       <option value="" disabled selected>Select Year</option>
-   </select>
+   </select> <br>
 
-   <button [disabled]="!toEdit.title || !toEdit.category || !toEdit.releaseYear"  type="button" class="btn btn-primary btn-sm" (click)="editGame()">Edit Game</button>
+   <span>Game Description: </span> <br> <textarea [(ngModel)] = "toEdit.desc" class="descTextBox" cols="50" rows="10"></textarea>
+
+   <button [disabled]="!toEdit.title || !toEdit.category || !toEdit.releaseYear || !toEdit.desc"  type="button" class="btn btn-primary btn-sm" (click)="editGame()">Edit Game</button>
    <button type="button" class="btn btn-danger btn-sm" id="cancelBtn" (click)="back()">Cancel</button>
 
 

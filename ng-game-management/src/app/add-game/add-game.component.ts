@@ -1,8 +1,10 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { GameManagerService } from '../game-manager.service';
 import { Game } from '../ts/Game';
+import { Platform } from '../ts/Platform';
 import { VideoGameComponent } from '../video-game/video-game.component'
 
 @Component({
@@ -16,39 +18,23 @@ export class AddGameComponent implements OnInit {
   category: string;
   releaseYear:number;
   platforms:number[];
-  plats: string[] = ["Playstation","Playstation 1","Playstation 2","Playstation 3","Playstation 4",
-  "Playsation 5","Xbox","Xbox 360","Xbox One","NES", "Super NES","Nintendo 64", "Nintendo DS","Nintendo DSi",
-  "Nintendo 3DS","Gameboy", "Gameboy Advance","Nintendo Gamecube", "Nintendo Wii","Nintendo Wii U","Nintendo Switch","PC","Dreamcast","Atari 7800","N/a"];
+  plats: Platform[];
+  genres:string[];
   desc:string;
 
   constructor(private service: GameManagerService, private router: Router, private location: Location) { }
 
   ngOnInit(): void {
+    this.service.getAllPlats().subscribe(list=>{this.plats = list});
+    this.service.getAllGenres().subscribe(list=>{this.genres=list});
     this.populate();
-    this.loadCategories();
-    // this.loadPlatforms();
   }
 
   addGame()
   {
-    // let platforms = [9];
     let toAdd: Game = {title: this.title, releaseYear: this.releaseYear, category: this.category, platforms: this.platforms, desc: this.desc}
     //return to main page after adding game
     this.service.addGame(toAdd).subscribe((_)=> {this.router.navigate(["/home"])});
-  }
-
-  //preset categories for each game
-  loadCategories()
-  {
-    let select = document.getElementById("categorySelect");
-    let categories: string[] = ["Adventure","Puzzle","Action","Action-adventure","RPG","FPS","MOBA","MMORPG","Simulation","Strategy","Sports", "Mobile"];
-    for(let i =0;i<categories.length;i++)
-    {
-      let option : any = document.createElement("option");
-      option.text = categories[i];
-      option.value = categories[i];
-      select.appendChild(option);
-    }
   }
 
   selectChangeHandler(event)

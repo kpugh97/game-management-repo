@@ -47,6 +47,9 @@ public class GameController {
         return ResponseEntity.ok(service.getGameCollection());
     }
 
+    @GetMapping("/genres")
+    public ResponseEntity getAllGenres(){return  ResponseEntity.ok(service.getAllGenres());}
+
     @GetMapping("/game/id/{gameID}")
     public ResponseEntity getGameByID(@PathVariable Integer gameID)
     {
@@ -110,9 +113,9 @@ public class GameController {
     public ResponseEntity editGame(@RequestBody Game editGame)
     {
         try {
-            service.editGame(editGame.getGameID(),editGame.getTitle(),editGame.getCategory(),editGame.getReleaseYear());
+            service.editGame(editGame.getGameID(),editGame.getTitle(),editGame.getCategory(),editGame.getReleaseYear(), editGame.getDesc());
         }
-        catch (InvalidIDException | NullIDException | NullYearException | NullTitleException | NullCategoryException e)
+        catch (InvalidIDException | NullIDException | NullYearException | NullTitleException | NullCategoryException | NullDescriptionException e)
         {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }

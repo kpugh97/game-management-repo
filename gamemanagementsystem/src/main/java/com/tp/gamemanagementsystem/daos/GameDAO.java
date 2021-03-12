@@ -14,9 +14,11 @@ public interface GameDAO {
     List<Game> getGameByCategory(String category) throws NullCategoryException;
     List<Game> getGamesByTitle(String title) throws NullTitleException;
     List<Game> getGamesByYear(Integer year) throws NullYearException;
-    void editGame(Integer gameID, String title, String category,  Integer releaseDate) throws NullIDException, InvalidIDException, NullTitleException, NullYearException, NullCategoryException;
+    void editGame(Integer gameID, String title, String category,  Integer releaseDate, String desc) throws NullIDException, InvalidIDException, NullTitleException, NullYearException, NullCategoryException, NullDescriptionException;
     void deleteGame(Integer gameID) throws NullIDException, InvalidIDException;
     void saveImageToDB(String gameName, String url) throws NullTitleException, NullURLException;
     void updateGameStatus(Integer gameID, Integer statusID) throws NullIDException, InvalidIDException;
     List<Game> getGamesByStatus(Integer statusID) throws  NullIDException, InvalidIDException;
+    List<Game> getGamesByGenre(String catName) throws  NullCategoryException;
+    List<String> getAllGenres();
 }

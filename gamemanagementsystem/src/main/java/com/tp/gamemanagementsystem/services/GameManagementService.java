@@ -40,6 +40,11 @@ public class GameManagementService {
         return  dao.getGameByID(gameID);
     }
 
+    public List<String> getAllGenres()
+    {
+       return dao.getAllGenres();
+    }
+
     public Game createGame(String title, String category, Integer year, List<Integer> platforms, String desc) throws InvalidIDException, NullTitleException, NullCategoryException, NullYearException, NullPlatformException, NullDescriptionException {
         //current year
         Year y = Year.now();
@@ -102,7 +107,7 @@ public class GameManagementService {
         dao.deleteGame(gameID);
     }
 
-    public void editGame(Integer gameID, String title, String category, Integer year) throws NullIDException, InvalidIDException, NullTitleException, NullYearException, NullCategoryException {
+    public void editGame(Integer gameID, String title, String category, Integer year, String desc) throws NullIDException, InvalidIDException, NullTitleException, NullYearException, NullCategoryException, NullDescriptionException {
         if(gameID<0)
         {
             throw new InvalidIDException("Invalid ID input");
@@ -116,7 +121,11 @@ public class GameManagementService {
         {
             throw new NullCategoryException("Invalid category input!");
         }
-        dao.editGame(gameID, title, category, year);
+        if(desc.trim().length() <= 0)
+        {
+            throw new NullCategoryException("Invalid category input!");
+        }
+        dao.editGame(gameID, title, category, year, desc);
     }
 
     public void updateGameStatus(Integer gameID, Integer statusID) throws NullIDException, InvalidIDException

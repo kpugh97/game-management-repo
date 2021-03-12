@@ -1,22 +1,29 @@
 <h2>Adding a New Game...</h2>
 <div class="container">
     <div class="child">
+
         <span>Title:</span>
-        <input required type="text" [(ngModel)]="title"> <br>
+        <input class="form-control" required type="text" [(ngModel)]="title"> <br>
+
         <span>Category:</span>
         <select required id="categorySelect" [(ngModel)]="category">
             <option value="" disabled selected>Choose Genre Category</option>
+            <option *ngFor="let categories of genres; let i = index">{{categories}}</option>
         </select> <br>
+
         <span>Platform(s):</span>
-        <select required id="platSelect" [(ngModel)]="platforms" (ngModelChange)="selectChangeHandler($event)">
+        <select required id="platSelect" [(ngModel)]="platforms" (ngModelChange)="selectChangeHandler($event);">
             <!-- <option value="" disabled selected>Choose Platform</option> -->
             <option value="" disabled selected>Choose Platform</option>
-            <option *ngFor="let platforms of plats; let i = index" [value]=i+1>{{platforms}}</option>
+            <option *ngFor="let platforms of plats; let i = index" [value]=i+1>{{platforms.name}}</option>
         </select> <br>
+
         <span>Release Year:</span>  <select required name="chooseYear" id="yearSelect" [(ngModel)] = "releaseYear">
             <option value="" disabled selected>Select Year</option>
          </select> <br> <br>
+
          <span>Game Description:</span><br> <textarea [(ngModel)] = "desc" name="descTextBox" cols="60" rows="5"></textarea><br>
+
         <button [disabled]="!releaseYear || !category || !title || !platforms || !desc"  type="button" class="btn btn-primary btn-sm" id="addBtn" (click)= "addGame()">Add Game</button>
         <button type="button" class="btn btn-danger btn-sm" id="cancelBtn" (click)="back()">Cancel</button> 
 

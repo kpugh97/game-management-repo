@@ -81,7 +81,7 @@ public class GamePostgresDAO implements GameDAO {
         }
         Game toReturn = null;
         try {
-            toReturn = template.queryForObject("SELECT * FROM \"Games\" WHERE \"gameID\" = \'" + gameID + "\'", new GameMapper());
+            toReturn = template.queryForObject("SELECT * FROM \"Games\" WHERE \"gameID\" = ? ", new GameMapper(),gameID);
         }
         catch(EmptyResultDataAccessException e)
         {
@@ -123,7 +123,7 @@ public class GamePostgresDAO implements GameDAO {
             throw new NullYearException("Cannot retrieve a game with a null year!");
         }
         List<Game> toReturn = null;
-        toReturn = template.query("SELECT * FROM \"Games\" WHERE \"year\" = \'" + year + "\'", new GameMapper());
+        toReturn = template.query("SELECT * FROM \"Games\" WHERE \"year\" = ? ", new GameMapper(),year);
         if(toReturn.isEmpty())
         {
             throw new NullYearException("Cannot retrieve a game with year "+year+"!");
@@ -134,7 +134,7 @@ public class GamePostgresDAO implements GameDAO {
 
 
     @Override
-    public void editGame(Integer gameID, String title, String category, Integer releaseDate) throws NullIDException, InvalidIDException, NullTitleException, NullYearException, NullCategoryException {
+    public void editGame(Integer gameID, String title, String category, Integer releaseDate, String desc) throws NullIDException, InvalidIDException, NullTitleException, NullYearException, NullCategoryException, NullDescriptionException{
         if (gameID == null) {
             throw new NullIDException("Cannot edit a game with a null ID!");
         }
@@ -147,9 +147,13 @@ public class GamePostgresDAO implements GameDAO {
         if (category == null) {
             throw new NullCategoryException("Cannot edit a game with a null category!");
         }
+        if(desc == null)
+        {
+            throw new NullDescriptionException("Cannot edit a game with a null description");
+        }
         //update game with new info
         try {
-            template.update("UPDATE \"Games\" SET \"title\" = ? , \"category\" = ?, \"year\" = ? WHERE \"gameID\" = ? ;",title,category,releaseDate,gameID);
+            template.update("UPDATE \"Games\" SET \"title\" = ? , \"category\" = ?, \"year\" = ?, \"desc\"= ? WHERE \"gameID\" = ? ;",title,category,releaseDate,desc, gameID);
         } catch (EmptyResultDataAccessException e) {
             throw new InvalidIDException("Cannot make changes to a game with ID " + gameID + "!");
         }
@@ -241,5 +245,33 @@ public class GamePostgresDAO implements GameDAO {
         }
         return toReturn;
 
+    }
+
+    @Override
+    public List<Game> getGamesByGenre(String catName) throws NullCategoryException {
+        if(catName==null)
+        {
+            throw new NullCategoryException("Cannot retrive a game with a null category!");
+        }
+        List<Game> toReturn = null;
+        try
+        {
+            toReturn = template.query("SELECT * FROM \"Games\" WHERE \"categoryName\" = ?", new GameMapper(),catName);
+        }
+        catch (DataIntegrityViolationException | EmptyResultDataAccessException e)
+        {
+            throw new NullCategoryException("Cannot find any games with genre"+catName+"!");
+        }
+        if (toReturn.isEmpty())
+        {
+            throw new NullCategoryException("Cannot find a game with category "+catName+"!");
+        }
+        return toReturn;
+    }
+
+    @Override
+    public List<String> getAllGenres() {
+        List<String> allGenres = template.query("SELECT * FROM \"Genres\" \n", new StringMapper("categoryName"));
+        return allGenres;
     }
 }
