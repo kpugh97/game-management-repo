@@ -27,10 +27,4 @@ export class ReviewByNameComponent implements OnInit {
       this.reviews = list)
   }
 
-  // back()
-  // {
-  //   
-  // }
-
-
 }

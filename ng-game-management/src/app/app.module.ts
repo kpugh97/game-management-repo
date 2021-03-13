@@ -28,6 +28,7 @@ import { GamesByPlatnameComponent } from './games-by-platname/games-by-platname.
 import {NgxPaginationModule} from 'ngx-pagination';
 import { GameSearchComponent } from './game-search/game-search.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +51,7 @@ import { GameSearchComponent } from './game-search/game-search.component';
     GetReviewComponent,
     GetGameEditComponent,
     GamesByPlatnameComponent,
-    GameSearchComponent,
+    GameSearchComponent
 
 
   ],
