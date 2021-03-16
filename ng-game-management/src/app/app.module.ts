@@ -61,7 +61,7 @@ import { GameSearchComponent } from './game-search/game-search.component';
     HttpClientModule,
     FormsModule,
     NgbModule,
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

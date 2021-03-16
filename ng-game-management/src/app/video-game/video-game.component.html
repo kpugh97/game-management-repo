@@ -5,7 +5,7 @@
         </ng-container> 
 
         <ng-template #showImage>
-            <a [routerLink]="['/get', game.gameID]"> 
+            <a [routerLink]="['/get', game.gameID, game.title]"> 
                 <img 
                 src="{{game.imgSrc}}">
                 <!-- {{game.title}} -->
