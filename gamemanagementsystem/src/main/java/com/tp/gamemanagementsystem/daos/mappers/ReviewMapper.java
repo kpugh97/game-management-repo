@@ -17,6 +17,7 @@ public class ReviewMapper implements RowMapper<Review> {
         reviewMap.setRating(resultSet.getInt("rating"));
         reviewMap.setGameID(resultSet.getInt("gameID"));
         reviewMap.setGameTitle(resultSet.getString("gameTitle"));
+        reviewMap.setUserID(resultSet.getInt("userID"));
         return reviewMap;
     }
 }

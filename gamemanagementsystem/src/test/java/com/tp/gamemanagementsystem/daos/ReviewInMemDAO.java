@@ -41,7 +41,7 @@ public class ReviewInMemDAO implements ReviewDAO {
     }
 
     @Override
-    public Review makeReview(String reviewTitle, String review, Integer rating, Integer gameID) throws NullTitleException, NullReviewException, NullIDException, InvalidIDException {
+    public Review makeReview(String reviewTitle, String review, Integer rating, Integer gameID,Integer userID) throws NullTitleException, NullReviewException, NullIDException, InvalidIDException {
         if(reviewTitle == null)
         {
             throw new NullTitleException("Cannot make a review with a null title!");

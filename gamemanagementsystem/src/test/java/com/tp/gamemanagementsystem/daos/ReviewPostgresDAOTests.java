@@ -38,13 +38,13 @@ public class ReviewPostgresDAOTests {
     public void addReviewTest() throws NullIDException, NullReviewException,NullTitleException, InvalidIDException
     {
         Review newReview = new Review();
-        newReview = testDAO.makeReview("Pretty cool", "The game is really fun and the music is amazing!",8,1);
+        newReview = testDAO.makeReview("Pretty cool", "The game is really fun and the music is amazing!",8,1,1);
         assertEquals(1,newReview.getReviewID());
         assertEquals("Pretty cool",newReview.getReviewTitle());
         assertEquals(1,newReview.getGameID());
         assertEquals("The game is really fun and the music is amazing!",newReview.getReviewText());
         assertEquals(8,newReview.getRating());
-        Review secondReview = testDAO.makeReview("Best game ever!", "This game is better than any other game I've played ever! Truly amazing!",10,2);
+        Review secondReview = testDAO.makeReview("Best game ever!", "This game is better than any other game I've played ever! Truly amazing!",10,2,1);
         assertEquals("Best game ever!",secondReview.getReviewTitle());
         assertEquals(2,secondReview.getGameID());
         assertEquals("This game is better than any other game I've played ever! Truly amazing!",secondReview.getReviewText());
@@ -54,28 +54,28 @@ public class ReviewPostgresDAOTests {
     @Test
     public void addReviewNullTitle()
     {
-        assertThrows(NullTitleException.class,()->testDAO.makeReview(null,"My brand new review!",8, 1 ));
+        assertThrows(NullTitleException.class,()->testDAO.makeReview(null,"My brand new review!",8, 1 ,1));
 
     }
 
     @Test
     public void addReviewNullReview()
     {
-        assertThrows(NullReviewException.class,()->testDAO.makeReview("New Review",null,8, 1 ));
+        assertThrows(NullReviewException.class,()->testDAO.makeReview("New Review",null,8, 1 ,1));
 
     }
 
     @Test
     public void addReviewNullGameID()
     {
-        assertThrows(NullIDException.class,()->testDAO.makeReview("New Review","My brand new review!",8, null ));
+        assertThrows(NullIDException.class,()->testDAO.makeReview("New Review","My brand new review!",8, null,1 ));
 
     }
 
     @Test
     public void editReviewTest() throws NullIDException, NullReviewException,NullTitleException, InvalidIDException
     {
-        testDAO.makeReview("Pretty cool", "The game is really fun and the music is amazing!",8,1);
+        testDAO.makeReview("Pretty cool", "The game is really fun and the music is amazing!",8,1,1);
         assertEquals(1,testDAO.getReviewByID(1).getReviewID());
         assertEquals("Pretty cool",testDAO.getReviewByID(1).getReviewTitle());
         assertEquals(1,testDAO.getReviewByID(1).getGameID());

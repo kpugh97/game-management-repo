@@ -8,9 +8,6 @@ public class Game {
     private String category;
     private String imgSrc;
     private String desc;
-    private Integer statusID;
-    private String statusName;
-
 
 
     //empty default constructor for testing
@@ -86,22 +83,5 @@ public class Game {
     public void setDesc(String desc) {
         this.desc = desc;
     }
-
-    public Integer getStatusID() {
-        return statusID;
-    }
-
-    public void setStatusID(Integer statusID) {
-        this.statusID = statusID;
-    }
-
-    public String getStatusName() {
-        return statusName;
-    }
-
-    public void setStatusName(String statusName) {
-        this.statusName = statusName;
-    }
-
 
 }

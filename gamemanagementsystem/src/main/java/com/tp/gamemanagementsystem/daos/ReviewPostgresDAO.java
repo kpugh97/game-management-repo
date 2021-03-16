@@ -43,10 +43,14 @@ public class ReviewPostgresDAO implements ReviewDAO {
     }
 
     @Override
-    public Review makeReview(String reviewTitle, String review, Integer rating, Integer gameID) throws NullTitleException, NullReviewException, NullIDException, InvalidIDException{
+    public Review makeReview(String reviewTitle, String review, Integer rating, Integer gameID, Integer userID) throws NullTitleException, NullReviewException, NullIDException, InvalidIDException{
         if(gameID == null)
         {
             throw new NullIDException("Cannot make a review for a game with a null ID!");
+        }
+        if(userID == null)
+        {
+            throw new NullIDException("Cannot make a review for a user with a null ID!");
         }
         if(reviewTitle == null)
         {
@@ -58,19 +62,26 @@ public class ReviewPostgresDAO implements ReviewDAO {
         }
         Review newReview = new Review();
         try {
-            Integer reviewID = template.queryForObject("INSERT INTO \"Reviews\" (\"reviewTitle\",\"rating\",\"gameID\",\"reviewText\") VALUES (?,?,?,?) RETURNING \"reviewID\"", new IntegerMapper("reviewID"),
+            Integer reviewID = template.queryForObject("INSERT INTO \"Reviews\" (\"reviewTitle\",\"rating\",\"gameID\",\"reviewText\", \"userID\") VALUES (?,?,?,?,?) RETURNING \"reviewID\"", new IntegerMapper("reviewID"),
                     reviewTitle,
                     rating,
                     gameID,
-                    review);
+                    review,
+                    userID);
             newReview.setReviewID(reviewID);
             newReview.setReviewTitle(reviewTitle);
             newReview.setReviewText(review);
             newReview.setGameID(gameID);
             newReview.setRating(rating);
+            newReview.setUserID(userID);
             template.update("UPDATE \"Reviews\" as r SET \"gameTitle\"=gs.\"title\" \n"+
                     "FROM \"Games\" as gs \n"+
                     "WHERE r.\"gameID\" = gs.\"gameID\"");
+            template.update("INSERT INTO \"UserReviews\" (\"userID\", \"reviewID\") \n"+
+                    "VALUES (?,?)",userID,reviewID);
+            template.update("UPDATE \"Reviews\" as r SET \"userID\"= ur.\"userID\"\n" +
+                    "FROM \"UserReviews\" as ur\n" +
+                    "WHERE r.\"reviewID\" = ur.\"reviewID\"");
         }
         catch (DataIntegrityViolationException e)
         {
@@ -82,7 +93,7 @@ public class ReviewPostgresDAO implements ReviewDAO {
     @Override
     public List<Review> getAllReviews(){
 
-        List<Review> allReviews = template.query("SELECT gs.\"gameID\",\"title\",\"reviewID\",\"title\",\"category\",\"reviewTitle\",\"reviewText\",\"rating\", \"gameTitle\" FROM \"Games\" as gs\n"+
+        List<Review> allReviews = template.query("SELECT gs.\"gameID\",\"title\",\"reviewID\",\"title\",\"category\",\"reviewTitle\",\"reviewText\",\"rating\", \"gameTitle\",\"userID\" FROM \"Games\" as gs\n"+
                 "INNER JOIN \"Reviews\" as rs ON rs.\"gameID\"=gs.\"gameID\"\n"+
                 "ORDER BY rs.\"reviewID\" DESC",new ReviewMapper());
         return allReviews;

@@ -14,7 +14,7 @@ public interface ReviewDAO {
 
     //create a new review to type up
     List<Review> getAllReviews();
-    Review makeReview(String reviewTitle, String review, Integer rating, Integer gameID) throws NullTitleException, NullReviewException, NullIDException, InvalidIDException;
+    Review makeReview(String reviewTitle, String review, Integer rating, Integer gameID, Integer userID) throws NullTitleException, NullReviewException, NullIDException, InvalidIDException;
     //return all the reviews for a game
     void deleteReview(Integer reviewID) throws NullIDException, InvalidIDException;
     void editReview(Integer reviewID, String review, Integer rating) throws NullIDException,NullReviewException, InvalidIDException;

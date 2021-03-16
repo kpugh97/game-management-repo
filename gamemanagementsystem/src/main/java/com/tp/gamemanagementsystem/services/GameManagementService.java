@@ -3,10 +3,12 @@ package com.tp.gamemanagementsystem.services;
 import com.tp.gamemanagementsystem.daos.GameDAO;
 import com.tp.gamemanagementsystem.daos.PlatformDAO;
 import com.tp.gamemanagementsystem.daos.ReviewDAO;
+import com.tp.gamemanagementsystem.daos.UserDAO;
 import com.tp.gamemanagementsystem.exceptions.*;
 import com.tp.gamemanagementsystem.models.Game;
 import com.tp.gamemanagementsystem.models.Platform;
 import com.tp.gamemanagementsystem.models.Review;
+import com.tp.gamemanagementsystem.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -25,6 +27,9 @@ public class GameManagementService {
 
     @Autowired
     ReviewDAO reviewdao;
+
+    @Autowired
+    UserDAO userdao;
 
 
     //VIDEO GAME DAOS:
@@ -256,7 +261,7 @@ public class GameManagementService {
         reviewdao.editReview(reviewID, review, rating);
     }
 
-    public Review makeReview(String title, String reviewText, Integer rating, Integer gameID) throws NullIDException, NullTitleException, NullReviewException, InvalidIDException,InvalidRatingException {
+    public Review makeReview(String title, String reviewText, Integer rating, Integer gameID, Integer userID) throws NullIDException, NullTitleException, NullReviewException, InvalidIDException,InvalidRatingException {
         if(title.trim().length()<=0)
         {
             throw new NullTitleException("Invalid title input!");
@@ -270,12 +275,54 @@ public class GameManagementService {
             throw new InvalidRatingException("Invalid rating input!");
 
         }
-        return reviewdao.makeReview(title, reviewText, rating, gameID);
+        return reviewdao.makeReview(title, reviewText, rating, gameID, userID);
     }
 
     public void saveImageToDB(String gameName, String url) throws NullURLException, NullTitleException {
         dao.saveImageToDB(gameName,url);
     }
+
+
+    //USER DAOS
+
+    public User createUser(String userName)throws InvalidIDException , InvalidUsernameException{
+        if(userName.trim().length()<=0 || userName.length()<3)
+        {
+            throw new InvalidUsernameException("Invalid username input! Must be 3 characters or more!");
+        }
+        return userdao.createUser(userName);
+    }
+
+    public User getUserByID (Integer userID) throws InvalidIDException, NullIDException{
+        if(userID  <0 )
+        {
+            throw new InvalidIDException("Invalid ID input!");
+        }
+
+       return userdao.getUserByID(userID);
+    }
+
+
+    public User getUserByName (String userName) throws InvalidUsernameException{
+        if(userName.trim().length() <= 0 || userName.length() < 3 )
+        {
+            throw new InvalidUsernameException("Invalid username input! Must be 3 characters or more!");
+        }
+
+        return userdao.getUserByName(userName);
+    }
+
+
+    public void deleteUser(Integer userID) throws InvalidIDException, NullIDException{
+        if(userID <0)
+        {
+            throw new InvalidIDException("Invalid ID input!");
+        }
+
+        userdao.deleteUser(userID);
+    }
+
+
 }
 
 

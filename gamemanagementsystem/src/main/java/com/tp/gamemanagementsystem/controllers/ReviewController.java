@@ -49,7 +49,7 @@ public class ReviewController {
         Review newReview = null;
         try
         {
-            newReview = service.makeReview(review.getReviewTitle(), review.getReviewText(),review.getRating(), review.getGameID());
+            newReview = service.makeReview(review.getReviewTitle(), review.getReviewText(),review.getRating(), review.getGameID(), review.getUserID());
         }
         catch(NullIDException | InvalidIDException | NullTitleException | NullReviewException | InvalidRatingException e)
         {
