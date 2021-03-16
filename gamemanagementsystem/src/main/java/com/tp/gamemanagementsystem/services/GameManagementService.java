@@ -323,6 +323,9 @@ public class GameManagementService {
     }
 
 
+    public List<User> getAllUsers() {
+        return userdao.getAllUsers();
+    }
 }
 
 

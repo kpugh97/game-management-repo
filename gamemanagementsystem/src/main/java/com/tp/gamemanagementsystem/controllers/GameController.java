@@ -65,7 +65,7 @@ public class GameController {
     }
 
 
-    @GetMapping("game/genre/{category}")
+    @GetMapping("/game/genre/{category}")
     public ResponseEntity getGameByCategory(@PathVariable String category)
     {
         List<Game> game =null;
@@ -79,7 +79,7 @@ public class GameController {
         return ResponseEntity.ok(game);
     }
 
-    @GetMapping("game/title/{title}")
+    @GetMapping("/game/title/{title}")
     public ResponseEntity getGameByTitle(@PathVariable String title)
     {
         List<Game> game =null;

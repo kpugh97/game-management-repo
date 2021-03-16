@@ -11,10 +11,12 @@ import com.tp.gamemanagementsystem.models.User;
 import com.tp.gamemanagementsystem.models.UserList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -31,12 +33,24 @@ public class UserPostgresDAO implements UserDAO{
         {
             throw new InvalidUsernameException("Cannot create a new user with a null username!");
         }
-        User newUser = null;
-        Integer userID = template.queryForObject("INSERT INTO \"Users\" (\"userName\") VALUES (?) RETURNING \"userID\"",new IntegerMapper("userID"),
-                userName);
-        newUser.setUserID(userID);
-        newUser.setUserName(userName);
+        User newUser = new User();
+        try {
+            Integer userID = template.queryForObject("INSERT INTO \"Users\" (\"userName\") VALUES (?) RETURNING \"userID\"", new IntegerMapper("userID"),
+                    userName);
+            newUser.setUserID(userID);
+            newUser.setUserName(userName);
+        }
+        catch (DuplicateKeyException e)
+        {
+            throw new InvalidUsernameException("A user with that name has already been created. Try again!");
+        }
         return newUser;
+    }
+
+    @Override
+    public List<User> getAllUsers(){
+        List<User> userList =  template.query("SELECT * FROM \"Users\"", new UserMapper());
+        return userList;
     }
 
     @Override
@@ -48,7 +62,7 @@ public class UserPostgresDAO implements UserDAO{
         User toReturn = null;
         try
         {
-            toReturn= template.queryForObject("SELECT * FROM \"Users\" WHERE \"userName\"= ? ", new UserMapper());
+            toReturn= template.queryForObject("SELECT * FROM \"Users\" WHERE \"userName\"= ? ", new UserMapper(),userName);
         }
         catch (EmptyResultDataAccessException e)
         {
@@ -66,7 +80,7 @@ public class UserPostgresDAO implements UserDAO{
         User toReturn = null;
         try
         {
-            toReturn= template.queryForObject("SELECT * FROM \"Users\" WHERE \"userID\"= ? ", new UserMapper());
+            toReturn= template.queryForObject("SELECT * FROM \"Users\" WHERE \"userID\"= ? ", new UserMapper(),userID);
         }
         catch (EmptyResultDataAccessException e)
         {

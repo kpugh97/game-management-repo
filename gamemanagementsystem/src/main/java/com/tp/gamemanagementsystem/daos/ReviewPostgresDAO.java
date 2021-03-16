@@ -107,7 +107,7 @@ public class ReviewPostgresDAO implements ReviewDAO {
         }
         List<Review> allReviews = null;
         try {
-            allReviews = template.query("SELECT gs.\"gameID\", \"reviewID\", \"title\",\"category\",\"reviewTitle\",\"reviewText\",\"rating\" FROM \"Games\" as gs\n"+
+            allReviews = template.query("SELECT gs.\"gameID\", \"reviewID\", \"title\",\"category\",\"reviewTitle\",\"reviewText\",\"rating\",\"userID\" FROM \"Games\" as gs\n"+
                     "INNER JOIN \"Reviews\" as rs ON rs.\"gameID\"=gs.\"gameID\"\n"+
                     "WHERE gs.\"gameID\" = ?",new ReviewMapper(),gameID);
         }
@@ -126,7 +126,7 @@ public class ReviewPostgresDAO implements ReviewDAO {
         }
         List<Review> allReviews = null;
         try {
-            allReviews = template.query("SELECT gs.\"gameID\", \"reviewID\",\"title\",\"category\",\"reviewTitle\",\"reviewText\",\"rating\", \"gameTitle\" FROM \"Games\" as gs\n"+
+            allReviews = template.query("SELECT gs.\"gameID\", \"reviewID\",\"title\",\"category\",\"reviewTitle\",\"reviewText\",\"rating\", \"gameTitle\", \"userID\" FROM \"Games\" as gs\n"+
                     "INNER JOIN \"Reviews\" as rs ON rs.\"gameID\"=gs.\"gameID\"\n"+
                     "WHERE gs.\"title\" = ?",new ReviewMapper(),title);
         }

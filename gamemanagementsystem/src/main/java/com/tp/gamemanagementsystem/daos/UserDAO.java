@@ -9,9 +9,11 @@ import com.tp.gamemanagementsystem.models.UserList;
 import java.util.List;
 
 public interface UserDAO {
+    List<User> getAllUsers();
     User createUser(String userName) throws InvalidUsernameException;
     User getUserByName(String userName) throws InvalidUsernameException;
     User getUserByID(Integer userID) throws InvalidIDException, NullIDException;
     public UserList getUserList(String userName) throws InvalidUsernameException;
     void deleteUser(Integer userID) throws NullIDException;
+
 }
