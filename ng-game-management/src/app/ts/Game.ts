@@ -7,7 +7,4 @@ export interface Game
     platforms?: number[];
     imgSrc?:string;
     desc?: string;
-    status?:string;
-    statusID?:number;
-
 }
