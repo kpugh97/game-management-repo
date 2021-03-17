@@ -25,3 +25,9 @@ input{
 }
 
 
+ul ng-template  li
+{
+    display: inline;
+}
+
+

@@ -20,14 +20,23 @@ export class AppComponent {
 
 
   constructor(private loginService: LoginServiceService) {
-    // this.currUser = this.loginService.getCurrUser();
    }
 
   ngOnInit(): void {
-  this.currUser = {userID: 1, userName: "kpugh"};
+    
+    this.currUser={userName:null}
+
   }
 
-
+  // getUser()
+  // {
+  //   if(this.loginService.getCurrUser())
+  //   {
+  //     this.currUser=this.loginService.getCurrUser();
+  //     // console.log(this.);
+      
+  //   }
+  // }
 }
 
 
