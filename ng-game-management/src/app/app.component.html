@@ -1,6 +1,5 @@
- <div  *ngIf="currUser.userName!='null'; then loggedIn; else loggedOut"></div>
+ <div  *ngIf="currUser.userName!=''; then loggedIn; else loggedOut"></div>
  <div  *ngIf="currUser.userName=='admin'; then isAdmin; else notAdmin"></div>
-
 
 <ng-template #loggedIn>
     <nav class="loginNav">
@@ -16,15 +15,16 @@
                     </li>
             </ul>
         </div>
-        </nav>
+    </nav>
 </ng-template>
 
 <ng-template #loggedOut>
     <nav class="loginNav">
         <div>
-            <ul>
+            <ul ngbNav #nav="ngbNav">
                 <li ngbNavItem>
-                    <a ngbNavLink class="nav-link" [routerLink]="['/login']" routerLinkActive> Login</a>
+                    <app-user-login (loginEvent)="update($event)">
+                    </app-user-login>                   
                 </li>
             </ul>
         </div>

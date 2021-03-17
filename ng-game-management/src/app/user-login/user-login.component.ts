@@ -13,6 +13,7 @@ export class UserLoginComponent implements OnInit {
 
   @Input() username: string;
   @Input() user: User;
+  @Output() loginEvent: EventEmitter<User> = new EventEmitter<User>();
 
 
 
@@ -24,9 +25,19 @@ export class UserLoginComponent implements OnInit {
 
   login() 
   {
-    this.service.getUserByName(this.username).subscribe(returnedUser=>{this.user = returnedUser, this.loginService.login(this.user) ,console.log("You are "+this.user.userName);})
-    // this.loginService.login(this.user)
+    this.service.getUserByName(this.username).subscribe(returnedUser=>
+      {this.user = returnedUser, this.loginService.login(this.user) ,
+        this.userLoggedIn(),
+        this.router.navigate(["/home"]),
+        console.log("You are "+this.user.userName);})
+        
+  }
 
+  userLoggedIn() : void
+  {
+    this.loginEvent.emit(
+      this.user
+    )
   }
 
 

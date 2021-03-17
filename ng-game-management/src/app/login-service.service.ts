@@ -15,7 +15,7 @@ export class LoginServiceService {
   httpOptions = {headers: new HttpHeaders({"Content-Type": "application/json"})}
 
 
-  loggedUser: User;
+  loggedUser: User = {userName:""};
    
   constructor(private http: HttpClient, private service: GameManagerService) { }
 
@@ -28,7 +28,7 @@ export class LoginServiceService {
 
   logout():void
   {
-    this.loggedUser = null;
+    this.loggedUser.userName = "";
   }
 
   getCurrUser():User

@@ -1,7 +1,9 @@
 .loginNav
 {
+    height: 35px;
     float:right;
 }
+
 
 h1{
     margin: 10px;
@@ -22,12 +24,6 @@ input{
     float: right;
     margin-right: 30px ;
     margin-top: 10px ;
-}
-
-
-ul ng-template  li
-{
-    display: inline;
 }
 
 

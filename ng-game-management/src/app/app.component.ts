@@ -15,28 +15,28 @@ import { User } from './ts/User';
 })
 export class AppComponent {
   title = 'ng-game-management';
-  // @Input()currUser:User;
+
   currUser:User;
 
 
   constructor(private loginService: LoginServiceService) {
+    this.currUser = {userName:""};
+    // this.currUser = {userName:""};
+    // this.currUser = {userName:"kpugh3"};
    }
 
   ngOnInit(): void {
-    
-    this.currUser={userName:null}
-
+    if(this.loginService.getCurrUser().userName != "")
+    {
+      this.currUser = this.loginService.getCurrUser();
+    }
   }
 
-  // getUser()
-  // {
-  //   if(this.loginService.getCurrUser())
-  //   {
-  //     this.currUser=this.loginService.getCurrUser();
-  //     // console.log(this.);
-      
-  //   }
-  // }
+  update(user:User)
+  {
+    this.ngOnInit();
+  }
+
 }
 
 

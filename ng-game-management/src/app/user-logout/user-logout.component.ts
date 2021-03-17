@@ -10,17 +10,14 @@ import { User } from '../ts/User';
   styleUrls: ['./user-logout.component.css']
 })
 export class UserLogoutComponent implements OnInit {
-  user:User;
 
   constructor(private service: GameManagerService, private loginService: LoginServiceService, private router: Router) { }
 
   ngOnInit(): void {
-//     this.user=this.loginService.loggedUser;
-//     this.user.userID=null;
-//     this.user.userName=null;
-//     setTimeout(() => {
-//     this.router.navigate(["home"]);
-// }, 5000);  
+    this.loginService.logout();
+    setTimeout(() => {
+    this.router.navigate(["home"]);
+}, 3000);  
   }
 
 }

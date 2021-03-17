@@ -21,6 +21,7 @@ export class GameManagerService {
 
   baseURL: string= "http://localhost:8080/api";
   httpOptions = {headers: new HttpHeaders({"Content-Type": "application/json"})}
+ 
 
   constructor(private http: HttpClient) { }
 
