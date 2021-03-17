@@ -5,10 +5,7 @@ import com.tp.gamemanagementsystem.daos.PlatformDAO;
 import com.tp.gamemanagementsystem.daos.ReviewDAO;
 import com.tp.gamemanagementsystem.daos.UserDAO;
 import com.tp.gamemanagementsystem.exceptions.*;
-import com.tp.gamemanagementsystem.models.Game;
-import com.tp.gamemanagementsystem.models.Platform;
-import com.tp.gamemanagementsystem.models.Review;
-import com.tp.gamemanagementsystem.models.User;
+import com.tp.gamemanagementsystem.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -325,6 +322,14 @@ public class GameManagementService {
 
     public List<User> getAllUsers() {
         return userdao.getAllUsers();
+    }
+
+    public List<UserList> getUserList(String userName) throws InvalidUsernameException {
+        if(userName.trim().length()<=0 || userName.length()<3)
+        {
+            throw new InvalidUsernameException("Invalid username length!");
+        }
+       return userdao.getUserList(userName);
     }
 }
 

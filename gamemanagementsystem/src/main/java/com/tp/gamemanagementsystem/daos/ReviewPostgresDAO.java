@@ -143,6 +143,7 @@ public class ReviewPostgresDAO implements ReviewDAO {
         {
             throw new NullIDException("Cannot delete a review with a null ID!");
         }
+        template.update("DELETE FROM \"UserReviews\" WHERE \"reviewID\"= ?",reviewID);
         template.update("DELETE FROM \"Reviews\" WHERE \"reviewID\"= ?",reviewID);
     }
 

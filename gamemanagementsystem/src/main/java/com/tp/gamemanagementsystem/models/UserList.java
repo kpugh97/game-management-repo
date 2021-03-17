@@ -6,7 +6,6 @@ public class UserList {
     String userName;
     Integer gameID;
     String gameName;
-    Integer rating;
     Integer statusID;
 
     public Integer getUserID() {
@@ -39,14 +38,6 @@ public class UserList {
 
     public void setGameName(String gameName) {
         this.gameName = gameName;
-    }
-
-    public Integer getRating() {
-        return rating;
-    }
-
-    public void setRating(Integer rating) {
-        this.rating = rating;
     }
 
     public Integer getStatusID() {

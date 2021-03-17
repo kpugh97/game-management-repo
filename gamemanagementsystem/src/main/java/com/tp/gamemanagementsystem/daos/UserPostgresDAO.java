@@ -2,6 +2,7 @@ package com.tp.gamemanagementsystem.daos;
 
 import com.tp.gamemanagementsystem.daos.mappers.GameMapper;
 import com.tp.gamemanagementsystem.daos.mappers.IntegerMapper;
+import com.tp.gamemanagementsystem.daos.mappers.UserListMapper;
 import com.tp.gamemanagementsystem.daos.mappers.UserMapper;
 import com.tp.gamemanagementsystem.exceptions.InvalidIDException;
 import com.tp.gamemanagementsystem.exceptions.InvalidUsernameException;
@@ -90,17 +91,28 @@ public class UserPostgresDAO implements UserDAO{
     }
 
     @Override
-    public UserList getUserList(String userName) throws InvalidUsernameException {
+    public List<UserList> getUserList(String userName) throws InvalidUsernameException {
         if(userName == null)
         {
             throw new InvalidUsernameException("Cannot retrieve a user with a null username!");
         }
-//        UserList list = null;
-//        try
-//        {
-//            template.query();
-//        }
-        return null;
+        List<UserList> list = null;
+        try
+        {
+            list = template.query("SELECT \"title\", us.\"userID\" ,\"userName\", gs.\"gameID\", ul.\"statusID\" FROM \"Users\" as us\n" +
+                    "INNER JOIN \"UserLists\" as ul\n" +
+                    "ON us.\"userID\" = ul.\"userID\"\n" +
+                    "INNER JOIN \"Games\" as gs \n" +
+                    "ON gs.\"gameID\" = ul.\"gameID\"\n" +
+                    "INNER JOIN \"Status\" as st \n" +
+                    "ON st.\"statusID\" = ul.\"statusID\"\n" +
+                    "WHERE \"userName\" = ?", new UserListMapper(),userName);
+        }
+        catch (EmptyResultDataAccessException e)
+        {
+            throw new InvalidUsernameException("Cannot find a user list for a user with name "+userName+"!");
+        }
+        return list;
     }
 
 
@@ -111,10 +123,9 @@ public class UserPostgresDAO implements UserDAO{
             throw new NullIDException("Cannot delete a user with a null user ID!");
         }
         template.update("DELETE FROM \"UserLists\" WHERE \"userID\" =  ?",userID);
-        template.update("DELETE FROM \"Users\" WHERE \"userID\" =  ?",userID);
+        template.update("DELETE FROM \"UserReviews\" WHERE \"userID\"= ?",userID);
         template.update("DELETE FROM \"Reviews\" WHERE \"userID\"= ?",userID);
-
-
+        template.update("DELETE FROM \"Users\" WHERE \"userID\" =  ?",userID);
 
     }
 }

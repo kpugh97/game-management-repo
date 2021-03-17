@@ -5,6 +5,7 @@ import com.tp.gamemanagementsystem.exceptions.InvalidIDException;
 import com.tp.gamemanagementsystem.exceptions.InvalidUsernameException;
 import com.tp.gamemanagementsystem.exceptions.NullIDException;
 import com.tp.gamemanagementsystem.models.User;
+import com.tp.gamemanagementsystem.models.UserList;
 import com.tp.gamemanagementsystem.services.GameManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -73,6 +74,23 @@ public class UserController {
         }
         return ResponseEntity.ok(user);
     }
+
+
+    @GetMapping("/user/list/{userName}")
+    public ResponseEntity getUserList(@PathVariable String userName)
+    {
+        List<UserList> list = null;
+        try
+        {
+            list = service.getUserList(userName);
+        }
+        catch (InvalidUsernameException e)
+        {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+        return ResponseEntity.ok(list);
+    }
+
 
     @DeleteMapping("/user/delete/{userID}")
     public ResponseEntity deleteUser(@PathVariable Integer userID)

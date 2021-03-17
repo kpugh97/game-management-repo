@@ -15,7 +15,6 @@ public class UserListMapper implements RowMapper<UserList> {
         list.setUserName(resultSet.getString("userName"));
         list.setGameID(resultSet.getInt("gameID"));
         list.setGameName(resultSet.getString("title"));
-        list.setRating(resultSet.getInt("rating"));
         list.setStatusID(resultSet.getInt("statusID"));
         return list;
     }
