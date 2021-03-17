@@ -20,8 +20,6 @@ export class GamesByPlatnameComponent implements OnInit {
 
   ngOnInit(): void {
     this.platName = this.route.snapshot.params.name;
-    // this.platName = "PC"
-    // console.log(this.route.snapshot.params.name);
     this.service.getGamesByPlatName(this.platName).subscribe(list=>this.games=list)
   }
 

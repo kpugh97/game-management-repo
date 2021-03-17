@@ -9,6 +9,8 @@ import { StringResponse } from './ts/StringResponse'
 import { Review } from './ts/Review';
 import { EditReview } from './ts/EditReview';
 import { EditStatus } from './ts/EditStatus';
+import { User } from './ts/User';
+import { UserList } from './ts/UserList';
 
 
 
@@ -345,6 +347,46 @@ getReviewsByGameTitle(title:string) : Observable<Review[]>
         return of(null);
       })
     );
+  }
+
+
+  //USER RELATED REQUESTS
+
+  getUserByName(username:string) : Observable<User>
+  {
+    return this.http.get<User>(this.baseURL + "/user/name/" + username)
+      .pipe(
+        tap(x => console.log(x)),
+        catchError(err => {
+          console.log(err);
+          return of(null);
+        })
+      );
+  }
+
+  getUserByID(userID:number) : Observable<User>
+  {
+    return this.http.get<User>(this.baseURL + "/user/id/" + userID)
+      .pipe(
+        tap(x => console.log(x)),
+        catchError(err => {
+          console.log(err);
+          return of(null);
+        })
+      );
+  }
+
+  getUserList(userName:string) : Observable<UserList[]>
+  {
+    return this.http.get<UserList[]>(this.baseURL + "/user/list/" + userName)
+      .pipe(
+        tap(x => console.log(x)),
+        catchError(err => {
+          console.log(err);
+          let empty: UserList[] = [];
+          return of(empty);
+        })
+      );
   }
 
 

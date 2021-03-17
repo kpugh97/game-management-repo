@@ -4,7 +4,6 @@ export interface UserList
     userName:string;
     gameID:number;
     gameName:string;
-    rating:number;
     statusID:number;
 
 }

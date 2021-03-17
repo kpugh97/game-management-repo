@@ -28,53 +28,6 @@
         <ng-template #noDesc>
             Description:  N/a
          </ng-template> <br>
-
-         <ng-container
-         *ngIf="gameReturned.statusID!=0; then showStatus; else noStatus">
-        </ng-container>
-
-        <ng-template #showStatus>
-            <ng-container
-         *ngIf="gameReturned.statusID==1; then showStatusPlaying;">
-        </ng-container>
-        <ng-container
-         *ngIf="gameReturned.statusID==2; then showStatusPlayed;">
-        </ng-container>
-        <ng-container
-         *ngIf="gameReturned.statusID==3; then showStatusPlan;">
-        </ng-container>
-        <ng-container
-         *ngIf="gameReturned.statusID==4; then showStatusDropped;">
-        </ng-container>
-        
-        <ng-template #showStatusPlaying>
-            Current Status: Playing
-        </ng-template>
-        <ng-template #showStatusPlayed>
-            Current Status: Played
-        </ng-template>
-        <ng-template #showStatusPlan>
-            Current Status: Plan to Play
-        </ng-template>
-        <ng-template #showStatusDropped>
-            Current Status: Dropped
-        </ng-template>
-        </ng-template>
-
-
-        <ng-template #noStatus>
-            Current Status: :  N/a
-         </ng-template> <br>
-
-
-
-         Status: <select id="statusSelect" [(ngModel)]="statusID" (ngModelChange)="selectChangeHandler($event)">
-             <option value="" disabled selected>Select</option>
-             <option text="Playing" [value]=1>Playing</option>
-             <option text="Played" [value]=2>Played</option>
-             <option text="Plan to Play" [value]=3>Plan to Play</option>
-             <option text="Dropped" [value]=4>Dropped</option>
-         </select>
 </p>
 </div>
 

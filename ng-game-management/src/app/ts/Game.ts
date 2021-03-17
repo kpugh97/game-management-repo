@@ -7,4 +7,5 @@ export interface Game
     platforms?: number[];
     imgSrc?:string;
     desc?: string;
+
 }

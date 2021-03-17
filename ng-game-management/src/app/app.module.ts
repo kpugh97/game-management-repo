@@ -27,6 +27,10 @@ import { GetGameEditComponent } from './get-game-edit/get-game-edit.component';
 import { GamesByPlatnameComponent } from './games-by-platname/games-by-platname.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { GameSearchComponent } from './game-search/game-search.component';
+import { UserComponent } from './user/user.component';
+import { UserLogoutComponent } from './user-logout/user-logout.component';
+import { UserLoginComponent } from './user-login/user-login.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 
 @NgModule({
@@ -51,7 +55,11 @@ import { GameSearchComponent } from './game-search/game-search.component';
     GetReviewComponent,
     GetGameEditComponent,
     GamesByPlatnameComponent,
-    GameSearchComponent
+    GameSearchComponent,
+    UserComponent,
+    UserLogoutComponent,
+    UserLoginComponent,
+    UserListComponent
 
 
   ],

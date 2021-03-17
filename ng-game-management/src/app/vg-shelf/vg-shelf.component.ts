@@ -16,8 +16,6 @@ export class VgShelfComponent implements OnInit {
 
   games:Game[];
   p: number = 1;
-  copyList:Game[];
-
 
 
   constructor(private service: GameManagerService, private router: Router, private route: ActivatedRoute) {
@@ -29,7 +27,6 @@ export class VgShelfComponent implements OnInit {
     this.service.getAllGames().subscribe(list => {
       this.games = list
     });
-    // this.copyList = this.games;
   }
 
   resetFilter()

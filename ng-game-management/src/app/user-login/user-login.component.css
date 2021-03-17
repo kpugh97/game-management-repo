@@ -1,0 +1,20 @@
+.container
+{
+    margin-top: 20px;
+}
+
+.form-control
+{
+    width: 320px;
+    display: inline-block;
+}
+
+
+button
+{
+   display: inline-block; 
+}
+
+span{
+    margin-right: 5px;
+}

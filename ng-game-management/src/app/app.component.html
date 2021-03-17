@@ -1,3 +1,50 @@
+<!-- <div  *ngIf="currUser!=null; then loggedIn; else loggedOut"></div>
+
+<ng-template #loggedIn>
+<span>Welcome {{currUser}}</span>
+<nav class="loginNav">
+    <div>
+        <ul ngbNav #nav="ngbNav">
+            <li ngbNavItem>
+                <a ngbNavLink class="nav-link" [routerLink]="['/userlist']" routerLinkActive> Logout</a>
+            </li>
+            <li ngbNavItem>
+                <a ngbNavLink class="nav-link" [routerLink]="['/logout']" routerLinkActive> Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+</ng-template>
+
+<ng-template #loggedOut>
+    <nav class="loginNav">
+        <div>
+            <ul ngbNav #nav="ngbNav">
+                <li ngbNavItem>
+                    <a ngbNavLink class="nav-link" [routerLink]="['/login']" routerLinkActive> Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</ng-template> -->
+
+<nav class="loginNav">
+    <div>
+        <span> Welcome: {{currUser.userName}}! </span>
+        <ul ngbNav #nav="ngbNav">
+            <li ngbNavItem>
+                <a ngbNavLink class="nav-link" [routerLink]="['/login']" routerLinkActive> Login</a>
+            </li>
+            <li ngbNavItem>
+                <a ngbNavLink class="nav-link" [routerLink]="['/logout']" routerLinkActive> Logout</a>
+            </li>
+            <li ngbNavItem>
+                <a ngbNavLink class="nav-link" [routerLink]="['/userlist', currUser.userName]" routerLinkActive> My List</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
 <nav class="">
 <h1>Video Game List Tracker</h1>
     <div class="">
@@ -9,7 +56,7 @@
             <a ngbNavLink class="nav-link" [routerLink]="['/recentrev']" routerLinkActive>All Reviews</a>
             </li>
             <li ngbNavItem>
-                <a ngbNavLink çclass="nav-link" [routerLink]="['/platforms']" routerLinkActive>Games by Platform</a>
+                <a ngbNavLink class="nav-link" [routerLink]="['/platforms']" routerLinkActive>Games by Platform</a>
             </li> 
             <li ngbNavItem>
                 <a ngbNavLink class="nav-link" [routerLink]="['/newgame']" routerLinkActive>Add Game</a>

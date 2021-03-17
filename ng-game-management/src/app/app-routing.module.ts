@@ -16,7 +16,9 @@ import { GetReviewComponent } from './get-review/get-review.component';
 import { ReviewByNameComponent } from './review-by-name/review-by-name.component';
 import { GetGameEditComponent } from './get-game-edit/get-game-edit.component';
 import { GamesByPlatnameComponent } from './games-by-platname/games-by-platname.component';
-
+import { UserComponent } from './user/user.component';
+import { UserLogoutComponent } from './user-logout/user-logout.component';
+import { UserLoginComponent } from './user-login/user-login.component';
 
 const routes: Routes = [
   {path: "home", component: VgShelfComponent},
@@ -32,6 +34,9 @@ const routes: Routes = [
   {path: "addreview/:gameID/:title", component: AddReviewComponent},
   {path: "editreview/:reviewID", component: GetReviewComponent},
   {path: "deletereview/:reviewID", component: DeleteReviewComponent},
+  {path: "userlist/:userName", component: UserComponent},
+  {path: "login", component: UserLoginComponent},
+  {path: "logout", component: UserLogoutComponent},
   {path: "**", component: PageNotFoundComponent}
 ];
 

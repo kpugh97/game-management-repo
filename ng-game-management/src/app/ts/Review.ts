@@ -5,4 +5,5 @@ export interface Review{
     rating?:number;
     gameTitle:string;
     gameID: number;
+    userID?:number;
 }

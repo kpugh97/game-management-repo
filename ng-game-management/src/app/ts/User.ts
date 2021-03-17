@@ -1,6 +1,9 @@
-export interface UserList
+import { UserList } from "./UserList";
+
+export interface User
 {
-    userID:number;
+    userID?:number;
     userName:string;
+    userList?: UserList[];
     
 }
