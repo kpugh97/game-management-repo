@@ -68,6 +68,8 @@
                         </ng-template>
                     </p> 
             <button id="reviewBtn" type="button" class="btn btn-outline-primary btn-sm" [routerLink]="['/editreview', review.reviewID]">Edit this Review</button>
+            <app-delete-review [id]="review.reviewID"></app-delete-review>
+
         </div>
     </div>
 </ng-template>
