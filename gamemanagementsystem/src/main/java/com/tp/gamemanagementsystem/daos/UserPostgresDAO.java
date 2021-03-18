@@ -160,7 +160,7 @@ public class UserPostgresDAO implements UserDAO{
         }
         try {
             template.update("DELETE FROM \"UserLists\" \n" +
-                    "WHERE \"userID\"= ? +\n"+
+                    "WHERE \"userID\"= ? \n"+
                     "AND \"gameID\"= ? ", userID, gameID);
         }
         catch (DataIntegrityViolationException | EmptyResultDataAccessException e)

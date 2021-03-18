@@ -137,6 +137,20 @@ public class UserController {
         return ResponseEntity.ok("List successfully edited!");
     }
 
+    @DeleteMapping("/user/deletegame/{userID}/{gameID}")
+    public ResponseEntity deleteGameFromUserList(@PathVariable Integer userID, @PathVariable Integer gameID)
+    {
+        try
+        {
+            service.deleteGameFromUserList(userID, gameID);
+        }
+        catch (NullIDException | InvalidIDException e)
+        {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+        return ResponseEntity.ok("List successfully edited!");
+    }
+
 
     @GetMapping("/user/reviews/{username}")
     public ResponseEntity getUserReviews(@PathVariable String username)

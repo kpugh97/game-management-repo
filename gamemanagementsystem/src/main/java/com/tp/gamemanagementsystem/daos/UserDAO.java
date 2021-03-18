@@ -19,5 +19,6 @@ public interface UserDAO {
     void addGameToUserList(Integer userID, Integer gameID) throws InvalidIDException, NullIDException;
     void editUserGameInfo(Integer userID,Integer gameID, Integer statusID) throws InvalidIDException, NullIDException;
     List<Review> getUserReviews(String userName) throws InvalidUsernameException;
+    void deleteGameFromUserList(Integer userID, Integer gameID) throws InvalidIDException, NullIDException;
 
 }

@@ -358,6 +358,14 @@ public class GameManagementService {
         return userdao.getUserReviews(userName);
 
     }
+
+    public void deleteGameFromUserList(Integer userID, Integer gameID) throws NullIDException, InvalidIDException {
+        if(userID < 0 || gameID < 0)
+        {
+            throw new InvalidIDException("Invalid ID input!");
+        }
+        userdao.deleteGameFromUserList(userID, gameID);
+    }
 }
 
 
