@@ -5,6 +5,8 @@ import { Game } from '../ts/Game';
 import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { EditStatus } from '../ts/EditStatus';
+import { User } from '../ts/User';
+import { LoginServiceService } from '../login-service.service';
 
 @Component({
   selector: 'app-get-game',
@@ -17,15 +19,18 @@ export class GetGameComponent implements OnInit {
   @Input()statusID:number;
   toReturn: Observable<Game>;
   toUpdate:EditStatus = {} as EditStatus;
+  currUser: User;
 
-  constructor(private service: GameManagerService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private service: GameManagerService,private loginService: LoginServiceService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params.gameID;
     this.toReturn= this.route.paramMap.pipe(
       switchMap((params: ParamMap)=>
     this.service.getGame(params.get("gameID")))
-    );  
+    );
+    this.currUser = this.loginService.getCurrUser();
+    
   }
 
   selectChangeHandler(event)

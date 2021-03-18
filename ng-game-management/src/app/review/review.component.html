@@ -1,22 +1,81 @@
-<div id="reviewDiv">
-    <div id="reviewContent">
-        <h3>{{review.reviewTitle}} - {{review.gameTitle}} </h3> 
-         <p>{{review.reviewText}} <br><br>
+<div  *ngIf="currUser.userName=='admin'; then adminIn;"></div>
+<div  *ngIf="currUser.userID==review.userID; then userIn;"></div>
+<div  *ngIf="currUser.userID!=review.userID && currUser.userName!='admin'; then userOut;"></div>
 
-            <ng-container
-            *ngIf="review.rating!=null; then showRating; else noRating">
-        </ng-container> 
 
-            <ng-template #showRating>
-           Game Rating: {{review.rating}}/10
-            </ng-template>
-
-            <ng-template #noRating>
-                Game Rating: -/10
-            </ng-template>
-        </p>  
-        <button id="reviewBtn" type="button" class="btn btn-outline-primary btn-sm" [routerLink]="['/editreview', review.reviewID]">Edit this Review</button>
-        <app-delete-review [id]="review.reviewID"></app-delete-review>
+<ng-template #userOut>
+    <div id="reviewDiv">
+        <div id="reviewContent">
+            <h3>{{review.reviewTitle}} - {{review.gameTitle}} </h3> 
+             <p>{{review.reviewText}} <br><br>
+    
+                <ng-container
+                *ngIf="review.rating!=null; then showRating; else noRating">
+            </ng-container> 
+    
+                <ng-template #showRating>
+               Game Rating: {{review.rating}}/10
+                </ng-template>
+    
+                <ng-template #noRating>
+                    Game Rating: -/10
+                </ng-template>
+            </p>       
     </div>
+</div>  
+</ng-template>
+
+
+<ng-template #adminIn>
+    <div id="reviewDiv">
+        <div id="reviewContent">
+            <h3>{{review.reviewTitle}} - {{review.gameTitle}} </h3> 
+                <p>{{review.reviewText}} <br><br>
+    
+                <ng-container
+                *ngIf="review.rating!=null; then showRating; else noRating">
+            </ng-container> 
+    
+                <ng-template #showRating>
+                Game Rating: {{review.rating}}/10
+                </ng-template>
+    
+                <ng-template #noRating>
+                    Game Rating: -/10
+                </ng-template>
+            </p>    
+            
+    <button id="reviewBtn" type="button" class="btn btn-outline-primary btn-sm" [routerLink]="['/editreview', review.reviewID]">Edit this Review</button>
+    <app-delete-review [id]="review.reviewID"></app-delete-review>
+
+
+</div>
     
 </div>
+</ng-template>
+
+        <ng-template #userIn>
+            <div id="reviewDiv">
+                <div id="reviewContent">
+                    <h3>{{review.reviewTitle}} - {{review.gameTitle}} </h3> 
+                     <p>{{review.reviewText}} <br><br>
+            
+                        <ng-container
+                        *ngIf="review.rating!=null; then showRating; else noRating">
+                    </ng-container> 
+            
+                        <ng-template #showRating>
+                       Game Rating: {{review.rating}}/10
+                        </ng-template>
+            
+                        <ng-template #noRating>
+                            Game Rating: -/10
+                        </ng-template>
+                    </p>    
+
+            <button id="reviewBtn" type="button" class="btn btn-outline-primary btn-sm" [routerLink]="['/editreview', review.reviewID]">Edit this Review</button>
+    </div>
+
+</div>
+        </ng-template>
+
