@@ -21,10 +21,12 @@ export class AddGameComponent implements OnInit {
   plats: Platform[];
   genres:string[];
   desc:string;
+  
 
   constructor(private service: GameManagerService, private router: Router, private location: Location) { }
 
   ngOnInit(): void {
+    this.category = "";
     this.service.getAllPlats().subscribe(list=>{this.plats = list});
     this.service.getAllGenres().subscribe(list=>{this.genres=list});
     this.populate();
