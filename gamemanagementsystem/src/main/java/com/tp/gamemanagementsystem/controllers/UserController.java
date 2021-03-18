@@ -4,6 +4,7 @@ package com.tp.gamemanagementsystem.controllers;
 import com.tp.gamemanagementsystem.exceptions.InvalidIDException;
 import com.tp.gamemanagementsystem.exceptions.InvalidUsernameException;
 import com.tp.gamemanagementsystem.exceptions.NullIDException;
+import com.tp.gamemanagementsystem.models.Review;
 import com.tp.gamemanagementsystem.models.User;
 import com.tp.gamemanagementsystem.models.UserList;
 import com.tp.gamemanagementsystem.services.GameManagementService;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import requests.StatusUpdateRequest;
+import requests.UserAddGameRequest;
 
 import java.util.List;
 
@@ -105,6 +108,51 @@ public class UserController {
         }
         return ResponseEntity.ok("User successfully deleted!");
     }
+
+    @PostMapping("/user/addgame")
+    public ResponseEntity addGameToUserList(@RequestBody UserAddGameRequest request)
+    {
+        try
+        {
+            service.addGameToUserList(request.getUserID(), request.getGameID());
+        }
+        catch (NullIDException | InvalidIDException e)
+        {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+        return ResponseEntity.ok("Game successfully added to list!");
+    }
+
+    @PutMapping("/user/editgame")
+    public ResponseEntity editUserGameInfo(@RequestBody StatusUpdateRequest request)
+    {
+        try
+        {
+            service.editUserGameInfo(request.getUserID(), request.getGameID(), request.getStatusID());
+        }
+        catch (NullIDException | InvalidIDException e)
+        {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+        return ResponseEntity.ok("List successfully edited!");
+    }
+
+
+    @GetMapping("/user/reviews/{username}")
+    public ResponseEntity getUserReviews(@PathVariable String username)
+    {
+        List<Review> toReturn = null;
+        try
+        {
+           toReturn = service.getUserReviews(username);
+        }
+        catch (InvalidUsernameException e)
+        {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+        return ResponseEntity.ok(toReturn);
+    }
+
 
 
 

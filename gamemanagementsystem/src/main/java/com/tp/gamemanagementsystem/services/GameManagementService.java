@@ -331,6 +331,33 @@ public class GameManagementService {
         }
        return userdao.getUserList(userName);
     }
+
+    public void addGameToUserList (Integer userID, Integer gameID) throws InvalidIDException, NullIDException
+    {
+        if(userID < 0 || gameID <0)
+        {
+            throw new InvalidIDException("Invalid ID input!");
+        }
+        userdao.addGameToUserList(userID, gameID);
+    }
+
+    public void editUserGameInfo (Integer userID, Integer gameID, Integer statusID) throws InvalidIDException, NullIDException
+    {
+        if(userID < 0 || gameID <0)
+        {
+            throw new InvalidIDException("Invalid ID input!");
+        }
+        userdao.editUserGameInfo(userID, gameID, statusID);
+    }
+
+    public List<Review> getUserReviews(String userName) throws InvalidUsernameException{
+        if(userName.trim().length()<=0 || userName.length()<3)
+        {
+            throw new InvalidUsernameException("Invalid username! Must be 3 or more characters!");
+        }
+        return userdao.getUserReviews(userName);
+
+    }
 }
 
 

@@ -1,17 +1,16 @@
 package com.tp.gamemanagementsystem.daos;
 
-import com.tp.gamemanagementsystem.daos.mappers.GameMapper;
-import com.tp.gamemanagementsystem.daos.mappers.IntegerMapper;
-import com.tp.gamemanagementsystem.daos.mappers.UserListMapper;
-import com.tp.gamemanagementsystem.daos.mappers.UserMapper;
+import com.tp.gamemanagementsystem.daos.mappers.*;
 import com.tp.gamemanagementsystem.exceptions.InvalidIDException;
 import com.tp.gamemanagementsystem.exceptions.InvalidUsernameException;
 import com.tp.gamemanagementsystem.exceptions.NullIDException;
 import com.tp.gamemanagementsystem.models.Game;
+import com.tp.gamemanagementsystem.models.Review;
 import com.tp.gamemanagementsystem.models.User;
 import com.tp.gamemanagementsystem.models.UserList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -127,5 +126,69 @@ public class UserPostgresDAO implements UserDAO{
         template.update("DELETE FROM \"Reviews\" WHERE \"userID\"= ?",userID);
         template.update("DELETE FROM \"Users\" WHERE \"userID\" =  ?",userID);
 
+    }
+
+    @Override
+    public void addGameToUserList(Integer userID, Integer gameID) throws InvalidIDException, NullIDException {
+        if(userID == null)
+        {
+            throw new NullIDException("Cannot edit a user with a null ID");
+        }
+        if(gameID == null)
+        {
+            throw new NullIDException("Cannot add a game with a null ID");
+        }
+        try {
+            template.update("INSERT INTO \"UserLists\" (\"userID\",\"gameID\")\n" +
+                    "VALUES (?,?)", userID, gameID);
+        }
+        catch (DataIntegrityViolationException | EmptyResultDataAccessException e)
+        {
+            throw new InvalidIDException("ERROR! Cannot make changes to this list! Invalid user or game ID!");
+        }
+    }
+
+    @Override
+    public void editUserGameInfo(Integer userID, Integer gameID, Integer statusID) throws InvalidIDException, NullIDException {
+        if(userID == null)
+        {
+            throw new NullIDException("Cannot edit a user with a null ID");
+        }
+        if(gameID == null)
+        {
+            throw new NullIDException("Cannot add a game with a null ID");
+        }
+        try {
+            template.update("UPDATE \"UserLists\" SET  \"statusID\"= ?\n" +
+                    "WHERE \"userID\"= ? \n" +
+                    "AND \"gameID\"= ? ", statusID, userID, gameID);
+        }
+        catch (DataIntegrityViolationException e)
+        {
+            throw new InvalidIDException("ERROR! Cannot make changes to this list! Invalid user, game, or status ID!");
+        }
+    }
+
+    public List<Review> getUserReviews(String userName) throws InvalidUsernameException
+    {
+        if(userName == null)
+        {
+            throw new InvalidUsernameException("Cannot retrieve reviews for a user with a null username!");
+        }
+        List<Review> list = null;
+        try {
+            list = template.query("SELECT  \"userName\", \"reviewTitle\", \"reviewText\", rs.\"reviewID\", \"rating\", \"gameTitle\", \"gameID\", us.\"userID\" FROM \"Users\" as us\n" +
+                    "INNER JOIN \"UserReviews\" as ur\n" +
+                    "ON us.\"userID\" = ur.\"userID\"\n" +
+                    "INNER JOIN \"Reviews\" as rs\n" +
+                    "ON rs.\"reviewID\" = ur.\"reviewID\"\n" +
+                    "AND rs.\"userID\" = ur.\"userID\"\n" +
+                    "WHERE \"userName\" = ? ",new ReviewMapper(),userName);
+        }
+        catch (DataIntegrityViolationException | EmptyResultDataAccessException e)
+        {
+            throw new InvalidUsernameException("Cannot retrieve reviews for a user with username "+userName+"!");
+        }
+        return list;
     }
 }

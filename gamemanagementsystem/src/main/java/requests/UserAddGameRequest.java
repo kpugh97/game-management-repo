@@ -1,9 +1,9 @@
 package requests;
 
-public class StatusUpdateRequest {
+public class UserAddGameRequest {
     Integer userID;
     Integer gameID;
-    Integer statusID;
+
 
     public Integer getUserID() {
         return userID;
@@ -21,11 +21,4 @@ public class StatusUpdateRequest {
         this.gameID = gameID;
     }
 
-    public Integer getStatusID() {
-        return statusID;
-    }
-
-    public void setStatusID(Integer statusID) {
-        this.statusID = statusID;
-    }
 }
