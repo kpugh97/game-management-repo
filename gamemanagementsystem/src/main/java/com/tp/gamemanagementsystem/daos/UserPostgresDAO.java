@@ -149,6 +149,27 @@ public class UserPostgresDAO implements UserDAO{
     }
 
     @Override
+    public void deleteGameFromUserList(Integer userID, Integer gameID) throws InvalidIDException, NullIDException {
+        if(userID == null)
+        {
+            throw new NullIDException("Cannot edit a user with a null ID");
+        }
+        if(gameID == null)
+        {
+            throw new NullIDException("Cannot add a game with a null ID");
+        }
+        try {
+            template.update("DELETE FROM \"UserLists\" \n" +
+                    "WHERE \"userID\"= ? +\n"+
+                    "AND \"gameID\"= ? ", userID, gameID);
+        }
+        catch (DataIntegrityViolationException | EmptyResultDataAccessException e)
+        {
+            throw new InvalidIDException("ERROR! Cannot make changes to this list! Invalid user or game ID!");
+        }
+    }
+
+    @Override
     public void editUserGameInfo(Integer userID, Integer gameID, Integer statusID) throws InvalidIDException, NullIDException {
         if(userID == null)
         {
