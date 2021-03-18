@@ -28,7 +28,8 @@ export class UserAddGameComponent implements OnInit {
   addGameToList()
 
   {
-    this.service.addToUserList(this.toAdd).subscribe()
+    this.service.addToUserList(this.toAdd).subscribe();
+    this.router.navigate(["/userlist/"+this.currUser.userName]);
   }
 
 }
