@@ -17,7 +17,7 @@ export class UserLogoutComponent implements OnInit {
     this.loginService.logout();
     setTimeout(() => {
     this.router.navigate(["home"]);
-}, 3000);  
+}, 1000);  
   }
 
 }

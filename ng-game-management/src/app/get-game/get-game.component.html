@@ -31,7 +31,8 @@
 </p>
 </div>
 
-<div  *ngIf="currUser.userName=='admin'; then adminIn; else adminOut"></div>
+<div  *ngIf="currUser.userName=='admin'; then adminIn;"></div>
+<div  *ngIf="currUser.userName!=''; then adminOut;"></div>
 
 <ng-template #adminOut>
     <div id="goMakeReview" *ngIf="toReturn | async as gameReturned">

@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { EditStatus } from '../ts/EditStatus';
 import { User } from '../ts/User';
 import { LoginServiceService } from '../login-service.service';
+import { UserList } from '../ts/UserList';
 
 @Component({
   selector: 'app-get-game',
@@ -20,6 +21,7 @@ export class GetGameComponent implements OnInit {
   toReturn: Observable<Game>;
   toUpdate:EditStatus = {} as EditStatus;
   currUser: User;
+  currUserList: UserList[];
 
   constructor(private service: GameManagerService,private loginService: LoginServiceService, private router: Router, private route: ActivatedRoute) { }
 
