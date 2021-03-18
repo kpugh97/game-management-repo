@@ -32,12 +32,15 @@
 </div>
 
 <div  *ngIf="currUser.userName=='admin'; then adminIn;"></div>
-<div  *ngIf="currUser.userName!=''; then adminOut;"></div>
+<div  *ngIf="currUser.userName!='' && currUser.userName!='admin'; then adminOut;"></div>
 
 <ng-template #adminOut>
     <div id="goMakeReview" *ngIf="toReturn | async as gameReturned">
         <button type="button" class="btn btn-outline-info" [routerLink]="['/addreview', gameReturned.gameID, gameReturned.title]">Review This Game</button><br>
     </div>
+    <!-- <div id="addGameToList" *ngIf="toReturn | async as gameReturned">
+        <app-user-add-game [gameID]="gameReturned.gameID"></app-user-add-game>
+    </div> -->
 </ng-template>
 
 
@@ -48,6 +51,10 @@
 
     <div id="goToEditGame" *ngIf="toReturn | async as gameReturned">
         <button  type="button" class="btn btn-outline-primary" [routerLink]="['/edit', gameReturned.gameID]" >Edit This Game</button><br>
+    </div>
+
+    <div id="addToList" *ngIf="toReturn | async as gameReturned">
+        <app-user-add-game [gameID]="gameReturned.gameID"></app-user-add-game>
     </div>
     
     <div id="goDeleteGame" *ngIf="toReturn | async as gameReturned">

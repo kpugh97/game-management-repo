@@ -31,6 +31,10 @@ import { UserComponent } from './user/user.component';
 import { UserLogoutComponent } from './user-logout/user-logout.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { UserListComponent } from './user-list/user-list.component';
+import { UserAddGameComponent } from './user-add-game/user-add-game.component';
+import { UserRemoveGameComponent } from './user-remove-game/user-remove-game.component';
+import { CreateUserComponent } from './create-user/create-user.component';
+import { DeleteUserComponent } from './delete-user/delete-user.component';
 
 
 @NgModule({
@@ -59,7 +63,11 @@ import { UserListComponent } from './user-list/user-list.component';
     UserComponent,
     UserLogoutComponent,
     UserLoginComponent,
-    UserListComponent
+    UserListComponent,
+    UserAddGameComponent,
+    UserRemoveGameComponent,
+    CreateUserComponent,
+    DeleteUserComponent
 
 
   ],

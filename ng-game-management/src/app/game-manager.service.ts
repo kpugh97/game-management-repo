@@ -11,6 +11,7 @@ import { EditReview } from './ts/EditReview';
 import { EditStatus } from './ts/EditStatus';
 import { User } from './ts/User';
 import { UserList } from './ts/UserList';
+import { AddUserGame } from './ts/AddUserGame';
 
 
 
@@ -353,6 +354,18 @@ getReviewsByGameTitle(title:string) : Observable<Review[]>
 
   //USER RELATED REQUESTS
 
+  createUser(username:string) : Observable<User>
+  {
+    return this.http.post<User>(this.baseURL + "/newuser",username,this.httpOptions)
+      .pipe(
+        tap(x => console.log(x)),
+        catchError(err => {
+          console.log(err);
+          return of(null);
+        })
+      );
+  }
+
   getUserByName(username:string) : Observable<User>
   {
     return this.http.get<User>(this.baseURL + "/user/name/" + username)
@@ -389,7 +402,33 @@ getReviewsByGameTitle(title:string) : Observable<Review[]>
         })
       );
   }
+  
 
+  addToUserList(toAdd:AddUserGame) : Observable<UserList[]>
+  {
+    return this.http.post<UserList[]>(this.baseURL + "/user/addgame",toAdd,this.httpOptions )
+      .pipe(
+        tap(x => console.log(x)),
+        catchError(err => {
+          console.log(err);
+          let empty: UserList[] = [];
+          return of(empty);
+        })
+      );
+  }
+
+  deleteFromUserList(toAdd:AddUserGame) : void
+  {
+    this.http.delete<UserList[]>(this.baseURL + "/user/deletegame/"+toAdd.userID+"/"+toAdd.gameID)
+      .pipe(
+        tap(x => console.log(x)),
+        catchError(err => {
+          console.log(err);
+          let empty: UserList[] = [];
+          return of(empty);
+        })
+      );
+  }
 
 
 

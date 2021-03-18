@@ -1,14 +1,65 @@
 <!-- <div>
     {{gameList.gameName}} - {{gameList.statusID}}
 </div> -->
+<div *ngIf="gameList.statusID==2; then Played;"></div>
+<div *ngIf="gameList.statusID==1; then Playing;"></div>
+<div *ngIf="gameList.statusID==3; then PlantoPlay;"></div>
+<div *ngIf="gameList.statusID==4; then Dropped;"></div>
 
-<table class="table table-striped">
+<ng-template #Played>
+  <table class="table table-striped">
     <tbody>
     <tr>
       <td>
         {{ gameList.gameName }}
       </td>
-      <td>{{ gameList.statusID}}</td>
+      <td> Played </td>
     </tr>
     </tbody>
   </table>
+
+</ng-template>
+
+<ng-template #Playing>
+
+  <table class="table table-striped">
+    <tbody>
+    <tr>
+      <td>
+        {{ gameList.gameName }}
+      </td>
+      <td>Playing</td>
+    </tr>
+    </tbody>
+  </table>
+</ng-template>
+
+
+<ng-template #PlantoPlay>
+
+  <table class="table table-striped">
+    <tbody>
+    <tr>
+      <td>
+        {{ gameList.gameName }}
+      </td>
+      <td>Plan to Play</td>
+    </tr>
+    </tbody>
+  </table>
+
+</ng-template>
+
+
+<ng-template #Dropped>
+  <table class="table table-striped">
+    <tbody>
+    <tr>
+      <td>
+        {{ gameList.gameName }}
+      </td>
+      <td>Dropped</td>
+    </tr>
+    </tbody>
+  </table>
+</ng-template>
