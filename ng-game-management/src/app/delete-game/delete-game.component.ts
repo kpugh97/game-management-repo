@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GameManagerService } from '../game-manager.service';
+import { LoginServiceService } from '../login-service.service';
 import { Game } from '../ts/Game';
+import { User } from '../ts/User';
 
 @Component({
   selector: 'app-delete-game',
@@ -12,7 +14,7 @@ export class DeleteGameComponent implements OnInit {
 
   @Input()id:number;
 
-  constructor(private service: GameManagerService, private router: Router) { }
+  constructor(private service: GameManagerService, private loginService: LoginServiceService, private router: Router) { }
 
   ngOnInit(): void {
   }
