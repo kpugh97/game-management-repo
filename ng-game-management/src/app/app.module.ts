@@ -35,6 +35,7 @@ import { UserAddGameComponent } from './user-add-game/user-add-game.component';
 import { UserRemoveGameComponent } from './user-remove-game/user-remove-game.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { DeleteUserComponent } from './delete-user/delete-user.component';
+import { UserEditGameComponent } from './user-edit-game/user-edit-game.component';
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import { DeleteUserComponent } from './delete-user/delete-user.component';
     UserAddGameComponent,
     UserRemoveGameComponent,
     CreateUserComponent,
-    DeleteUserComponent
+    DeleteUserComponent,
+    UserEditGameComponent
 
 
   ],

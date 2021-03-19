@@ -4,16 +4,11 @@
         <tr>
           <th scope="col">Game Title</th>
           <th scope="col">Status</th>
+          <th scope="col">Change Status</th>
         </tr>
         </thead> 
 </table>
 
-<!-- <thead>
-    <tr>
-      <th scope="col">Game Title</th>
-      <th scope="col">Status</th>
-    </tr>
-</thead>  -->
 
 <app-user-list *ngFor="let list of userGameList" [gameList]="list">
 

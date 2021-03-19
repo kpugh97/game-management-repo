@@ -139,8 +139,8 @@ public class UserPostgresDAO implements UserDAO{
             throw new NullIDException("Cannot add a game with a null ID");
         }
         try {
-            template.update("INSERT INTO \"UserLists\" (\"userID\",\"gameID\")\n" +
-                    "VALUES (?,?)", userID, gameID);
+            template.update("INSERT INTO \"UserLists\" (\"userID\",\"gameID\", \"statusID\")\n" +
+                    "VALUES (?,?,?)", userID, gameID,3);
         }
         catch (DataIntegrityViolationException | EmptyResultDataAccessException e)
         {

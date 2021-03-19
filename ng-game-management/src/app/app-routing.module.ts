@@ -19,6 +19,7 @@ import { GamesByPlatnameComponent } from './games-by-platname/games-by-platname.
 import { UserComponent } from './user/user.component';
 import { UserLogoutComponent } from './user-logout/user-logout.component';
 import { UserLoginComponent } from './user-login/user-login.component';
+import { CreateUserComponent } from './create-user/create-user.component';
 
 const routes: Routes = [
   {path: "home", component: VgShelfComponent},
@@ -34,6 +35,7 @@ const routes: Routes = [
   {path: "addreview/:gameID/:title", component: AddReviewComponent},
   {path: "editreview/:reviewID", component: GetReviewComponent},
   {path: "deletereview/:reviewID", component: DeleteReviewComponent},
+  {path: "newuser", component: CreateUserComponent},
   {path: "userlist/:userName", component: UserComponent},
   {path: "login", component: UserLoginComponent},
   {path: "logout", component: UserLogoutComponent},
@@ -41,7 +43,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

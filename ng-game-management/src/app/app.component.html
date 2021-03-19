@@ -26,6 +26,9 @@
                     <app-user-login (loginEvent)="update($event)">
                     </app-user-login>                   
                 </li>
+                <li ngbNavItem>
+                    <a ngbNavLink class="nav-link" [routerLink]="['/newuser']" routerLinkActive>Register</a>                 
+                </li>
             </ul>
         </div>
     </nav>

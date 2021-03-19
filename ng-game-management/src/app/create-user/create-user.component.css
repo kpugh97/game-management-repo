@@ -1,0 +1,15 @@
+.container
+{
+    margin: 20px;
+}
+
+.child
+{
+    
+}
+
+input
+{
+    width: 250px;
+    display: inline;
+}

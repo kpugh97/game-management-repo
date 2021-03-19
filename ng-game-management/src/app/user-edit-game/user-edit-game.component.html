@@ -1,0 +1,7 @@
+<select [(ngModel)]="statusID" (change)="selectChangeHandler($event)">
+    <option disabled selected >Choose Status</option>
+    <option  [value]=1>Playing</option>
+    <option [value]=2>Played</option>
+    <option  [value]=3>Plan to Play</option>
+    <option [value]=4>Dropped</option>
+</select>

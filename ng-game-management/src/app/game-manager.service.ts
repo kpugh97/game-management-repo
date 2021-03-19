@@ -145,17 +145,6 @@ export class GameManagerService {
     );
   }
 
-  updateGameStatus(update:EditStatus): Observable<Game>
-  {
-    return this.http.put<Game>(this.baseURL + "/game/status/update",update,this.httpOptions)
-    .pipe(
-      tap(x => console.log(x)),
-      catchError(err => {
-        console.log(err);
-        return of(null);
-      })
-    );
-  }
 
 getAllGenres(): Observable<string[]>
 {
@@ -428,6 +417,18 @@ getReviewsByGameTitle(title:string) : Observable<Review[]>
           return of(empty);
         })
       );
+  }
+
+  updateGameStatus(update:EditStatus): Observable<UserList>
+  {
+    return this.http.put<UserList>(this.baseURL + "/user/editgame",update,this.httpOptions)
+    .pipe(
+      tap(x => console.log(x)),
+      catchError(err => {
+        console.log(err);
+        return of(null);
+      })
+    );
   }
 
 

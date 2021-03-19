@@ -12,7 +12,6 @@ public class StatusUpdateRequest {
     public void setUserID(Integer userID) {
         this.userID = userID;
     }
-
     public Integer getGameID() {
         return gameID;
     }

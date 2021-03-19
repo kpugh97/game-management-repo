@@ -15,7 +15,7 @@ import { UserList } from '../ts/UserList';
   styleUrls: ['./get-game.component.css']
 })
 export class GetGameComponent implements OnInit {
-
+  @Input()userID;
   @Input()id:number;
   @Input()statusID:number;
   toReturn: Observable<Game>;
@@ -26,6 +26,7 @@ export class GetGameComponent implements OnInit {
   constructor(private service: GameManagerService,private loginService: LoginServiceService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.currUser = this.loginService.getCurrUser()
     this.id = this.route.snapshot.params.gameID;
     this.toReturn= this.route.paramMap.pipe(
       switchMap((params: ParamMap)=>
@@ -37,6 +38,7 @@ export class GetGameComponent implements OnInit {
 
   selectChangeHandler(event)
   {
+    this.toUpdate.userID = this.currUser.userID;
     this.toUpdate.gameID = this.id;
     this.toUpdate.statusID = this.statusID;
     this.statusID = parseInt(event);

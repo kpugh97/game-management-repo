@@ -26,7 +26,7 @@ public class UserController {
     @Autowired
     GameManagementService service;
 
-    @PostMapping("newuser")
+    @PostMapping("/newuser")
     public ResponseEntity createUser(@RequestBody String userName)
     {
         User newUser = null;
@@ -43,10 +43,11 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public ResponseEntity createUser()
+    public ResponseEntity getAllUsers()
     {
         return ResponseEntity.ok(service.getAllUsers());
     }
+
 
     @GetMapping("/user/name/{userName}")
     public ResponseEntity getUserByName(@PathVariable String userName)
